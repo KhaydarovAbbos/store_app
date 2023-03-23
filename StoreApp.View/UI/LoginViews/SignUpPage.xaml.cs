@@ -1,4 +1,5 @@
 ﻿using MaterialDesignThemes.Wpf;
+using StoreApp.Domain.Entities.Users;
 using StoreApp.Service.Interfaces;
 using StoreApp.Service.Services;
 using StoreApp.Service.ViewModels;
@@ -104,6 +105,11 @@ namespace StoreApp.View.UI.LoginViews
 
                     if (entity != null)
                     {
+                        signInPage.userSign = new UserSignIn()
+                        {
+                            Login = txtLogin.Text,
+                            Password = txtPassword.Password
+                        };
                         targetWindow.AllCloseControls(1);
                         
                         isClear = true;
