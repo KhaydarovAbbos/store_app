@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:StoreApp.View.UI.FastInsertProductViews"
              mc:Ignorable="d" 
-             d:DesignHeight="700" d:DesignWidth="1320" MinHeight="730">
+             d:DesignHeight="688" d:DesignWidth="1320" MinHeight="730">
 
     <Grid Background="#E5F6FF">
 
