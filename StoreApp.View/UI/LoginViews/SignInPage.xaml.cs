@@ -78,7 +78,7 @@ namespace StoreApp.View.UI.LoginViews
             }
 
             targetWindow.SetEffect();
-            //targetWindow.giff.Visibility = Visibility.Visible;
+            targetWindow.giff.Visibility = Visibility.Visible;
 
 
 
@@ -121,7 +121,7 @@ namespace StoreApp.View.UI.LoginViews
             }
 
             targetWindow.RemoveEffect();
-            //targetWindow.giff.Visibility = Visibility.Hidden;
+            targetWindow.giff.Visibility = Visibility.Hidden;
             userSign = null;
         }
 

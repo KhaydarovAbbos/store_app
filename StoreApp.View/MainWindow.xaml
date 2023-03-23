@@ -59,7 +59,7 @@
 
 
 
-            <!--<Grid Grid.Row="2" Width="100" Height="100" Margin="0 0 0 70" x:Name="giff"
+            <Grid Grid.Row="2" Width="100" Height="100" Margin="0 0 0 70" x:Name="giff"
                   Visibility="Hidden"
                           Panel.ZIndex="1">
                 <Grid.Background>
@@ -72,7 +72,7 @@
                         </VisualBrush.Visual>
                     </VisualBrush>
                 </Grid.Background>
-            </Grid>-->
+            </Grid>
 
 
 

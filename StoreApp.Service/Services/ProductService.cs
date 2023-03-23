@@ -84,6 +84,11 @@ namespace StoreApp.Service.Services
             else
             {
                 existProduct.Name = model.Name;
+                existProduct.Quantity = model.Quantity;
+                existProduct.Price = model.Price;
+                existProduct.ArrivalPrice = model.ArrivalPrice;
+                existProduct.Barcode = model.Barcode;
+
                 existProduct.Update();
 
                 return await productRepository.UpdateAsync(existProduct);

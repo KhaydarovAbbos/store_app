@@ -102,7 +102,7 @@ namespace StoreApp.View.UI.ProductsView
             }
         }
 
-        private void BtnEdit_Click(object sender, RoutedEventArgs e)
+        private async void BtnEdit_Click(object sender, RoutedEventArgs e)
         {
             if (txtName.Text == "")
             {
@@ -145,7 +145,7 @@ namespace StoreApp.View.UI.ProductsView
                 Barcode = txtBarcode.Text
             };
 
-            productService.Update(product);
+            await productService.Update(product);
 
             Productsview.WindowLoad();
 
