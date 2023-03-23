@@ -215,10 +215,30 @@ namespace StoreApp.View.UI.ProductsView
         {
             try
             {
+                if (txtBarcode.Text.Contains(" "))
+                {
+                    var text = txtBarcode.Text;
+                    int index = text.IndexOf(" ");
+                    txtBarcode.Text = text.Remove(index);
+                    txtBarcode.CaretIndex = txtBarcode.Text.Length;
+                }
+
                 if (txtBarcode.Text.Length == 0 || txtBarcode.Text == "")
                 {
                     txtErrorBarocde.Text = "Необходимый";
                     txtBarcode.Focus();
+                }
+                else if (txtBarcode.Text.Length > 0 && txtBarcode.Text.Length < 13)
+                {
+                    txtErrorBarocde.Text = "Должно быть только 13 цифр";
+                    txtBarcode.Focus();
+                }
+                else if (txtBarcode.Text.Length > 13)
+                {
+                    var text = txtBarcode.Text;
+                    txtBarcode.Text = text.Remove(text.Length - 1);
+                    txtBarcode.CaretIndex = txtBarcode.Text.Length;
+                    return;
                 }
                 else
                 {
@@ -236,7 +256,6 @@ namespace StoreApp.View.UI.ProductsView
             txtBarcode.Clear();
             txtBarcode.Focus();
 
-            autoBarcodeGrid.Visibility = Visibility.Visible;
             barcodeGrid.Visibility = Visibility.Hidden;
 
             ckAutoBarcode.IsChecked = false;
@@ -251,9 +270,12 @@ namespace StoreApp.View.UI.ProductsView
 
         private void ckAutoBarcode_Checked(object sender, RoutedEventArgs e)
         {
-            autoBarcodeGrid.Visibility = Visibility.Hidden;
             barcodeGrid.Visibility = Visibility.Visible;
-            ckBarcode.IsChecked = true;
+        }
+
+        private void txtBarcode_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            
         }
     }
 }

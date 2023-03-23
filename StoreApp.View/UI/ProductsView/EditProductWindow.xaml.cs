@@ -190,10 +190,30 @@ namespace StoreApp.View.UI.ProductsView
         {
             try
             {
+                if (txtBarcode.Text.Contains(" "))
+                {
+                    var text = txtBarcode.Text;
+                    int index = text.IndexOf(" ");
+                    txtBarcode.Text = text.Remove(index);
+                    txtBarcode.CaretIndex = txtBarcode.Text.Length;
+                }
+
                 if (txtBarcode.Text.Length == 0 || txtBarcode.Text == "")
                 {
                     txtErrorBarocde.Text = "Необходимый";
                     txtBarcode.Focus();
+                }
+                else if (txtBarcode.Text.Length > 0 && txtBarcode.Text.Length < 13)
+                {
+                    txtErrorBarocde.Text = "Должно быть только 13 цифр";
+                    txtBarcode.Focus();
+                }
+                else if (txtBarcode.Text.Length > 13)
+                {
+                    var text = txtBarcode.Text;
+                    txtBarcode.Text = text.Remove(text.Length - 1);
+                    txtBarcode.CaretIndex = txtBarcode.Text.Length;
+                    return;
                 }
                 else
                 {
