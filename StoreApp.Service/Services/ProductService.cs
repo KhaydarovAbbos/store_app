@@ -1,4 +1,6 @@
-﻿using StoreApp.Data.IRepositories;
+﻿using Microsoft.EntityFrameworkCore;
+using StoreApp.Data.Contexts;
+using StoreApp.Data.IRepositories;
 using StoreApp.Data.Repositories;
 using StoreApp.Domain.Entities.Products;
 using StoreApp.Domain.Enums;
@@ -6,6 +8,7 @@ using StoreApp.Service.Interfaces;
 using StoreApp.Service.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,10 +18,12 @@ namespace StoreApp.Service.Services
     public class ProductService : IProductService
     {
         IProductRepository productRepository;
+        private AppDbContext _db;
 
         public ProductService()
         {
             productRepository = new ProductRepository();
+            _db = new AppDbContext();
         }
 
         public async Task<Product> Create(ProductViewModel model)
@@ -71,6 +76,13 @@ namespace StoreApp.Service.Services
             var stores = await productRepository.GetAllAsync(x => x.State != ItemState.Deleted && x.StoreId == storeId && x.SubCategoryId == subCategoryId);
 
             return stores.OrderByDescending(x => x.Id).ToList();
+        }
+
+        public async Task<IList<Product>> GetProducts(long storeId)
+        {
+
+            return await _db.Products.Where(x => x.StoreId == storeId).Include(c => c.SubCategory).Include(c => c.SubCategory.Category).ToListAsync();
+
         }
 
         public async Task<Product> Update(Product model)

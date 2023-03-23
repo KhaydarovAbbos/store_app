@@ -9,5 +9,6 @@ namespace StoreApp.Data.IRepositories
 {
     public interface IProductRepository : IGenericRepository<Product>
     {
+
     }
 }

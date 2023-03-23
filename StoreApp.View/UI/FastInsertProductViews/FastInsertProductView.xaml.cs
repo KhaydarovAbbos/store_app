@@ -1,4 +1,7 @@
-﻿using System;
+﻿using StoreApp.Service.Interfaces;
+using StoreApp.Service.Services;
+using StoreApp.View.UI.MainViews;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +23,22 @@ namespace StoreApp.View.UI.FastInsertProductViews
     /// </summary>
     public partial class FastInsertProductView : UserControl
     {
+
+        IProductService productService = new ProductService();
         public FastInsertProductView()
         {
             InitializeComponent();
+        }
+
+        public async void WindowLoad()
+        {
+            long storeId = long.Parse(StoreMainView.StoreId);
+
+            var products = await productService.GetProducts(storeId);
+
+            datagridProducts.ItemsSource = products;
+            datagridProducts.Items.Refresh();
+
         }
     }
 }

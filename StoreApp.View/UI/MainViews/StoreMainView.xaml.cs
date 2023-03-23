@@ -85,6 +85,7 @@ namespace StoreApp.View.UI.MainViews
             if (i == 4)
             {
                 insert_products_view.Visibility = Visibility.Visible;
+                insert_products_view.WindowLoad();
             }
         }
 

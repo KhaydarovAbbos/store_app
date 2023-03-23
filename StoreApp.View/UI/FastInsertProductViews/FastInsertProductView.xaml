@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:StoreApp.View.UI.FastInsertProductViews"
              mc:Ignorable="d" 
-             d:DesignHeight="730" d:DesignWidth="1320" MinHeight="730">
+             d:DesignHeight="700" d:DesignWidth="1320" MinHeight="730">
 
     <Grid Background="#E5F6FF">
 
@@ -29,11 +29,79 @@
 
         <Grid Grid.Row="1" Margin="0 20 0 10">
 
-            <ScrollViewer x:Name="MyScrollViewer" VerticalScrollBarVisibility="Auto"  >
-                <WrapPanel Margin=" 20 10 20 10" x:Name="panel" >
+            <DataGrid 
+                x:Name="datagridProducts"
+                Margin="20 0 20 20" 
+                Background="White"
+                Width="Auto"
+                BorderBrush="Gray"
+                CanUserAddRows="False"
+                CanUserDeleteRows="False"
+                HeadersVisibility="Column"
+                CanUserResizeColumns="False"
+                HorizontalGridLinesBrush="#E0E6ED"
+                AutoGenerateColumns="False"
+                GridLinesVisibility="Horizontal"
+                CanUserReorderColumns="False"
+                IsReadOnly="True"
+                CanUserSortColumns="False"
+                ItemsSource="{Binding products}"
+                SelectionMode="Single" 
+                SelectionUnit="FullRow"
+                >
 
-                </WrapPanel>
-            </ScrollViewer>
+                <DataGrid.Resources>
+                    <Style TargetType="DataGrid">
+                        <Setter Property="GridLinesVisibility" Value="Horizontal"/>
+                    </Style>
+                    <Style TargetType="DataGridCell">
+                        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+                        <Setter Property="Foreground" Value="Black"/>
+                        <Setter Property="FontWeight" Value="Bold"/>
+                        <Setter Property="BorderThickness" Value="0"/>
+                        <Setter Property="FontSize" Value="16"/>
+                        <Setter Property="Height" Value="35"/>
+                        <Setter Property="TextBlock.TextAlignment" Value="Center"/>
+                        <Style.Triggers>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter Property="Background" Value="#B6E0FF"/>
+                            </Trigger>
+
+                        </Style.Triggers>
+                    </Style>
+                    <Style TargetType="DataGridColumnHeader">
+                        <Setter Property="Background" Value="#E0E6ED"/>
+                        <Setter Property="Foreground" Value="#2E83E6"/>
+                        <Setter Property="FontWeight" Value="Bold"/>
+                        <Setter Property="Height" Value="45"/>
+                        <Setter Property="FontSize" Value="16"/>
+                        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Cursor" Value="Hand"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                    <!--Scrolbar uchun style-->
+                    <Style TargetType="ScrollBar">
+                        <Setter Property="Background" Value="White"/>
+                        <Setter Property="Foreground" Value="#4D638C"/>
+                    </Style>
+                </DataGrid.Resources>
+
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Код" Width="70" TextBlock.TextAlignment="Center" Binding="{ Binding Id}" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="Имя" Width="200*" Binding="{ Binding Name}" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="Категорий" Width="170*" Binding="{ Binding SubCategory.Category.Name}" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="Подкатегорий" Width="170*" Binding="{ Binding SubCategory.Name}" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="Штрих-код" Width="200" Binding="{ Binding Barcode}" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="Себестоимость" Width="150*" Binding="{ Binding ArrivalPrice}" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="Цена" Width="150*" Binding="{ Binding Price}" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="Количество" Width="150" Binding="{ Binding Quantity}" IsReadOnly="True"/>
+                    
+                </DataGrid.Columns>
+                
+            </DataGrid>
 
         </Grid>
     </Grid>

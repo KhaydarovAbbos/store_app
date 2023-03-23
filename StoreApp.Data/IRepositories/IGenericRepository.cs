@@ -19,5 +19,7 @@ namespace StoreApp.Data.IRepositories
         Task<T> UpdateAsync(T entity);
 
         Task<bool> DeleteAsync(Expression<Func<T, bool>> expression);
+
+        
     }
 }
