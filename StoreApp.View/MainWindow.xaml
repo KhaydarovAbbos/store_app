@@ -1,0 +1,89 @@
+﻿<Window x:Class="StoreApp.View.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:logins="clr-namespace:StoreApp.View.UI.LoginViews"
+        xmlns:menuviews="clr-namespace:StoreApp.View.UI.MainViews"
+        xmlns:gif="http://wpfanimatedgif.codeplex.com"
+        xmlns:local="clr-namespace:StoreApp.View"
+        mc:Ignorable="d" Loaded="Window_Loaded"
+         Height="730" Width="1320" WindowStartupLocation="CenterScreen" WindowStyle="SingleBorderWindow" Icon="{x:Null}">
+    <Window.Background>
+        <LinearGradientBrush EndPoint="0,1" StartPoint="1, 1" >
+            <GradientStop Color="#B651C2" Offset="0"/>
+            <GradientStop Color="#6356CC" Offset="1"/>
+        </LinearGradientBrush>
+    </Window.Background>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0"/>
+            <RowDefinition Height="851*"/>
+        </Grid.RowDefinitions>
+
+
+        <Grid Grid.Row="0" Margin="0 0 0 0" >
+
+            <Button HorizontalAlignment="Right" Width="20" Height="20" Background="Transparent" BorderBrush="{x:Null}" Margin="0 0 0 0" Click="Button_Click" Visibility="Hidden">
+                <md:PackIcon x:Name="btnExit" Kind="WindowClose"
+                             
+                            Width="40" Height="40" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="-15 0 0 0">
+                    <md:PackIcon.Style>
+
+                        <Style TargetType="md:PackIcon">
+                            <Setter Property="Foreground" Value="White"/>
+
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Foreground" Value="Red"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </md:PackIcon.Style>
+                </md:PackIcon>
+            </Button>
+
+        </Grid>
+
+
+        <Grid Margin="0 0 0 0" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+
+            <DockPanel  Grid.ColumnSpan="2">
+                <logins:SignInPage x:Name="sign_in_view" Visibility="Hidden"/>
+            </DockPanel>
+            <DockPanel  Grid.ColumnSpan="2">
+                <logins:SignUpPage x:Name="sign_up_view" Visibility="Hidden"/>
+            </DockPanel>
+
+
+
+            <!--<Grid Grid.Row="2" Width="100" Height="100" Margin="0 0 0 70" x:Name="giff"
+                  Visibility="Hidden"
+                          Panel.ZIndex="1">
+                <Grid.Background>
+                    <VisualBrush>
+                        <VisualBrush.Visual>
+                            <Image gif:ImageBehavior.AnimatedSource="pack://application:,,,/Images/loading.gif"
+                           
+                       gif:ImageBehavior.AutoStart="True"
+                       gif:ImageBehavior.RepeatBehavior="1"/>
+                        </VisualBrush.Visual>
+                    </VisualBrush>
+                </Grid.Background>
+            </Grid>-->
+
+
+
+        </Grid>
+
+        <DockPanel Grid.Row="1">
+            <menuviews:MainView x:Name="main_view" Visibility="Hidden"/>
+        </DockPanel>
+
+        <DockPanel Grid.Row="1">
+            <menuviews:StoreMainView x:Name="store_main_view" Visibility="Hidden"/>
+        </DockPanel>
+    </Grid>
+</Window>

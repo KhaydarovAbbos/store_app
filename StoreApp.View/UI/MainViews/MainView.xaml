@@ -1,0 +1,119 @@
+﻿<UserControl x:Class="StoreApp.View.UI.MainViews.MainView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:local="clr-namespace:StoreApp.View.UI.MainViews"
+             xmlns:storeviews="clr-namespace:StoreApp.View.UI.StoreViews"
+             mc:Ignorable="d" 
+             d:DesignHeight="730" d:DesignWidth="1320" Background="#E5F6FF">
+    <Grid x:Name="MainGrid">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Border BorderBrush="Gray" BorderThickness="1" x:Name="hamburgerMenu" HorizontalAlignment="Left" >
+            <Grid Grid.Column="0">
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="80"/>
+                </Grid.RowDefinitions>
+
+
+                <StackPanel>
+
+                    <Button Width="40" Height="30" x:Name="btnMenu" Margin="10 5 0 5" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="0" Background="Transparent" BorderBrush="Black" Click="btnMenu_Click">
+                        <Button.Content>
+                            <materialDesign:PackIcon  
+                                    Kind="Menu" Margin="0 0 0 0"
+                                    Foreground="Black" 
+                                    VerticalAlignment="Center" 
+                                    Width="40" Height="30"
+                                />
+                        </Button.Content>
+                    </Button>
+
+
+                    <ListView Width="199" >
+                        <ListViewItem x:Name="shops" Foreground="Black" TextBlock.TextAlignment="Center" BorderThickness="1" BorderBrush="Gray" Margin="0 0 0 0" MouseUp="shops_MouseUp" Selected="shops_Selected">
+                            <ListViewItem.Content>
+
+                                <StackPanel Orientation="Horizontal">
+
+                                    <materialDesign:PackIcon  
+                                    Kind="Shop"
+                                    Foreground="Black" 
+                                    VerticalAlignment="Center" 
+                                    Margin="0,00,0,0" 
+                                    Height="35" Width="35"
+                                />
+
+                                    <TextBlock Text="Мои магазины" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="20 0 0 0" FontSize="16" FontWeight="Bold">
+
+                                    </TextBlock>
+
+                                </StackPanel>
+                            </ListViewItem.Content>
+                        </ListViewItem>
+                        <ListViewItem Foreground="Black" x:Name="settings" TextBlock.TextAlignment="Center" BorderThickness="1" BorderBrush="Gray" MouseUp="settings_MouseUp">
+                            <ListViewItem.Content>
+
+                                <StackPanel Orientation="Horizontal">
+
+                                    <materialDesign:PackIcon  
+                                    Kind="Settings"
+                                    Foreground="Black" 
+                                    VerticalAlignment="Center" 
+                                    Margin="0,00,0,0" 
+                                    Height="35" Width="35"
+                                />
+
+                                    <TextBlock Text="Настройки" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="20 0 0 0" FontSize="16" FontWeight="Bold">
+
+                                    </TextBlock>
+
+                                </StackPanel>
+                            </ListViewItem.Content>
+                        </ListViewItem>
+                    </ListView>
+                </StackPanel>
+
+                <ListView Width="199" Grid.Row="1">
+                    <ListViewItem x:Name="exit" Foreground="Black" TextBlock.TextAlignment="Center" BorderThickness="1" BorderBrush="Gray" Margin="0 0 0 0" MouseUp="exit_MouseUp" >
+                        <ListViewItem.Content>
+
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+
+                                <materialDesign:PackIcon  
+                                    Kind="ExitToApp"
+                                    Foreground="Black" 
+                                    VerticalAlignment="Center" 
+                                    Margin="0,00,0,0" 
+                                    Height="35" Width="35"
+                                    />
+
+                                <TextBlock Text="Выход" VerticalAlignment="Center" Margin="20 0 0 0" HorizontalAlignment="Center"  FontSize="16" FontWeight="Bold">
+
+                                </TextBlock>
+
+                            </StackPanel>
+                        </ListViewItem.Content>
+                    </ListViewItem>
+                </ListView>
+
+            </Grid>
+        </Border>
+
+        <DockPanel Grid.Column="2" Grid.Row="0" >
+            <storeviews:StoreView x:Name="shop_view" Visibility="Hidden" Height="Auto" Width="Auto"/>
+        </DockPanel>
+
+        <DockPanel Grid.Column="2" Grid.Row="0" >
+            <local:StoreMainView x:Name="store_main_view" Visibility="Hidden" Height="Auto" Width="Auto"/>
+        </DockPanel>
+    </Grid>
+</UserControl>
+
