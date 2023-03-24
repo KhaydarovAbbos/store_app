@@ -139,6 +139,12 @@ namespace StoreApp.View.UI.FastInsertProductViews
                 txtBarcode.Focus();
                 return;
             }
+            if (txtBarcode.Text.Length != 13)
+            {
+                txtBarcode.Focus();
+                return;
+
+            }
 
             Product product = new Product()
             {

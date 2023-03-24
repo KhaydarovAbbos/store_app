@@ -75,7 +75,7 @@ namespace StoreApp.View.UI.ProductsView
                 txtQuantity.Focus();
                 return;
             }
-            if (autoBarcodeGrid.Visibility == Visibility.Visible)
+            if (ckAutoBarcode.IsChecked == true)
             {
                 byte[] encoded = SHA256.Create().ComputeHash(Encoding.UTF8.GetBytes(txtName.Text));
                 var value = BitConverter.ToUInt32(encoded, 0) % 100000;
