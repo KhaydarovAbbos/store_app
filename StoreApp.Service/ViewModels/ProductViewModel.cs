@@ -14,13 +14,10 @@ namespace StoreApp.Service.ViewModels
 
         public double Price { get; set; }
 
-        public double Quantity { get; set; }
-
         public string Barcode { get; set; }
 
         public long SubCategoryId { get; set; }
-
-        public long StoreId { get; set; }
+        public long CategoryId { get; set; }
 
     }
 }

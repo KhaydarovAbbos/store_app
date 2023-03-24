@@ -22,6 +22,8 @@ namespace StoreApp.Data.Contexts
         public DbSet<SubCategory> SubCategories { get; set; }
         
         public DbSet<Product> Products { get; set; }
+        public DbSet<StoreProduct> StoreProducts { get; set; }
+
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

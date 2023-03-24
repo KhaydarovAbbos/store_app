@@ -31,12 +31,11 @@ namespace StoreApp.Service.Services
             Product product = new Product()
             {
                 Name = model.Name,
-                StoreId = model.StoreId,
                 SubCategoryId = model.SubCategoryId,
+                CategoryId = model.CategoryId,
                 ArrivalPrice = model.Arrivalprice,
                 Barcode = model.Barcode,
-                Price = model.Price,
-                Quantity = model.Quantity
+                Price = model.Price
 
             };
             product.Create();
@@ -68,19 +67,19 @@ namespace StoreApp.Service.Services
 
         public async Task<Product> Get(long id)
         {
-            return await productRepository.GetAsync(x => x.Id == id && x.State != ItemState.Deleted);
+            return await productRepository.GetAsync(x => x.Id == id && x.State != ItemState.NoActive);
         }
 
-        public async Task<IList<Product>> GetAll(long storeId, long categoryId, long subCategoryId)
+        public async Task<IList<Product>> GetAll()
         {
-            var stores = await productRepository.GetAllAsync(x => x.State != ItemState.Deleted && x.StoreId == storeId && x.SubCategoryId == subCategoryId && x.SubCategory.CategoryId == categoryId);
+            var stores = await productRepository.GetAllAsync(x => x.State != ItemState.NoActive);
 
             return stores.OrderByDescending(x => x.Id).ToList();
         }
 
-        public async Task<IList<Product>> GetProducts(long storeId)
+        public async Task<IList<Product>> GetProducts()
         {
-            return await _db.Products.Where(x => x.StoreId == storeId && x.State != ItemState.Deleted).Include(c => c.SubCategory).Include(c => c.SubCategory.Category).ToListAsync();
+            return await _db.Products.Where(x => x.State != ItemState.NoActive).Include(x => x.Category).Include(x => x.SubCategory).ToListAsync();
         }
 
         public async Task<Product> Update(Product model)
@@ -94,12 +93,9 @@ namespace StoreApp.Service.Services
             else
             {
                 existProduct.Name = model.Name;
-                existProduct.Quantity = model.Quantity;
                 existProduct.Price = model.Price;
                 existProduct.ArrivalPrice = model.ArrivalPrice;
                 existProduct.Barcode = model.Barcode;
-
-                existProduct.Update();
 
                 return await productRepository.UpdateAsync(existProduct);
             }

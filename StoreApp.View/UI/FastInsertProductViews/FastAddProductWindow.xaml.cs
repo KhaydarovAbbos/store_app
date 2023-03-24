@@ -27,23 +27,25 @@ namespace StoreApp.View.UI.FastInsertProductViews
     public partial class FastAddProductWindow : Window
     {
         FastInsertProductView Productsview;
-        IProductService productService = new ProductService();
-        Product _product { get; set; }
+        IStoreProductService productService = new StoreProductService();
 
 
-        public FastAddProductWindow(Product product, FastInsertProductView productsView)
+        StoreProduct _product { get; set; }
+
+
+        public FastAddProductWindow(StoreProduct product, FastInsertProductView productsView)
         {
             InitializeComponent();
 
             _product = product;
             Productsview = productsView;
 
-            txtCategory.Text = _product.SubCategory.Category.Name;
-            txtSubCategory.Text = _product.SubCategory.Name;
-            txtName.Text = _product.Name;
-            txtBarcode.Text = _product.Barcode;
-            txtArrivalPrice.Text = _product.ArrivalPrice.ToString();
-            txtSellingPrice.Text = _product.Price.ToString();
+            txtCategory.Text = _product.Product.SubCategory.Category.Name;
+            txtSubCategory.Text = _product.Product.SubCategory.Name;
+            txtName.Text = _product.Product.Name;
+            txtBarcode.Text = _product.Product.Barcode;
+            txtArrivalPrice.Text = _product.Product.ArrivalPrice.ToString();
+            txtSellingPrice.Text = _product.Product.Price.ToString();
 
             txtQuantity.Focus();
         }
@@ -58,20 +60,26 @@ namespace StoreApp.View.UI.FastInsertProductViews
                 return;
             }
 
-            Product productViewModel = new Product()
+            var existProduct = await productService.Get(_product.Product.Id);
+
+            if (existProduct != null)
             {
-                Id = _product.Id,
-                Name = _product.Name,
-                ArrivalPrice = _product.ArrivalPrice,
-                Price = _product.Price,
-                Barcode = _product.Barcode,
-                SubCategoryId = _product.SubCategoryId,
-                StoreId = _product.StoreId,
-                Quantity = double.Parse(txtQuantity.Text) + _product.Quantity,
-            };
+                existProduct.Quantity = double.Parse(txtQuantity.Text) + _product.Quantity;
 
+                await productService.Update(existProduct);
+            }
+            else
+            {
+                StoreProductViewModel productViewModel = new StoreProductViewModel()
+                {
+                    ProductId = _product.Product.Id,
+                    StoreId = _product.StoreId,
+                    SubcategoryId = _product.Product.SubCategory.Id,
+                    Quantity = double.Parse(txtQuantity.Text)
+                };
 
-            var result = await productService.Update(productViewModel);
+                await productService.Create(productViewModel);
+            }
 
             Productsview.WindowLoad();
 

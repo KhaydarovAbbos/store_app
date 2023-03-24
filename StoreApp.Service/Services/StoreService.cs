@@ -59,12 +59,12 @@ namespace StoreApp.Service.Services
 
         public async Task<Store> Get(long id)
         {
-            return await storeRepository.GetAsync(x => x.Id == id && x.State != ItemState.Deleted);
+            return await storeRepository.GetAsync(x => x.Id == id && x.State != ItemState.NoActive);
         }
 
         public async Task<IList<Store>> GetAll()
         {
-            var stores = await storeRepository.GetAllAsync(x => x.State != ItemState.Deleted);
+            var stores = await storeRepository.GetAllAsync(x => x.State != ItemState.NoActive);
 
             return stores.OrderByDescending(x => x.Id).ToList();
         }
@@ -80,7 +80,6 @@ namespace StoreApp.Service.Services
             else
             {
                 existStore.Name = model.Name;
-                existStore.Update();
 
                 return await storeRepository.UpdateAsync(existStore);
             }

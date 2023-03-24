@@ -174,7 +174,7 @@
                     PreviewTextInput="NumberValidationTextBox" 
                         />
 
-                <Border Height="15" Margin="0 -45 0 0"  Background="White" Width="75" HorizontalAlignment="Center">
+                <Border Height="15" Margin="20 -45 0 0"  Background="White" Width="75" HorizontalAlignment="Left">
 
                     <TextBlock Text="Количество" FontSize="13" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                 </Border>

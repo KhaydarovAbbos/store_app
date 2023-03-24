@@ -53,7 +53,7 @@ namespace StoreApp.View.UI.ProductsView
             long subCategoryId = long.Parse(StoremainView.sub_category_id.Content.ToString());
             long categoryid = long.Parse(StoremainView.category_id.Content.ToString());
 
-            var products = await productService.GetAll(storeId, categoryid, subCategoryId);
+            var products = await productService.GetAll();
 
             #region Button add
             Border borderAdd = new Border
@@ -92,7 +92,6 @@ namespace StoreApp.View.UI.ProductsView
                     Name = item.Name,
                     ArrivalPrice = item.ArrivalPrice,
                     Price = item.Price,
-                    Quantity = item.Quantity,
                     SubCategoryId = item.SubCategoryId,
                     Barcode = item.Barcode
                 };
@@ -158,7 +157,7 @@ namespace StoreApp.View.UI.ProductsView
                     HorizontalAlignment = HorizontalAlignment.Left,
                     FontSize = 16,
 
-                    Text = $"Количество : {product.Quantity.ToString("#,##", numberFormatInfo)}",
+                    //Text = $"Количество : {product.Quantity.ToString("#,##", numberFormatInfo)}",
                     Margin = new Thickness(10, 0, 0, 0)
                 };
 

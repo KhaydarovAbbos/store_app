@@ -13,10 +13,16 @@ namespace StoreApp.Domain.Entities.Products
 {
     public class Product : IAuditable
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [Required]
         public long Id { get; set; }
-        
+
+        [ForeignKey(nameof(SubCategoryId))]
+        public SubCategory SubCategory { get; set; }
+        public long SubCategoryId { get; set; }
+
+        [ForeignKey(nameof(CategoryId))]
+        public Category Category { get; set; }
+        public long CategoryId { get; set; }
+
         public string Name { get; set; }
         
         public string Barcode { get; set; }
@@ -24,43 +30,17 @@ namespace StoreApp.Domain.Entities.Products
         public double ArrivalPrice { get; set; }
         
         public double Price { get; set; }
-        
-        public double Quantity { get; set; }
-
-        [ForeignKey(nameof(SubCategoryId))]
-        public SubCategory SubCategory { get; set; }
-        
-        public long SubCategoryId { get; set; }
-
-        [ForeignKey(nameof(StoreId))]
-        public Store Store { get; set; }
-        
-        public long StoreId { get; set; }
-
-        public DateTime CreatedDate { get; set; }
-
-        public DateTime UpdatedDate { get; set; }
-
-        public DateTime DeletedDate { get; set; }
 
         public ItemState State { get; set; }
 
         public void Create()
         {
-            CreatedDate = DateTime.Now;
-            State = ItemState.Created;
-        }
-
-        public void Update()
-        {
-            UpdatedDate = DateTime.Now;
-            State = ItemState.Updated;
+            State = ItemState.Active;
         }
 
         public void Delete()
         {
-            DeletedDate = DateTime.Now;
-            State = ItemState.Deleted;
+            State = ItemState.NoActive;
         }
     }
 }

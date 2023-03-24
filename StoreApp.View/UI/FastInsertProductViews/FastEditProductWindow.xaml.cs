@@ -33,7 +33,7 @@ namespace StoreApp.View.UI.FastInsertProductViews
 
             _product = product;
             txtName.Text = _product.Name;
-            txtQuantity.Text = _product.Quantity.ToString();
+            txtQuantity.Text = "0";
             txtSellingPrice.Text = _product.Price.ToString();
             txtArrivalPrice.Text = _product.ArrivalPrice.ToString();
             txtBarcode.Text = _product.Barcode.ToString();
@@ -139,7 +139,6 @@ namespace StoreApp.View.UI.FastInsertProductViews
                 Name = txtName.Text,
                 ArrivalPrice = double.Parse(txtArrivalPrice.Text),
                 Price = double.Parse(txtSellingPrice.Text),
-                Quantity = double.Parse(txtQuantity.Text),
                 Barcode = txtBarcode.Text
             };
 

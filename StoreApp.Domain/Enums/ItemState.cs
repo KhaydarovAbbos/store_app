@@ -8,8 +8,7 @@ namespace StoreApp.Domain.Enums
 {
     public enum ItemState
     {
-        Created = 1,
-        Updated,
-        Deleted
+        Active = 1,
+        NoActive,
     }
 }

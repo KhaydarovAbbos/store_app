@@ -27,6 +27,8 @@ namespace StoreApp.View.UI.FastInsertProductViews
     {
 
         IProductService productService;
+        IStoreProductService storeProductService;
+
         public FastInsertProductView()
         {
             InitializeComponent();
@@ -35,12 +37,13 @@ namespace StoreApp.View.UI.FastInsertProductViews
         public async void WindowLoad()
         {
             productService = new ProductService();
+            storeProductService = new StoreProductService();
 
             long storeId = long.Parse(StoreMainView.StoreId);
 
-            var products = await productService.GetProducts(storeId);
+            var response = await storeProductService.GetAllProducts(storeId);
 
-            datagridProducts.ItemsSource = products;
+            datagridProducts.ItemsSource = response;
             datagridProducts.Items.Refresh();
 
         }
@@ -50,10 +53,12 @@ namespace StoreApp.View.UI.FastInsertProductViews
             if (datagridProducts.SelectedItems.Count > 0)
             {
 
-                var product = datagridProducts.SelectedItems[0] as Product;
+                var product = datagridProducts.SelectedItems[0] as StoreProduct;
 
                 if (product != null)
                 {
+
+                    product.StoreId = long.Parse(StoreMainView.StoreId);
                     FastAddProductWindow fastAddProductWindow = new FastAddProductWindow(product, this);
                     fastAddProductWindow.ShowDialog();
 

@@ -34,7 +34,7 @@ namespace StoreApp.View.UI.ProductsView
 
             productId = product.Id;
             txtName.Text = product.Name;
-            txtQuantity.Text = product.Quantity.ToString();
+            txtQuantity.Text = "0";
             txtSellingPrice.Text = product.Price.ToString();
             txtArrivalPrice.Text = product.ArrivalPrice.ToString();
             txtBarcode.Text = product.Barcode.ToString();
@@ -141,7 +141,6 @@ namespace StoreApp.View.UI.ProductsView
                 Name = txtName.Text,
                 ArrivalPrice = double.Parse(txtArrivalPrice.Text),
                 Price = double.Parse(txtSellingPrice.Text),
-                Quantity = double.Parse(txtQuantity.Text),
                 Barcode = txtBarcode.Text
             };
 

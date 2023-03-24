@@ -30,6 +30,7 @@ namespace StoreApp.View.UI.ProductsView
         SubCategory ProductSubcategory { get; set; }
         ProductView Productsview;
         IProductService productService = new ProductService();
+        IStoreProductService storeProductService = new StoreProductService();
 
         public AddProductWindow(Category category, SubCategory subCategory)
         {
@@ -79,7 +80,7 @@ namespace StoreApp.View.UI.ProductsView
                 byte[] encoded = SHA256.Create().ComputeHash(Encoding.UTF8.GetBytes(txtName.Text));
                 var value = BitConverter.ToUInt32(encoded, 0) % 100000;
                 //txtBarcode.Text = txtName.Text[0].ToString() + value.ToString();
-                txtBarcode.Text = value.ToString();
+                txtBarcode.Text = "478" + value.ToString();
             }
             if (barcodeGrid.Visibility == Visibility.Visible)
             {
@@ -98,14 +99,24 @@ namespace StoreApp.View.UI.ProductsView
                 Name = txtName.Text,
                 Arrivalprice = double.Parse(txtArrivalPrice.Text),
                 Price = double.Parse(txtSellingPrice.Text),
-                Quantity = double.Parse(txtQuantity.Text),
                 Barcode = txtBarcode.Text,
                 SubCategoryId = ProductSubcategory.Id,
-                StoreId = long.Parse(Productsview.StoremainView.store_id.Content.ToString())
+                CategoryId = Productcategory.Id
+               
+            };
+            var result = await productService.Create(productViewModel);
+
+            var store_id = long.Parse(Productsview.StoremainView.store_id.Content.ToString());
+
+            StoreProductViewModel storeProductViewModel = new StoreProductViewModel()
+            {
+                ProductId = result.Id,
+                SubcategoryId = result.SubCategoryId,
+                StoreId = store_id,
+                Quantity = double.Parse(txtQuantity.Text)
             };
 
-
-            var result = await productService.Create(productViewModel);
+            await storeProductService.Create(storeProductViewModel);
 
             Productsview.WindowLoad();
 
