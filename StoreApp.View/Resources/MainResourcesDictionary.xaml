@@ -102,6 +102,7 @@
                 <Setter Property="BorderBrush" Value="#36434F"/>
                 <Setter Property="Background" Value="#36434F"/>
                 <Setter Property="Foreground" Value="#EAEEF0"/>
+                <Setter Property="Cursor" Value="Hand"/>
             </Trigger>
         </Style.Triggers>
     </Style>

@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:StoreApp.View.UI.FastInsertProductViews"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
              d:DesignHeight="688" d:DesignWidth="1240" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
 
@@ -11,6 +12,7 @@
 
         <Grid.RowDefinitions>
             <RowDefinition Height="40"/>
+            <RowDefinition Height="60"/>
             <RowDefinition Height="*"/>
 
         </Grid.RowDefinitions>
@@ -26,15 +28,68 @@
 
         </Border>
 
+        <Grid Grid.Row="1" Margin="0 10 0 0">
+            <StackPanel VerticalAlignment="Center" Orientation="Horizontal" Margin="20 0 0 0">
+                <Button x:Name="btnAdd" Width="160" Height="40" VerticalAlignment="Center" Style="{StaticResource Button}" Background="White" Click="btnAdd_Click">
 
-        <Grid Grid.Row="1" Margin="0 20 0 0">
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon  
+                                    Kind="Add"
+                                    Foreground="Black" 
+                                    VerticalAlignment="Center" 
+                                    Margin="0,00,0,0" 
+                                    Width="25" 
+                                    Height="25"
+                                />
 
+                        <TextBlock Margin="10 0 0 0" Text="Добавление" Foreground="Black" FontSize="16"/>
+
+                    </StackPanel>
+
+                    <Button.Effect>
+                        <DropShadowEffect ShadowDepth="0.1"/>
+                    </Button.Effect>
+
+                   
+                    
+                </Button>
+
+                <Button Width="160" Height="40" VerticalAlignment="Center" Style="{StaticResource Button}" Background="White" Margin="20 0 0 0">
+
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon  
+                                    Kind="Edit"
+                                    Foreground="Black" 
+                                    VerticalAlignment="Center" 
+                                    Margin="0,00,0,0" 
+                                    Width="25" 
+                                    Height="25"
+                                />
+
+                        <TextBlock Margin="10 0 0 0" Text="Редактирование" Foreground="Black" FontSize="16"/>
+
+                    </StackPanel>
+
+                    <Button.Effect>
+                        <DropShadowEffect ShadowDepth="0.1"/>
+                    </Button.Effect>
+                </Button>
+
+            </StackPanel>
+        </Grid>
+       
+
+        <Grid Grid.Row="2" Margin="0 20 0 0">
+
+
+            <Border CornerRadius="5"  Background="White" Margin="20 0 20 20" BorderBrush="#E0E6ED" BorderThickness="2">
+                
             <DataGrid 
                 x:Name="datagridProducts"
-                Margin="20 0 20 20" 
-                Background="White"
+                
+                Background="Transparent"
                 Width="Auto"
-                BorderBrush="Gray"
+                BorderBrush="#E0E6ED"
                 CanUserAddRows="False"
                 CanUserDeleteRows="False"
                 HeadersVisibility="Column"
@@ -49,6 +104,7 @@
                 SelectionMode="Single" 
                 SelectionUnit="FullRow"
                 >
+
 
                 <DataGrid.Resources>
                     <Style TargetType="DataGrid">
@@ -87,6 +143,9 @@
                         <Setter Property="Background" Value="White"/>
                         <Setter Property="Foreground" Value="#4D638C"/>
                     </Style>
+                    
+                    
+                    
                 </DataGrid.Resources>
 
                 <DataGrid.Columns>
@@ -102,6 +161,7 @@
                 </DataGrid.Columns>
                 
             </DataGrid>
+            </Border>
 
         </Grid>
     </Grid>

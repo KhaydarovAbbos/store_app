@@ -1,6 +1,8 @@
-﻿using StoreApp.Service.Interfaces;
+﻿using StoreApp.Domain.Entities.Products;
+using StoreApp.Service.Interfaces;
 using StoreApp.Service.Services;
 using StoreApp.View.UI.MainViews;
+using StoreApp.View.UI.ProductsView;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,7 +26,7 @@ namespace StoreApp.View.UI.FastInsertProductViews
     public partial class FastInsertProductView : UserControl
     {
 
-        IProductService productService = new ProductService();
+        IProductService productService;
         public FastInsertProductView()
         {
             InitializeComponent();
@@ -32,6 +34,8 @@ namespace StoreApp.View.UI.FastInsertProductViews
 
         public async void WindowLoad()
         {
+            productService = new ProductService();
+
             long storeId = long.Parse(StoreMainView.StoreId);
 
             var products = await productService.GetProducts(storeId);
@@ -39,6 +43,18 @@ namespace StoreApp.View.UI.FastInsertProductViews
             datagridProducts.ItemsSource = products;
             datagridProducts.Items.Refresh();
 
+        }
+
+        private void btnAdd_Click(object sender, RoutedEventArgs e)
+        {
+            var product = datagridProducts.SelectedItems[0] as Product;
+
+            if (product != null)
+            {
+                FastAddProductWindow fastAddProductWindow = new FastAddProductWindow(product, this);
+                fastAddProductWindow.ShowDialog();
+
+            }
         }
     }
 }

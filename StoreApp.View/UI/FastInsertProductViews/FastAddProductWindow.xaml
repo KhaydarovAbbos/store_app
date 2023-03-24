@@ -1,0 +1,202 @@
+﻿<Window x:Class="StoreApp.View.UI.FastInsertProductViews.FastAddProductWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:local="clr-namespace:StoreApp.View.UI.FastInsertProductViews"
+        mc:Ignorable="d"
+        Title="" Height="500" Width="350" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+
+    <Grid>
+
+        <StackPanel>
+
+            <Grid Margin="0 20 0 0 ">
+
+
+                <Border BorderBrush="#C4C4C4" BorderThickness="1" CornerRadius="10" Margin="5 0 5 0"> 
+                    
+                
+                    <StackPanel Orientation="Horizontal">
+
+                        <TextBox Text="Категорий : " Style="{StaticResource txt1}" Foreground="Black" FontSize="18" VerticalAlignment="Center" Height="40" Margin="0 0 0 0"  Background="White" Width="100" HorizontalAlignment="Left" IsEnabled="False"/>
+
+                        <TextBox 
+                            x:Name="txtCategory"
+                            Foreground="Black"
+                            Style="{StaticResource txt1}"
+                            HorizontalAlignment="Center"
+                            Width="180" 
+                            Height="40"
+                            PreviewTextInput="NumberValidationTextBox" 
+                            Margin="0,0,0,0" 
+                            FontSize="18" 
+                            VerticalAlignment="Center" IsReadOnly="True" IsEnabled="False"
+                            />
+
+                    </StackPanel>
+                </Border>
+            </Grid>
+
+            <Grid Margin="0 5 0 0 ">
+
+                <Border BorderBrush="#C4C4C4" BorderThickness="1" CornerRadius="10" Margin="5 0 5 0">
+                    <StackPanel Orientation="Horizontal">
+
+                        <TextBox Text="Подкатегорий : " Style="{StaticResource txt1}" Foreground="Black" FontSize="18" VerticalAlignment="Center" Height="40" Margin="0 0 0 0"  Background="White" Width="130" HorizontalAlignment="Left" IsEnabled="False"/>
+
+                        <TextBox 
+                            x:Name="txtSubCategory"
+                            Foreground="Black"
+                            Style="{StaticResource txt1}"
+                            HorizontalAlignment="Center"
+                            Height="40"
+                            Width="180"
+                            PreviewTextInput="NumberValidationTextBox"  IsReadOnly="True" IsEnabled="False"
+                            Margin="0,0,0,0" 
+                            FontSize="18" 
+                            VerticalAlignment="Center"
+                            />
+                    </StackPanel>
+                </Border>
+            </Grid>
+
+            <Grid Margin="0 5 0 0 ">
+
+                <Border BorderBrush="#C4C4C4" BorderThickness="1" CornerRadius="10" Margin="5 0 5 0">
+                    <StackPanel Orientation="Horizontal">
+
+                        <TextBox Text="Имя : " Style="{StaticResource txt1}" Foreground="Black" FontSize="18" VerticalAlignment="Center" Height="40" Margin="0 0 0 0"  Background="White" Width="130" HorizontalAlignment="Left" IsEnabled="False"/>
+
+                        <TextBox 
+                            x:Name="txtName"
+                            Foreground="Black"
+                            Style="{StaticResource txt1}"
+                            HorizontalAlignment="Center"
+                            Height="40"
+                            Width="180"
+                            PreviewTextInput="NumberValidationTextBox"  IsReadOnly="True" IsEnabled="False"
+                            Margin="0,0,0,0" 
+                            FontSize="18" 
+                            VerticalAlignment="Center"
+                            />
+                    </StackPanel>
+                </Border>
+            </Grid>
+
+            <Grid Margin="0 5 0 0 ">
+
+                <Border BorderBrush="#C4C4C4" BorderThickness="1" CornerRadius="10" Margin="5 0 5 0">
+                    <StackPanel Orientation="Horizontal">
+
+                        <TextBox Text="Себестоимость:" Style="{StaticResource txt1}" Foreground="Black" FontSize="18" VerticalAlignment="Center" Height="40" Margin="0 0 0 0"  Background="White" Width="135" HorizontalAlignment="Left" IsEnabled="False"/>
+
+                        <TextBox 
+                            x:Name="txtArrivalPrice"
+                            Foreground="Black"
+                            Style="{StaticResource txt1}"
+                            HorizontalAlignment="Center"
+                            Height="40"
+                            Width="180"
+                            PreviewTextInput="NumberValidationTextBox"  IsReadOnly="True" IsEnabled="False"
+                            Margin="0,0,0,0" 
+                            FontSize="18" 
+                            VerticalAlignment="Center"
+                            />
+                    </StackPanel>
+                </Border>
+
+            </Grid>
+
+            <Grid Margin="0 5 0 0 ">
+
+                <Border BorderBrush="#C4C4C4" BorderThickness="1" CornerRadius="10" Margin="5 0 5 0">
+                    <StackPanel Orientation="Horizontal">
+
+                        <TextBox Text="Цена : " Style="{StaticResource txt1}" Foreground="Black" FontSize="18" VerticalAlignment="Center" Height="40" Margin="0 0 0 0"  Background="White" Width="130" HorizontalAlignment="Left" IsEnabled="False"/>
+
+                        <TextBox 
+                            x:Name="txtSellingPrice"
+                            Foreground="Black"
+                            Style="{StaticResource txt1}"
+                            HorizontalAlignment="Center"
+                            Height="40"
+                            Width="180"
+                            PreviewTextInput="NumberValidationTextBox"  IsReadOnly="True" IsEnabled="False"
+                            Margin="0,0,0,0" 
+                            FontSize="18" 
+                            VerticalAlignment="Center"
+                            />
+                    </StackPanel>
+                </Border>
+
+            </Grid>
+
+            <Grid Margin="0 5 0 0 ">
+
+                <Border BorderBrush="#C4C4C4" BorderThickness="1" CornerRadius="10" Margin="5 0 5 0">
+                    <StackPanel Orientation="Horizontal">
+
+                        <TextBox Text="Штрих-код : " Style="{StaticResource txt1}" Foreground="Black" FontSize="18" VerticalAlignment="Center" Height="40" Margin="0 0 0 0"  Background="White" Width="130" HorizontalAlignment="Left" IsEnabled="False"/>
+
+                        <TextBox 
+                    x:Name="txtBarcode"
+                    Foreground="Black"
+                    Style="{StaticResource txt1}"
+                    HorizontalAlignment="Center"
+                    Height="40"
+                    Width="180"
+                    PreviewTextInput="NumberValidationTextBox"  IsReadOnly="True" IsEnabled="False"
+                    Margin="0,0,0,0" 
+                    FontSize="18" 
+                    VerticalAlignment="Center"
+                    />
+                    </StackPanel>
+                </Border>
+
+            </Grid>
+
+
+            <Grid Margin="0 30 0 0 ">
+
+                <TextBox 
+                    x:Name="txtQuantity"
+                    materialDesign:HintAssist.Hint="Количество" 
+                    Foreground="Black"
+                    Style="{StaticResource txtMain}"
+                    Height="40"
+                    Margin="5,0,5,0" 
+                    FontSize="18" 
+                    VerticalAlignment="Center"
+                    TextChanged="txtQuantity_TextChanged"
+                    Text="{Binding Cost, ValidatesOnExceptions=True}"
+                    PreviewTextInput="NumberValidationTextBox" 
+                        />
+
+                <Border Height="15" Margin="0 -45 0 0"  Background="White" Width="75" HorizontalAlignment="Center">
+
+                    <TextBlock Text="Количество" FontSize="13" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Border>
+
+            </Grid>
+            <TextBlock x:Name="txtErrorQuantity" FontSize="13" Width="200" Foreground="Red" />
+
+            <Button x:Name="BtnAdd" 
+                    Click="BtnAdd_Click" Width="258"
+                    Margin="0 20 0 0" 
+                    Content="Добавить" 
+                    Style="{StaticResource Button}" VerticalAlignment="Bottom">
+
+
+                <Button.Effect>
+                    <DropShadowEffect ShadowDepth="2"/>
+                </Button.Effect>
+
+            </Button>
+
+        </StackPanel>
+
+    </Grid>
+</Window>
+

@@ -81,7 +81,7 @@ namespace StoreApp.Service.Services
         public async Task<IList<Product>> GetProducts(long storeId)
         {
 
-            return await _db.Products.Where(x => x.StoreId == storeId).Include(c => c.SubCategory).Include(c => c.SubCategory.Category).ToListAsync();
+            return await _db.Products.Where(x => x.StoreId == storeId && x.State != ItemState.Deleted).Include(c => c.SubCategory).Include(c => c.SubCategory.Category).ToListAsync();
 
         }
 
