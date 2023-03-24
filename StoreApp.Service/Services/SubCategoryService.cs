@@ -58,7 +58,7 @@ namespace StoreApp.Service.Services
 
         public async Task<IList<SubCategory>> GetAll()
         {
-            var stores = await SubCategoryRepository.GetAllAsync(x => x.State != ItemState.NoActive);
+            var stores = await SubCategoryRepository.GetAllAsync(x => x.State != ItemState.NoActive && x.Category.State != ItemState.NoActive);
 
             return stores.OrderByDescending(x => x.Id).ToList();
         }

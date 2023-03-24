@@ -60,13 +60,11 @@ namespace StoreApp.View.UI.FastInsertProductViews
                 return;
             }
 
-            var existProduct = await productService.Get(_product.Product.Id);
-
-            if (existProduct != null)
+            if (_product.Id != 0)
             {
-                existProduct.Quantity = double.Parse(txtQuantity.Text) + _product.Quantity;
+                _product.Quantity = double.Parse(txtQuantity.Text) + _product.Quantity;
 
-                await productService.Update(existProduct);
+                await productService.Update(_product);
             }
             else
             {

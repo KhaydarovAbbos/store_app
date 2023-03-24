@@ -1,6 +1,7 @@
 ﻿using StoreApp.Domain.Entities.Products;
 using StoreApp.Service.Interfaces;
 using StoreApp.Service.Services;
+using StoreApp.Service.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,23 +26,24 @@ namespace StoreApp.View.UI.ProductsView
     {
         ProductView Productsview;
         long productId;
-        Product Product;
+        StoreProduct _product;
         IProductService productService = new ProductService();
+        IStoreProductService storeProductService = new StoreProductService();
 
-        public EditProductWindow(Product product, ProductView productsview)
+        public EditProductWindow(StoreProduct product, ProductView productsview)
         {
             InitializeComponent();
 
             productId = product.Id;
-            txtName.Text = product.Name;
-            txtQuantity.Text = "0";
-            txtSellingPrice.Text = product.Price.ToString();
-            txtArrivalPrice.Text = product.ArrivalPrice.ToString();
-            txtBarcode.Text = product.Barcode.ToString();
+            txtName.Text = product.Product.Name;
+            txtQuantity.Text = product.Quantity.ToString();
+            txtSellingPrice.Text = product.Product.Price.ToString();
+            txtArrivalPrice.Text = product.Product.ArrivalPrice.ToString();
+            txtBarcode.Text = product.Product.Barcode.ToString();
             Productsview = productsview;
-            Product = product;
+            _product = product;
+            
         }
-
 
         private void txtName_TextChanged(object sender, TextChangedEventArgs e)
         {
@@ -146,10 +148,35 @@ namespace StoreApp.View.UI.ProductsView
 
             await productService.Update(product);
 
+            if (_product.Id == 0)
+            {
+                StoreProductViewModel storeViewModel = new StoreProductViewModel()
+                {
+                    ProductId = _product.Product.Id,
+                    StoreId = _product.StoreId,
+                    SubcategoryId = _product.Product.SubCategoryId,
+                    Quantity = double.Parse(txtQuantity.Text),
+                };
+
+                await storeProductService.Create(storeViewModel);
+            }
+            else
+            {
+                StoreProduct storeProduct = new StoreProduct()
+                {
+                    Id = _product.Id,
+                    ProductId = _product.Product.Id,
+                    Quantity = double.Parse(txtQuantity.Text),
+                    StoreId = _product.StoreId,
+                    SubcategoryId = _product.Product.SubCategoryId,
+                };
+
+                await storeProductService.Update(storeProduct);
+            }
+
             Productsview.WindowLoad();
 
             this.Close();
-
         }
 
         private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)

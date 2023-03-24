@@ -88,7 +88,7 @@ namespace StoreApp.View.UI.ProductsView
 
                 product = new Product()
                 {
-                    Id = item.Id,
+                    Id = item.Product.Id,
                     Name = item.Product.Name,
                     ArrivalPrice = item.Product.ArrivalPrice,
                     Price = item.Product.Price,
@@ -192,7 +192,7 @@ namespace StoreApp.View.UI.ProductsView
                         Height = 20
                     }
                 };
-                btnDelete.Product = product;
+                btnDelete.StoreProduct = item;
                 btnDelete.Click += new RoutedEventHandler(btnDelete_Click);
 
                 ProductButton btnEdit = new ProductButton
@@ -214,7 +214,7 @@ namespace StoreApp.View.UI.ProductsView
                     }
 
                 };
-                btnEdit.Product = product;
+                btnEdit.StoreProduct = item;
                 btnEdit.Click += new RoutedEventHandler(btnEdit_Click);
 
                 StackPanel stackPanel = new StackPanel
@@ -257,14 +257,13 @@ namespace StoreApp.View.UI.ProductsView
                 {
                     ProductButton btnDelete = sender as ProductButton;
 
-                    long id = btnDelete.Product.Id;
+                    long id = btnDelete.StoreProduct.Product.Id;
 
                     IProductService serviceProduct = new ProductService();
 
                     if (id != 0)
                     {
                         await serviceProduct.Delete(id);
-                        //await productService.Delete(id);
 
                         WindowLoad();
                     }
@@ -283,7 +282,8 @@ namespace StoreApp.View.UI.ProductsView
             {
                 ProductButton btnDelete = sender as ProductButton;
 
-                Product product = btnDelete.Product;
+                StoreProduct product = btnDelete.StoreProduct;
+
 
                 EditProductWindow editProductWindow = new EditProductWindow(product, this);
                 editProductWindow.ShowDialog();
@@ -320,13 +320,12 @@ namespace StoreApp.View.UI.ProductsView
             catch (Exception)
             {
 
-                throw;
             }
         }
     }
 
     public class ProductButton : Button
     {
-        public Product Product { get; set; }
+        public StoreProduct StoreProduct { get; set; }
     }
 }

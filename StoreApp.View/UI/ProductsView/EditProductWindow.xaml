@@ -158,7 +158,7 @@
             <TextBlock x:Name="txtErrorSellingPrice" FontSize="13" Width="200" Foreground="Red"/>
 
 
-            <Grid Margin="0 10 0 0 ">
+            <Grid Margin="0 10 0 0 " x:Name="gridQuantity">
 
                 <TextBox 
                     x:Name="txtQuantity"
