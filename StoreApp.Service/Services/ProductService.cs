@@ -71,18 +71,16 @@ namespace StoreApp.Service.Services
             return await productRepository.GetAsync(x => x.Id == id && x.State != ItemState.Deleted);
         }
 
-        public async Task<IList<Product>> GetAll(long storeId, long subCategoryId)
+        public async Task<IList<Product>> GetAll(long storeId, long categoryId, long subCategoryId)
         {
-            var stores = await productRepository.GetAllAsync(x => x.State != ItemState.Deleted && x.StoreId == storeId && x.SubCategoryId == subCategoryId);
+            var stores = await productRepository.GetAllAsync(x => x.State != ItemState.Deleted && x.StoreId == storeId && x.SubCategoryId == subCategoryId && x.SubCategory.CategoryId == categoryId);
 
             return stores.OrderByDescending(x => x.Id).ToList();
         }
 
         public async Task<IList<Product>> GetProducts(long storeId)
         {
-
             return await _db.Products.Where(x => x.StoreId == storeId && x.State != ItemState.Deleted).Include(c => c.SubCategory).Include(c => c.SubCategory.Category).ToListAsync();
-
         }
 
         public async Task<Product> Update(Product model)
