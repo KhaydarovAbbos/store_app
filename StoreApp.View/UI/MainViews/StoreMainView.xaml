@@ -175,21 +175,25 @@
 
 
 
-            <DockPanel Grid.Column="2" Grid.Row="1" >
-                <categoryview:CategoryView x:Name="productcategory_view" Visibility="Hidden" Height="Auto" Width="Auto"/>
-            </DockPanel>
+            <Grid Grid.Row="2">
+                
+                <DockPanel >
+                    <categoryview:CategoryView x:Name="productcategory_view" Visibility="Hidden" />
+                </DockPanel>
             
-            <DockPanel Grid.Column="2" Grid.Row="1" >
-                <subcategoryview:SubCategoryView x:Name="productSubCategory_view" Visibility="Hidden" Height="Auto" Width="Auto"/>
-            </DockPanel>
+                <DockPanel  >
+                    <subcategoryview:SubCategoryView x:Name="productSubCategory_view" Visibility="Hidden" Height="Auto" Width="Auto"/>
+                </DockPanel>
 
-            <DockPanel Grid.Column="2" Grid.Row="1" >
-                <productview:ProductView x:Name="products_view" Visibility="Hidden" Height="Auto" Width="Auto"/>
-            </DockPanel>
+                <DockPanel  >
+                    <productview:ProductView x:Name="products_view" Visibility="Hidden" Height="Auto" Width="Auto"/>
+                </DockPanel>
 
-            <DockPanel Grid.Column="2" Grid.Row="1" >
-                <productinsertview:FastInsertProductView x:Name="insert_products_view" Visibility="Hidden" Height="Auto" Width="Auto"/>
-            </DockPanel>
+                <DockPanel  >
+                    <productinsertview:FastInsertProductView x:Name="insert_products_view" Visibility="Hidden" />
+                </DockPanel>
+            </Grid>
+
 
         </Grid>
 

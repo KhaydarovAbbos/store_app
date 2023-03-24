@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:StoreApp.View.UI.FastInsertProductViews"
              mc:Ignorable="d" 
-             d:DesignHeight="688" d:DesignWidth="1320" MinHeight="730">
+             d:DesignHeight="688" d:DesignWidth="1240" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
 
     <Grid Background="#E5F6FF">
 
@@ -27,7 +27,7 @@
         </Border>
 
 
-        <Grid Grid.Row="1" Margin="0 20 0 20">
+        <Grid Grid.Row="1" Margin="0 20 0 0">
 
             <DataGrid 
                 x:Name="datagridProducts"
