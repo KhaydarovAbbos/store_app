@@ -24,23 +24,30 @@ namespace StoreApp.View.UI.FastInsertProductViews
     public partial class FastEditProductWindow : Window
     {
         FastInsertProductView Productsview;
-        Product _product;
+        StoreProduct _product;
         IProductService productService = new ProductService();
+        IStoreProductService storeProductService = new StoreProductService();
 
-        public FastEditProductWindow(Product product, FastInsertProductView productsview)
+        public FastEditProductWindow(StoreProduct product, FastInsertProductView productsview)
         {
             InitializeComponent();
 
             _product = product;
-            txtName.Text = _product.Name;
-            txtQuantity.Text = "0";
-            txtSellingPrice.Text = _product.Price.ToString();
-            txtArrivalPrice.Text = _product.ArrivalPrice.ToString();
-            txtBarcode.Text = _product.Barcode.ToString();
-            txtSubCategory.Text = _product.SubCategory.Name;
-            txtCategory.Text = _product.SubCategory.Category.Name;
+            txtName.Text = _product.Product.Name;
+            txtQuantity.Text = _product.Quantity.ToString();
+            txtSellingPrice.Text = _product.Product.Price.ToString();
+            txtArrivalPrice.Text = _product.Product.ArrivalPrice.ToString();
+            txtBarcode.Text = _product.Product.Barcode.ToString();
+            txtSubCategory.Text = _product.Product.SubCategory.Name;
+            txtCategory.Text = _product.Product.SubCategory.Category.Name;
 
             Productsview = productsview;
+
+            if (product.Id == 0)
+            {
+                gridQuantity.Visibility = Visibility.Hidden;
+
+            }
 
         }
 
@@ -135,14 +142,28 @@ namespace StoreApp.View.UI.FastInsertProductViews
 
             Product product = new Product()
             {
-                Id = _product.Id,
+                Id = _product.Product.Id,
                 Name = txtName.Text,
                 ArrivalPrice = double.Parse(txtArrivalPrice.Text),
                 Price = double.Parse(txtSellingPrice.Text),
                 Barcode = txtBarcode.Text
             };
-
             await productService.Update(product);
+
+
+            if (gridQuantity.Visibility == Visibility.Visible)
+            {
+                StoreProduct storeProduct = new StoreProduct()
+                {
+                    Id= _product.Id,
+                    ProductId= _product.Product.Id,
+                    Quantity = double.Parse(txtQuantity.Text),
+                    StoreId = _product.StoreId,
+                    SubcategoryId = _product.Product.SubCategoryId,
+                };
+
+                await storeProductService.Update(storeProduct);
+            }
 
             Productsview.WindowLoad();
 
@@ -175,11 +196,6 @@ namespace StoreApp.View.UI.FastInsertProductViews
             {
 
             }
-        }
-
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-            
         }
 
         private void txtBarcode_TextChanged(object sender, TextChangedEventArgs e)
@@ -221,5 +237,6 @@ namespace StoreApp.View.UI.FastInsertProductViews
 
             }
         }
+
     }
 }

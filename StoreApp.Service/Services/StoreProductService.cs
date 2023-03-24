@@ -80,7 +80,7 @@ namespace StoreApp.Service.Services
             IList<StoreProduct> resultList = new List<StoreProduct>();
 
             var products = await _db.Products.Where(x => x.State != ItemState.NoActive).Include(c => c.SubCategory).Include(c => c.SubCategory.Category).ToListAsync();
-            var storeProducts = await _db.StoreProducts.Where(x => x.State != ItemState.NoActive && x.StoreId == storeId).Include(x => x.Product).Include(x => x.SubCategory).ToListAsync();
+            var storeProducts = await _db.StoreProducts.Where(x => x.State != ItemState.NoActive && x.StoreId == storeId).Include(x => x.Product).Include(x => x.SubCategory).Include(x => x.Store).ToListAsync();
 
             foreach (var item in products)
             {

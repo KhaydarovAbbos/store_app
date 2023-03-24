@@ -66,19 +66,18 @@ namespace StoreApp.View.UI.FastInsertProductViews
             }
         }
 
-        private void btnEdit_Click(object sender, RoutedEventArgs e)
+        private async void btnEdit_Click(object sender, RoutedEventArgs e)
         {
             if (datagridProducts.SelectedItems.Count > 0)
             {
 
-                var product = datagridProducts.SelectedItems[0] as Product;
+                var product = datagridProducts.SelectedItems[0] as StoreProduct;
 
                 if (product != null)
                 {
-
+                    product.StoreId = long.Parse(StoreMainView.StoreId);
                     FastEditProductWindow fastEditProductWindow = new FastEditProductWindow(product, this);
                     fastEditProductWindow.ShowDialog();
-
                 }
             }
         }
