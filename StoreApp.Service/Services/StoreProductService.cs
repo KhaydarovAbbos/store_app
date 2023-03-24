@@ -108,10 +108,42 @@ namespace StoreApp.Service.Services
             return resultList;
         }
 
-        public async Task<IList<StoreProduct>> GetProducts(long storeId)
+
+
+        public async Task<IList<StoreProduct>> GetProducts(long storeId, long subCategoryId)
         {
-            return await _db.StoreProducts.Where(x => x.Store.Id == storeId && x.State != ItemState.NoActive).Include(c => c.Product.SubCategory).Include(c => c.Product.SubCategory.Category).ToListAsync();
+            IList<StoreProduct> resultList = new List<StoreProduct>();
+
+            var products = await _db.Products.Where(x => x.State != ItemState.NoActive && x.SubCategoryId == subCategoryId).Include(c => c.SubCategory).Include(c => c.SubCategory.Category).ToListAsync();
+            var storeProducts = await _db.StoreProducts.Where(x => x.State != ItemState.NoActive && x.StoreId == storeId && x.SubcategoryId == subCategoryId).Include(x => x.Product).Include(x => x.SubCategory).Include(x => x.Store).ToListAsync();
+
+            foreach (var item in products)
+            {
+                StoreProduct product = new StoreProduct();
+
+                foreach (var item1 in storeProducts)
+                {
+                    if (item.Id == item1.ProductId)
+                    {
+                        product = item1;
+                    }
+                }
+
+                if (product.Id != 0)
+                {
+                    resultList.Add(product);
+                }
+                else
+                {
+                    product.Product = item;
+                    resultList.Add(product);
+                }
+            }
+
+            return resultList;
         }
+
+        
 
         public async Task<StoreProduct> Update(StoreProduct model)
         {

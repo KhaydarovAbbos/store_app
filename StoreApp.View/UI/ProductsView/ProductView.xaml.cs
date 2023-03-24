@@ -31,7 +31,7 @@ namespace StoreApp.View.UI.ProductsView
 
         public StoreMainView StoremainView;
         Product product;
-        IProductService productService { get; set; }
+        IStoreProductService productService { get; set; }
 
         public ProductView()
         {
@@ -44,7 +44,7 @@ namespace StoreApp.View.UI.ProductsView
                 panel.Children.Clear();
             }
 
-            productService = new ProductService();
+            productService = new StoreProductService();
 
             NumberFormatInfo numberFormatInfo = (NumberFormatInfo)CultureInfo.InvariantCulture.NumberFormat.Clone();
             numberFormatInfo.NumberGroupSeparator = " ";
@@ -53,7 +53,7 @@ namespace StoreApp.View.UI.ProductsView
             long subCategoryId = long.Parse(StoremainView.sub_category_id.Content.ToString());
             long categoryid = long.Parse(StoremainView.category_id.Content.ToString());
 
-            var products = await productService.GetAll();
+            var products = await productService.GetProducts(storeId, subCategoryId);
 
             #region Button add
             Border borderAdd = new Border
@@ -89,11 +89,11 @@ namespace StoreApp.View.UI.ProductsView
                 product = new Product()
                 {
                     Id = item.Id,
-                    Name = item.Name,
-                    ArrivalPrice = item.ArrivalPrice,
-                    Price = item.Price,
-                    SubCategoryId = item.SubCategoryId,
-                    Barcode = item.Barcode
+                    Name = item.Product.Name,
+                    ArrivalPrice = item.Product.ArrivalPrice,
+                    Price = item.Product.Price,
+                    SubCategoryId = item.Product.SubCategoryId,
+                    Barcode = item.Product.Barcode
                 };
 
 
@@ -157,7 +157,7 @@ namespace StoreApp.View.UI.ProductsView
                     HorizontalAlignment = HorizontalAlignment.Left,
                     FontSize = 16,
 
-                    //Text = $"Количество : {product.Quantity.ToString("#,##", numberFormatInfo)}",
+                    Text = $"Количество : {item.Quantity.ToString("#,##", numberFormatInfo)}",
                     Margin = new Thickness(10, 0, 0, 0)
                 };
 
@@ -259,11 +259,12 @@ namespace StoreApp.View.UI.ProductsView
 
                     long id = btnDelete.Product.Id;
 
-                    productService = new ProductService();
+                    IProductService serviceProduct = new ProductService();
 
                     if (id != 0)
                     {
-                        await productService.Delete(id);
+                        await serviceProduct.Delete(id);
+                        //await productService.Delete(id);
 
                         WindowLoad();
                     }

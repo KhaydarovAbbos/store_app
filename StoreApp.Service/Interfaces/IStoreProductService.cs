@@ -20,7 +20,7 @@ namespace StoreApp.Service.Interfaces
 
         Task<StoreProduct> Get(long id);
 
-        Task<IList<StoreProduct>> GetProducts(long storeId);
+        Task<IList<StoreProduct>> GetProducts(long storeId, long subCategoryId);
 
         Task<IList<StoreProduct>> GetAllProducts(long storeId);
 
