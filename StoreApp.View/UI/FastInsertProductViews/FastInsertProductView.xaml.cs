@@ -47,13 +47,34 @@ namespace StoreApp.View.UI.FastInsertProductViews
 
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
-            var product = datagridProducts.SelectedItems[0] as Product;
-
-            if (product != null)
+            if (datagridProducts.SelectedItems.Count > 0)
             {
-                FastAddProductWindow fastAddProductWindow = new FastAddProductWindow(product, this);
-                fastAddProductWindow.ShowDialog();
 
+                var product = datagridProducts.SelectedItems[0] as Product;
+
+                if (product != null)
+                {
+                    FastAddProductWindow fastAddProductWindow = new FastAddProductWindow(product, this);
+                    fastAddProductWindow.ShowDialog();
+
+                }
+            }
+        }
+
+        private void btnEdit_Click(object sender, RoutedEventArgs e)
+        {
+            if (datagridProducts.SelectedItems.Count > 0)
+            {
+
+                var product = datagridProducts.SelectedItems[0] as Product;
+
+                if (product != null)
+                {
+
+                    FastEditProductWindow fastEditProductWindow = new FastEditProductWindow(product, this);
+                    fastEditProductWindow.ShowDialog();
+
+                }
             }
         }
     }

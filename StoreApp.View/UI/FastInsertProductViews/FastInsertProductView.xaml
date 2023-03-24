@@ -54,7 +54,7 @@
                     
                 </Button>
 
-                <Button Width="160" Height="40" VerticalAlignment="Center" Style="{StaticResource Button}" Background="White" Margin="20 0 0 0">
+                <Button x:Name="btnEdit" Width="160" Height="40" VerticalAlignment="Center" Style="{StaticResource Button}" Background="White" Margin="20 0 0 0" Click="btnEdit_Click">
 
                     <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon  
