@@ -48,11 +48,18 @@ namespace StoreApp.View.UI.CategoryViews
                     Name = txtName.Text,
                 };
 
-                await categoryService.Create(categoryViewModel);
+                if (! await categoryService.IsExist(categoryViewModel.Name))
+                {
+                    await categoryService.Create(categoryViewModel);
 
-                Categoryview.WindowLoad();
+                    Categoryview.WindowLoad();
 
-                this.Close();
+                    this.Close();
+                }
+                else
+                {
+                    txtError.Text = "Есть категория с таким названием";
+                }
 
             }
             catch (Exception ex)

@@ -21,5 +21,7 @@ namespace StoreApp.Service.Interfaces
 
         Task<Category> Get(long id);
 
+        Task<bool> IsExist(string name);
+
     }
 }
