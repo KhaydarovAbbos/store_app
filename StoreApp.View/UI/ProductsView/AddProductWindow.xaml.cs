@@ -75,12 +75,16 @@ namespace StoreApp.View.UI.ProductsView
                 txtQuantity.Focus();
                 return;
             }
-            if (ckAutoBarcode.IsChecked == true)
+            if (ckAutoBarcode.IsChecked == false)
             {
                 byte[] encoded = SHA256.Create().ComputeHash(Encoding.UTF8.GetBytes(txtName.Text));
                 var value = BitConverter.ToUInt32(encoded, 0) % 100000;
                 //txtBarcode.Text = txtName.Text[0].ToString() + value.ToString();
-                txtBarcode.Text = "478" + value.ToString();
+                //txtBarcode.Text = "478" + value.ToString();
+
+                Random rnd = new Random();
+                txtBarcode.Text = "478" + rnd.Next(100000000, 999999999).ToString();
+
             }
             if (barcodeGrid.Visibility == Visibility.Visible)
             {

@@ -28,7 +28,6 @@ namespace StoreApp.View.UI.ProductsView
     /// </summary>
     public partial class ProductView : UserControl
     {
-
         public StoreMainView StoremainView;
         Product product;
         IStoreProductService productService { get; set; }
@@ -51,7 +50,6 @@ namespace StoreApp.View.UI.ProductsView
 
             long storeId = long.Parse(StoremainView.store_id.Content.ToString());
             long subCategoryId = long.Parse(StoremainView.sub_category_id.Content.ToString());
-            long categoryid = long.Parse(StoremainView.category_id.Content.ToString());
 
             var products = await productService.GetProducts(storeId, subCategoryId);
 
@@ -85,7 +83,6 @@ namespace StoreApp.View.UI.ProductsView
 
             foreach (var item in products)
             {
-
                 product = new Product()
                 {
                     Id = item.Product.Id,
@@ -95,7 +92,6 @@ namespace StoreApp.View.UI.ProductsView
                     SubCategoryId = item.Product.SubCategoryId,
                     Barcode = item.Product.Barcode
                 };
-
 
                 Border border = new Border
                 {
@@ -298,7 +294,6 @@ namespace StoreApp.View.UI.ProductsView
         {
             try
             {
-
                 Category category = new Category()
                 {
                     Id = long.Parse(StoremainView.category_id.Content.ToString()),
