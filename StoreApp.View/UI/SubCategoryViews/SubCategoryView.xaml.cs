@@ -45,8 +45,10 @@ namespace StoreApp.View.UI.SubCategoryViews
             {
                 panel.Children.Clear();
             }
+
+            long categoryid = long.Parse(StoremainView.category_id.Content.ToString());
             SubCategoryService = new SubCategoryService();
-            var subcategories = await SubCategoryService.GetAll();
+            var subcategories = await SubCategoryService.GetAll(categoryid);
 
             Border borderAdd = new Border
             {

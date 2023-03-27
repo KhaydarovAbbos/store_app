@@ -164,7 +164,7 @@
 
 
                 <Grid x:Name="autoBarcodeGrid" VerticalAlignment="Top">
-                    <TextBlock Text="У вас есть штрих-код?" x:Name="txtQuestion" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="16" Margin="0 -5 60 0"/>
+                <TextBlock Text="Есть ли штрих-код продукта?" x:Name="txtQuestion" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="16" Margin="0 -5 30 0"/>
 
                     <CheckBox Padding="0"
                             x:Name="ckAutoBarcode" 

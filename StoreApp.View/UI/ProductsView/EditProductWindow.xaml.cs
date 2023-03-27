@@ -136,10 +136,16 @@ namespace StoreApp.View.UI.ProductsView
                 txtBarcode.Focus();
                 return;
             }
+            if (txtBarcode.Text.Length != 13)
+            {
+                txtErrorBarocde.Text = "Должно быть только 13 цифр";
+                txtBarcode.Focus();
+                return;
+            }
 
             Product product = new Product()
             {
-                Id = productId,
+                Id = _product.ProductId,
                 Name = txtName.Text,
                 ArrivalPrice = double.Parse(txtArrivalPrice.Text),
                 Price = double.Parse(txtSellingPrice.Text),
@@ -162,6 +168,7 @@ namespace StoreApp.View.UI.ProductsView
             }
             else
             {
+
                 StoreProduct storeProduct = new StoreProduct()
                 {
                     Id = _product.Id,
@@ -169,6 +176,7 @@ namespace StoreApp.View.UI.ProductsView
                     Quantity = double.Parse(txtQuantity.Text),
                     StoreId = _product.StoreId,
                     SubcategoryId = _product.Product.SubCategoryId,
+                    
                 };
 
                 await storeProductService.Update(storeProduct);

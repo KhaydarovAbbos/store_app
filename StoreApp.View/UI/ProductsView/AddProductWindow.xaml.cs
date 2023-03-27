@@ -95,6 +95,11 @@ namespace StoreApp.View.UI.ProductsView
                     return;
                 }
             }
+            if (txtBarcode.Text.Length != 13)
+            {
+                txtErrorBarocde.Text = "Должно быть только 13 цифр";
+                return;
+            }
 
             bool isExist = await productService.IsExist(txtName.Text);
 

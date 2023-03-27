@@ -53,9 +53,9 @@ namespace StoreApp.Service.Services
             return await SubCategoryRepository.GetAsync(x => x.Id == id);
         }
 
-        public async Task<IList<SubCategory>> GetAll()
+        public async Task<IList<SubCategory>> GetAll(long categoryId)
         {
-            var subcategories = await SubCategoryRepository.GetAllAsync();
+            var subcategories = await SubCategoryRepository.GetAllAsync(x => x.CategoryId == categoryId);
 
             return subcategories.OrderByDescending(x => x.Id).ToList();
         }

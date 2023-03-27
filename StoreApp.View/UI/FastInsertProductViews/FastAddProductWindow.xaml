@@ -6,7 +6,7 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:StoreApp.View.UI.FastInsertProductViews"
         mc:Ignorable="d"
-        Title="" Height="500" Width="350" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+        Title="" Height="520" Width="350" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
 
     <Grid>
 
@@ -158,7 +158,7 @@
             </Grid>
 
 
-            <Grid Margin="0 30 0 0 ">
+            <Grid Margin="0 60 0 0 ">
 
                 <TextBox 
                     x:Name="txtQuantity"

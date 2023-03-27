@@ -148,12 +148,13 @@ namespace StoreApp.View.UI.ProductsView
                     Margin = new Thickness(10, 0, 0, 0)
                 };
 
+                string quantity = item.Quantity == 0 ? "0" : item.Quantity.ToString("#,##", numberFormatInfo);
                 TextBlock txtQuantity = new TextBlock
                 {
                     HorizontalAlignment = HorizontalAlignment.Left,
                     FontSize = 16,
 
-                    Text = $"Количество : {item.Quantity.ToString("#,##", numberFormatInfo)}",
+                    Text = $"Количество : {quantity}",
                     Margin = new Thickness(10, 0, 0, 0)
                 };
 

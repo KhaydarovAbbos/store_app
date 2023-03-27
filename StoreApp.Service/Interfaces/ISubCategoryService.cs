@@ -16,7 +16,7 @@ namespace StoreApp.Service.Interfaces
 
         Task<bool> Delete(long id);
 
-        Task<IList<SubCategory>> GetAll();
+        Task<IList<SubCategory>> GetAll(long categoryId);
 
         Task<SubCategory> Get(long id);
 

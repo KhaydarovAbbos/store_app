@@ -110,6 +110,7 @@ namespace StoreApp.View.UI.LoginViews
                             Login = txtLogin.Text,
                             Password = txtPassword.Password
                         };
+                        signInPage.txtError.Text = "";
                         targetWindow.AllCloseControls(1);
                         
                         isClear = true;
