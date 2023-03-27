@@ -75,5 +75,12 @@ namespace StoreApp.Service.Services
                 return await SubCategoryRepository.UpdateAsync(existStore);
             }
         }
+
+        public async Task<bool> IsExist(string name)
+        {
+            var isExistSubCategory = await SubCategoryRepository.GetAsync(x => x.Name.Trim() == name.Trim());
+            
+            return isExistSubCategory == null ? false : true;
+        }
     }
 }

@@ -52,11 +52,19 @@ namespace StoreApp.View.UI.SubCategoryViews
                     CategoryId = CategoryId
                 };
 
-                await SubCategoryService.Create(model);
+                if (! await SubCategoryService.IsExist(model.Name)) 
+                {
+                    await SubCategoryService.Create(model);
 
-                subCategoryView.WindowLoad();
+                    subCategoryView.WindowLoad();
 
-                this.Close();
+                    this.Close();
+
+                }
+                else
+                {
+                    txtError.Text = "Есть подкатегория с таким названием";
+                }
 
             }
             catch (Exception ex)

@@ -19,5 +19,7 @@ namespace StoreApp.Service.Interfaces
         Task<IList<SubCategory>> GetAll();
 
         Task<SubCategory> Get(long id);
+
+        Task<bool> IsExist(string name);
     }
 }
