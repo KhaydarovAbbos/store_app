@@ -31,6 +31,7 @@ namespace StoreApp.View.UI.StoreViews
         {
             InitializeComponent();
             Storeview = storeView;
+            txtName.Focus();
         }
 
         private async void BtnAdd_Click(object sender, RoutedEventArgs e)

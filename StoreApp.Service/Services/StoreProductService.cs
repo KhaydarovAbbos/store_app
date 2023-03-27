@@ -64,20 +64,14 @@ namespace StoreApp.Service.Services
             return await storeProductRepository.GetAsync(x => x.ProductId == id);
         }
 
-        public async Task<IList<StoreProduct>> GetAll(long storeId, long categoryId, long subCategoryId)
-        {
-            var storeProducts = await storeProductRepository.GetAllAsync(x => x.Store.Id == storeId && x.Product.SubCategory.Id == subCategoryId && x.Product.SubCategory.Id == categoryId);
 
-            return storeProducts.OrderByDescending(x => x.Id).ToList();
-        }
-
-        public async Task<IList<StoreProduct>> GetAllProducts(long storeId)
+        public async Task<IList<StoreProduct>> GetAll(long storeId)
         {
 
             IList<StoreProduct> resultList = new List<StoreProduct>();
 
             var products = await _db.Products.Include(c => c.SubCategory).Include(c => c.SubCategory.Category).ToListAsync();
-            var storeProducts = await _db.StoreProducts.Include(x => x.Product).Include(x => x.SubCategory).Include(x => x.Store).ToListAsync();
+            var storeProducts = await _db.StoreProducts.Where(x => x.StoreId == storeId).Include(x => x.Product).Include(x => x.SubCategory).Include(x => x.Store).ToListAsync();
 
             foreach (var item in products)
             {
@@ -105,7 +99,7 @@ namespace StoreApp.Service.Services
             return resultList;
         }
 
-        public async Task<IList<StoreProduct>> GetProducts(long storeId, long subCategoryId)
+        public async Task<IList<StoreProduct>> GetAll(long storeId, long subCategoryId)
         {
             IList<StoreProduct> resultList = new List<StoreProduct>();
 
@@ -138,7 +132,6 @@ namespace StoreApp.Service.Services
 
             return resultList;
         }
-
 
 
         public async Task<StoreProduct> Update(StoreProduct model)

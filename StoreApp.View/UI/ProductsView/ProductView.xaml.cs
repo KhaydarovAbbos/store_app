@@ -51,7 +51,7 @@ namespace StoreApp.View.UI.ProductsView
             long storeId = long.Parse(StoremainView.store_id.Content.ToString());
             long subCategoryId = long.Parse(StoremainView.sub_category_id.Content.ToString());
 
-            var products = await productService.GetProducts(storeId, subCategoryId);
+            var products = await productService.GetAll(storeId, subCategoryId);
 
             #region Button add
             Border borderAdd = new Border

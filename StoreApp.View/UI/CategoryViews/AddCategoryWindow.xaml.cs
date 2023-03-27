@@ -31,6 +31,7 @@ namespace StoreApp.View.UI.CategoryViews
         {
             InitializeComponent();
             Categoryview = categoryview;
+            txtName.Focus();
         }
 
         private async void BtnAdd_Click(object sender, RoutedEventArgs e)

@@ -41,7 +41,7 @@ namespace StoreApp.View.UI.FastInsertProductViews
 
             long storeId = long.Parse(StoreMainView.StoreId);
 
-            var response = await storeProductService.GetAllProducts(storeId);
+            var response = await storeProductService.GetAll(storeId);
 
             datagridProducts.ItemsSource = response;
             datagridProducts.Items.Refresh();

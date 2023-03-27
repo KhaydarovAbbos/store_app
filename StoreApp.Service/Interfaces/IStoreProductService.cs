@@ -16,13 +16,11 @@ namespace StoreApp.Service.Interfaces
 
         Task<bool> Delete(long id);
 
-        Task<IList<StoreProduct>> GetAll(long storeId, long categoryId, long subCategoryId);
-
         Task<StoreProduct> Get(long id);
 
-        Task<IList<StoreProduct>> GetProducts(long storeId, long subCategoryId);
+        Task<IList<StoreProduct>> GetAll(long storeId, long subCategoryId);
 
-        Task<IList<StoreProduct>> GetAllProducts(long storeId);
+        Task<IList<StoreProduct>> GetAll(long storeId);
 
     }
 }
