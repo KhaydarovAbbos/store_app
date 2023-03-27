@@ -1,11 +1,5 @@
-﻿using StoreApp.Domain.Enums;
-using StoreApp.View.Enums;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using StoreApp.View.Enums;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
 namespace StoreApp.View.Helpers
 {

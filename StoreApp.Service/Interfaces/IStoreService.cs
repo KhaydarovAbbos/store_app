@@ -1,10 +1,5 @@
 ﻿using StoreApp.Domain.Entities.Stores;
 using StoreApp.Service.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace StoreApp.Service.Interfaces
 {
@@ -20,6 +15,6 @@ namespace StoreApp.Service.Interfaces
 
         Task<Store> Get(long id);
 
-        Task<bool> IsExist(string name); 
+        Task<bool> IsExist(string name);
     }
 }

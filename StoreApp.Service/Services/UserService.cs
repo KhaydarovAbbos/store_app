@@ -3,11 +3,6 @@ using StoreApp.Data.Repositories;
 using StoreApp.Domain.Entities.Users;
 using StoreApp.Service.Interfaces;
 using StoreApp.Service.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace StoreApp.Service.Services
 {
@@ -25,7 +20,7 @@ namespace StoreApp.Service.Services
             return UserRepository.GetAsync(x => x.Login == login);
         }
 
-        public Task<User> UserLogin(UserLoginViewModel  userLoginViewModel)
+        public Task<User> UserLogin(UserLoginViewModel userLoginViewModel)
         {
             return UserRepository.GetAsync(x => x.Login == userLoginViewModel.Login && x.Password == userLoginViewModel.Password);
         }

@@ -1,25 +1,15 @@
-﻿using StoreApp.Data.IRepositories;
-using StoreApp.Domain.Entities.Products;
+﻿using StoreApp.Domain.Entities.Products;
 using StoreApp.Service.Interfaces;
 using StoreApp.Service.Services;
 using StoreApp.Service.ViewModels;
 using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using XAct.Library.Settings;
 
 namespace StoreApp.View.UI.ProductsView
 {
@@ -33,7 +23,7 @@ namespace StoreApp.View.UI.ProductsView
         ProductView Productsview;
         IProductService productService = new ProductService();
         IStoreProductService storeProductService = new StoreProductService();
-        IReceiveReportService receiveReportService = new ReceiveReportService(); 
+        IReceiveReportService receiveReportService = new ReceiveReportService();
 
         public AddProductWindow(Category category, SubCategory subCategory)
         {
@@ -115,7 +105,7 @@ namespace StoreApp.View.UI.ProductsView
                     Barcode = txtBarcode.Text,
                     SubCategoryId = ProductSubcategory.Id,
                     CategoryId = Productcategory.Id
-               
+
                 };
                 var result = await productService.Create(productViewModel);
 
@@ -330,7 +320,7 @@ namespace StoreApp.View.UI.ProductsView
 
         private void txtBarcode_PreviewKeyDown(object sender, KeyEventArgs e)
         {
-            
+
         }
     }
 }

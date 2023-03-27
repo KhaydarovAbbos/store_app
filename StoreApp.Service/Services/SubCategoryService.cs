@@ -1,7 +1,6 @@
 ﻿using StoreApp.Data.IRepositories;
 using StoreApp.Data.Repositories;
 using StoreApp.Domain.Entities.Products;
-using StoreApp.Domain.Enums;
 using StoreApp.Service.Interfaces;
 using StoreApp.Service.ViewModels;
 
@@ -22,7 +21,7 @@ namespace StoreApp.Service.Services
             {
                 Name = model.Name,
                 CategoryId = model.CategoryId,
-                
+
             };
 
             return await SubCategoryRepository.CreatAsync(category);
@@ -79,7 +78,7 @@ namespace StoreApp.Service.Services
         public async Task<bool> IsExist(string name)
         {
             var isExistSubCategory = await SubCategoryRepository.GetAsync(x => x.Name.Trim() == name.Trim());
-            
+
             return isExistSubCategory == null ? false : true;
         }
     }

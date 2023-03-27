@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq.Expressions;
 
 namespace StoreApp.Data.IRepositories
 {
@@ -20,6 +15,6 @@ namespace StoreApp.Data.IRepositories
 
         Task<bool> DeleteAsync(Expression<Func<T, bool>> expression);
 
-        
+
     }
 }

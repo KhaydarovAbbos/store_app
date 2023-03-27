@@ -1,21 +1,11 @@
 ﻿using StoreApp.Domain.Entities.Products;
 using StoreApp.Service.Interfaces;
 using StoreApp.Service.Services;
-using StoreApp.View.UI.ProductsView;
 using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace StoreApp.View.UI.FastInsertProductViews
 {
@@ -175,8 +165,8 @@ namespace StoreApp.View.UI.FastInsertProductViews
             {
                 StoreProduct storeProduct = new StoreProduct()
                 {
-                    Id= _product.Id,
-                    ProductId= _product.Product.Id,
+                    Id = _product.Id,
+                    ProductId = _product.Product.Id,
                     Quantity = double.Parse(txtQuantity.Text),
                     StoreId = _product.StoreId,
                     SubcategoryId = _product.Product.SubCategoryId,

@@ -3,20 +3,10 @@ using StoreApp.Service.Interfaces;
 using StoreApp.Service.Services;
 using StoreApp.Service.ViewModels;
 using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using XAct.Library.Settings;
 
 namespace StoreApp.View.UI.ProductsView
 {
@@ -43,7 +33,7 @@ namespace StoreApp.View.UI.ProductsView
             txtBarcode.Text = product.Product.Barcode.ToString();
             Productsview = productsview;
             _product = product;
-            
+
         }
 
         private void txtName_TextChanged(object sender, TextChangedEventArgs e)
@@ -189,7 +179,7 @@ namespace StoreApp.View.UI.ProductsView
                     Quantity = double.Parse(txtQuantity.Text),
                     StoreId = _product.StoreId,
                     SubcategoryId = _product.Product.SubCategoryId,
-                    
+
                 };
 
                 await storeProductService.Update(storeProduct);

@@ -1,13 +1,5 @@
 ﻿using StoreApp.Domain.Commons;
-using StoreApp.Domain.Entities.Stores;
-using StoreApp.Domain.Enums;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace StoreApp.Domain.Entities.Products
 {
@@ -24,11 +16,11 @@ namespace StoreApp.Domain.Entities.Products
         public long CategoryId { get; set; }
 
         public string Name { get; set; }
-        
+
         public string Barcode { get; set; }
-        
+
         public double ArrivalPrice { get; set; }
-        
+
         public double Price { get; set; }
     }
 }

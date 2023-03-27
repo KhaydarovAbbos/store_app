@@ -2,23 +2,12 @@
 using StoreApp.Service.Interfaces;
 using StoreApp.Service.Services;
 using StoreApp.Service.ViewModels;
-using StoreApp.View.UI.ProductsView;
 using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace StoreApp.View.UI.FastInsertProductViews
 {
@@ -31,7 +20,7 @@ namespace StoreApp.View.UI.FastInsertProductViews
         IStoreProductService productService = new StoreProductService();
         IReceiveReportService receiveReportService = new ReceiveReportService();
         NumberFormatInfo numberFormatInfo = (NumberFormatInfo)CultureInfo.InvariantCulture.NumberFormat.Clone();
-        
+
 
 
         StoreProduct _product { get; set; }

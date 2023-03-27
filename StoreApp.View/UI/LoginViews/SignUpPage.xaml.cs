@@ -5,22 +5,13 @@ using StoreApp.Service.Services;
 using StoreApp.Service.ViewModels;
 using StoreApp.View.Helpers;
 using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using XAct.Library.Settings;
 
 namespace StoreApp.View.UI.LoginViews
 {
@@ -112,7 +103,7 @@ namespace StoreApp.View.UI.LoginViews
                         };
                         signInPage.txtError.Text = "";
                         targetWindow.AllCloseControls(1);
-                        
+
                         isClear = true;
                     }
                     else
