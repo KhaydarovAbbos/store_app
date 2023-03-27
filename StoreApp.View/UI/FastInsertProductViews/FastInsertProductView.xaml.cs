@@ -4,6 +4,7 @@ using StoreApp.Service.Services;
 using StoreApp.View.UI.MainViews;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace StoreApp.View.UI.FastInsertProductViews
 {
@@ -49,6 +50,7 @@ namespace StoreApp.View.UI.FastInsertProductViews
                     FastAddProductWindow fastAddProductWindow = new FastAddProductWindow(product, this);
                     fastAddProductWindow.ShowDialog();
 
+                    Keyboard.ClearFocus();
                 }
             }
         }
@@ -65,6 +67,8 @@ namespace StoreApp.View.UI.FastInsertProductViews
                     product.StoreId = long.Parse(StoreMainView.StoreId);
                     FastEditProductWindow fastEditProductWindow = new FastEditProductWindow(product, this);
                     fastEditProductWindow.ShowDialog();
+
+                    Keyboard.ClearFocus();
                 }
             }
         }

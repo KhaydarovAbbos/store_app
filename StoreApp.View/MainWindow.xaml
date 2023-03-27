@@ -50,6 +50,7 @@
 
         <Grid Margin="0 0 0 0" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
 
+            
             <DockPanel  Grid.ColumnSpan="2">
                 <logins:SignInPage x:Name="sign_in_view" Visibility="Hidden"/>
             </DockPanel>

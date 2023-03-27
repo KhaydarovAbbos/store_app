@@ -4,6 +4,7 @@ using StoreApp.View.UI.MainViews;
 using System;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using static StoreApp.View.UI.StoreViews.StoreView;
@@ -222,6 +223,7 @@ namespace StoreApp.View.UI.CategoryViews
                 EditCategoryWindow editProductCategoryWindow = new EditCategoryWindow(this, id);
                 editProductCategoryWindow.ShowDialog();
 
+                Keyboard.ClearFocus();
             }
             catch (Exception ex)
             {
@@ -251,6 +253,8 @@ namespace StoreApp.View.UI.CategoryViews
         {
             AddCategoryWindow addProductcategory = new AddCategoryWindow(this);
             addProductcategory.ShowDialog();
+
+            Keyboard.ClearFocus();
         }
     }
 }

@@ -4,6 +4,7 @@ using StoreApp.View.UI.MainViews;
 using System;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
@@ -56,7 +57,8 @@ namespace StoreApp.View.UI.StoreViews
                 BorderBrush = Brushes.Transparent,
                 Content = "+ Добавить",
                 FontWeight = FontWeights.Bold,
-                FontSize = 25
+                FontSize = 25,
+                
             };
             buttonAdd.Click += new RoutedEventHandler(btnAdd_Click);
 
@@ -177,6 +179,8 @@ namespace StoreApp.View.UI.StoreViews
         {
             AddStoreWindow addStoreWindow = new AddStoreWindow(this);
             addStoreWindow.ShowDialog();
+
+            Keyboard.ClearFocus();
         }
 
         public class TotalInfo
@@ -229,6 +233,7 @@ namespace StoreApp.View.UI.StoreViews
                 editStoreWindow.WindowLoad(id, this);
                 editStoreWindow.ShowDialog();
 
+                Keyboard.ClearFocus();
             }
             catch (Exception ex)
             {
@@ -249,6 +254,7 @@ namespace StoreApp.View.UI.StoreViews
                 StoreMainView.StoreId = myButton.Totalinfo.Id.ToString();
 
                 MainView.AllCloseControls(2);
+
 
             }
             catch (Exception ex)

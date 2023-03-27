@@ -6,6 +6,7 @@ using System;
 using System.Globalization;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using static StoreApp.View.UI.StoreViews.StoreView;
@@ -274,6 +275,7 @@ namespace StoreApp.View.UI.ProductsView
                 EditProductWindow editProductWindow = new EditProductWindow(product, this);
                 editProductWindow.ShowDialog();
 
+                Keyboard.ClearFocus();
             }
             catch (Exception ex)
             {
@@ -301,6 +303,7 @@ namespace StoreApp.View.UI.ProductsView
                 addProductWindow.GetProductsView(this);
                 addProductWindow.ShowDialog();
 
+                Keyboard.ClearFocus();
             }
             catch (Exception)
             {
