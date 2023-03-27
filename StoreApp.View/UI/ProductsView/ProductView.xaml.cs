@@ -136,7 +136,7 @@ namespace StoreApp.View.UI.ProductsView
                 {
                     HorizontalAlignment = HorizontalAlignment.Left,
                     FontSize = 16,
-                    Text = $"Себестоимость : {product.ArrivalPrice.ToString("#,##", numberFormatInfo)}",
+                    Text = $"Себе-мость : {product.ArrivalPrice.ToString("#,##", numberFormatInfo)}",
                     Margin = new Thickness(10, 0, 0, 0)
                 };
 
@@ -154,7 +154,7 @@ namespace StoreApp.View.UI.ProductsView
                     HorizontalAlignment = HorizontalAlignment.Left,
                     FontSize = 16,
 
-                    Text = $"Количество : {quantity}",
+                    Text = $"Коли-во : {quantity}",
                     Margin = new Thickness(10, 0, 0, 0)
                 };
 

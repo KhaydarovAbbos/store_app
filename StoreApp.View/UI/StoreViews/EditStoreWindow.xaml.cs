@@ -60,10 +60,19 @@ namespace StoreApp.View.UI.StoreViews
                     Name = txtName.Text
                 };
 
-                var result = await storeService.Update(store);
 
-                Storeview.WindowLoad();
-                this.Close();
+                if (!await storeService.IsExist(store.Name))
+                {
+                    var result = await storeService.Update(store);
+
+                    Storeview.WindowLoad();
+                    this.Close();
+
+                }
+                else
+                {
+                    txtError.Text = "Есть магазин с таким названием";
+                }
             }
             catch (Exception ex)
             {

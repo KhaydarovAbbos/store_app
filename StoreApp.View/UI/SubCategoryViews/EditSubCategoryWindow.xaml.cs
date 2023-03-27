@@ -64,15 +64,23 @@ namespace StoreApp.View.UI.SubCategoryViews
                     Name = txtName.Text,
                 };
 
-                await categoryService.Update(subCategory);
+                if (!await categoryService.IsExist(subCategory.Name))
+                {
+                    await categoryService.Update(subCategory);
 
-                ProductsubCategoryView.WindowLoad();
-                this.Close();
+                    ProductsubCategoryView.WindowLoad();
+                    this.Close();
+
+                }
+                else
+                {
+                    txtError.Text = "Есть подкатегория с таким названием";
+                }
+                
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                throw;
+                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 

@@ -86,6 +86,13 @@ namespace StoreApp.Service.Services
             return existProduct == null ? false : true;
         }
 
+        public async Task<bool> IsExist(string name, long id)
+        {
+            var existProduct = await productRepository.GetAsync(x => x.Name.Trim() == name.Trim() && x.Id == id);
+
+            return existProduct == null ? false : true;
+        }
+
         public async Task<Product> Update(Product model)
         {
             var existProduct = await Get(model.Id);

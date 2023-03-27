@@ -84,6 +84,9 @@ namespace StoreApp.View.UI.MainViews
             }
             if (i == 4)
             {
+                nameCategory.Visibility = Visibility.Hidden;
+                nameSubCategory.Visibility = Visibility.Hidden;
+
                 insert_products_view.Visibility = Visibility.Visible;
                 insert_products_view.WindowLoad();
             }

@@ -1,6 +1,7 @@
 ﻿using StoreApp.Domain.Entities.Products;
 using StoreApp.Service.Interfaces;
 using StoreApp.Service.Services;
+using StoreApp.Service.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -52,10 +53,19 @@ namespace StoreApp.View.UI.CategoryViews
                     Name = txtName.Text,
                 };
 
-                await categoryService.Update(category);
+                if (!await categoryService.IsExist(category.Name))
+                {
+                    await categoryService.Update(category);
 
-                ProductCategory.WindowLoad();
-                this.Close();
+                    ProductCategory.WindowLoad();
+                    this.Close();
+                }
+                else
+                {
+                    txtError.Text = "Есть категория с таким названием";
+                }
+
+                
             }
             catch (Exception)
             {

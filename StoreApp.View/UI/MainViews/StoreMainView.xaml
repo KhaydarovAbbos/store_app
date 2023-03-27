@@ -76,7 +76,7 @@
                                     Height="35" Width="35"
                                     />
 
-                                    <TextBlock Text="Быстрый приход" VerticalAlignment="Center" Margin="10 0 0 0" HorizontalAlignment="Center"  FontSize="16" FontWeight="Bold">
+                                    <TextBlock Text="Склад" VerticalAlignment="Center" Margin="20 0 0 0" HorizontalAlignment="Center"  FontSize="16" FontWeight="Bold">
 
                                     </TextBlock>
 

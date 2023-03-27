@@ -101,9 +101,8 @@ namespace StoreApp.View.UI.ProductsView
                 return;
             }
 
-            bool isExist = await productService.IsExist(txtName.Text);
 
-            if (!isExist)
+            if (!await productService.IsExist(txtName.Text))
             {
                 ProductViewModel productViewModel = new ProductViewModel()
                 {
