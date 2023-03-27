@@ -74,9 +74,9 @@
                     TextChanged="txtName_TextChanged"
                 />
 
-                <Border Height="15" Margin="60 -45 0 0"  Background="White" Width="30" HorizontalAlignment="Left">
+                <Border Height="15" Margin="60 -45 0 0"  Background="White" Width="135" HorizontalAlignment="Left">
 
-                    <TextBlock Text="Имя" FontSize="13" HorizontalAlignment="Center"/>
+                    <TextBlock Text="Наименование товара" FontSize="13" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                 </Border>
 
             </Grid>

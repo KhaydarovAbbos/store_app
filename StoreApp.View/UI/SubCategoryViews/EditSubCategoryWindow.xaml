@@ -26,9 +26,9 @@
                     TextChanged="txtName_TextChanged"
                 />
 
-                <Border Height="15" Margin="60 20 0 0"  Background="White" Width="30" HorizontalAlignment="Left">
+                <Border Height="15" Margin="60 20 0 0"  Background="White" Width="145" HorizontalAlignment="Left">
 
-                    <TextBlock Text="Имя" FontSize="13" HorizontalAlignment="Center"/>
+                    <TextBlock Text="Название подкатегории" FontSize="13" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                 </Border>
 
             </Grid>
