@@ -32,11 +32,11 @@ namespace StoreApp.Service.Services
         {
             bool response = false;
 
-            var store = await Get(id);
+            var subcategory = await Get(id);
 
-            if (store != null)
+            if (subcategory != null)
             {
-                await SubCategoryRepository.UpdateAsync(store);
+                await SubCategoryRepository.DeleteAsync(x => x.Id == subcategory.Id);
 
                 response = true;
             }
@@ -55,24 +55,24 @@ namespace StoreApp.Service.Services
 
         public async Task<IList<SubCategory>> GetAll()
         {
-            var stores = await SubCategoryRepository.GetAllAsync();
+            var subcategories = await SubCategoryRepository.GetAllAsync();
 
-            return stores.OrderByDescending(x => x.Id).ToList();
+            return subcategories.OrderByDescending(x => x.Id).ToList();
         }
 
         public async Task<SubCategory> Update(SubCategory model)
         {
-            var existStore = await Get(model.Id);
+            var existSubcategory = await Get(model.Id);
 
-            if (existStore == null)
+            if (existSubcategory == null)
             {
-                return existStore;
+                return existSubcategory;
             }
             else
             {
-                existStore.Name = model.Name;
+                existSubcategory.Name = model.Name;
 
-                return await SubCategoryRepository.UpdateAsync(existStore);
+                return await SubCategoryRepository.UpdateAsync(existSubcategory);
             }
         }
 

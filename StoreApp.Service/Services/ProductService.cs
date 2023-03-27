@@ -69,9 +69,9 @@ namespace StoreApp.Service.Services
 
         public async Task<IList<Product>> GetAll()
         {
-            var stores = await productRepository.GetAllAsync();
+            var products = await productRepository.GetAllAsync();
 
-            return stores.OrderByDescending(x => x.Id).ToList();
+            return products.OrderByDescending(x => x.Id).ToList();
         }
 
         public async Task<IList<Product>> GetProducts()

@@ -47,7 +47,7 @@ namespace StoreApp.Service.Services
 
             if (product != null)
             {
-                await storeProductRepository.UpdateAsync(product);
+                await storeProductRepository.DeleteAsync(x => x.Id == product.Id);
 
                 response = true;
             }
@@ -66,9 +66,9 @@ namespace StoreApp.Service.Services
 
         public async Task<IList<StoreProduct>> GetAll(long storeId, long categoryId, long subCategoryId)
         {
-            var stores = await storeProductRepository.GetAllAsync(x => x.Store.Id == storeId && x.Product.SubCategory.Id == subCategoryId && x.Product.SubCategory.Id == categoryId);
+            var storeProducts = await storeProductRepository.GetAllAsync(x => x.Store.Id == storeId && x.Product.SubCategory.Id == subCategoryId && x.Product.SubCategory.Id == categoryId);
 
-            return stores.OrderByDescending(x => x.Id).ToList();
+            return storeProducts.OrderByDescending(x => x.Id).ToList();
         }
 
         public async Task<IList<StoreProduct>> GetAllProducts(long storeId)

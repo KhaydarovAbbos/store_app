@@ -37,11 +37,11 @@ namespace StoreApp.Service.Services
         {
             bool response = false;
 
-            var store = await Get(id);
+            var category = await Get(id);
 
-            if (store != null)
+            if (category != null)
             {
-                await categoryRepository.UpdateAsync(store);
+                await categoryRepository.DeleteAsync(x => x.Id == category.Id);
 
                 response = true;
             }
@@ -60,24 +60,24 @@ namespace StoreApp.Service.Services
 
         public async Task<IList<Category>> GetAll()
         {
-            var stores = await categoryRepository.GetAllAsync();
+            var categories = await categoryRepository.GetAllAsync();
 
-            return stores.OrderByDescending(x => x.Id).ToList();
+            return categories.OrderByDescending(x => x.Id).ToList();
         }
 
         public async Task<Category> Update(Category model)
         {
-            var existStore = await Get(model.Id);
+            var existCategory = await Get(model.Id);
 
-            if (existStore == null)
+            if (existCategory == null)
             {
-                return existStore;
+                return existCategory;
             }
             else
             {
-                existStore.Name = model.Name;
+                existCategory.Name = model.Name;
 
-                return await categoryRepository.UpdateAsync(existStore);
+                return await categoryRepository.UpdateAsync(existCategory);
             }
         }
 

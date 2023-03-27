@@ -42,7 +42,7 @@ namespace StoreApp.Service.Services
 
             if (store != null)
             {
-                await storeRepository.UpdateAsync(store);
+                await storeRepository.DeleteAsync(x => x.Id == store.Id);
 
                 response = true;
             }
