@@ -22,5 +22,7 @@ namespace StoreApp.Service.Interfaces
 
         Task<Product> Get(long id);
 
+        Task<bool> IsExist(string name);
+
     }
 }

@@ -79,6 +79,13 @@ namespace StoreApp.Service.Services
             return await _db.Products.Include(x => x.Category).Include(x => x.SubCategory).ToListAsync();
         }
 
+        public async Task<bool> IsExist(string name)
+        {
+            var existProduct = await productRepository.GetAsync(x => x.Name.Trim() == name.Trim());
+
+            return existProduct == null ? false : true;
+        }
+
         public async Task<Product> Update(Product model)
         {
             var existProduct = await Get(model.Id);

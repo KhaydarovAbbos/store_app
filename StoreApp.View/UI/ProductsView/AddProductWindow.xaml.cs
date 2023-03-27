@@ -83,7 +83,7 @@ namespace StoreApp.View.UI.ProductsView
                 //txtBarcode.Text = "478" + value.ToString();
 
                 Random rnd = new Random();
-                txtBarcode.Text = "478" + rnd.Next(100000000, 999999999).ToString();
+                txtBarcode.Text = "478" + rnd.NextInt64(1000000000, 9999999999).ToString();
 
             }
             if (barcodeGrid.Visibility == Visibility.Visible)
@@ -96,33 +96,45 @@ namespace StoreApp.View.UI.ProductsView
                 }
             }
 
-            ProductViewModel productViewModel = new ProductViewModel()
+            bool isExist = await productService.IsExist(txtName.Text);
+
+            if (!isExist)
             {
-                Name = txtName.Text,
-                Arrivalprice = double.Parse(txtArrivalPrice.Text),
-                Price = double.Parse(txtSellingPrice.Text),
-                Barcode = txtBarcode.Text,
-                SubCategoryId = ProductSubcategory.Id,
-                CategoryId = Productcategory.Id
+                ProductViewModel productViewModel = new ProductViewModel()
+                {
+                    Name = txtName.Text,
+                    Arrivalprice = double.Parse(txtArrivalPrice.Text),
+                    Price = double.Parse(txtSellingPrice.Text),
+                    Barcode = txtBarcode.Text,
+                    SubCategoryId = ProductSubcategory.Id,
+                    CategoryId = Productcategory.Id
                
-            };
-            var result = await productService.Create(productViewModel);
+                };
+                var result = await productService.Create(productViewModel);
 
-            var store_id = long.Parse(Productsview.StoremainView.store_id.Content.ToString());
+                var store_id = long.Parse(Productsview.StoremainView.store_id.Content.ToString());
 
-            StoreProductViewModel storeProductViewModel = new StoreProductViewModel()
+                StoreProductViewModel storeProductViewModel = new StoreProductViewModel()
+                {
+                    ProductId = result.Id,
+                    SubcategoryId = result.SubCategoryId,
+                    StoreId = store_id,
+                    Quantity = double.Parse(txtQuantity.Text)
+                };
+
+                await storeProductService.Create(storeProductViewModel);
+
+                Productsview.WindowLoad();
+
+                this.Close();
+
+            }
+            else
             {
-                ProductId = result.Id,
-                SubcategoryId = result.SubCategoryId,
-                StoreId = store_id,
-                Quantity = double.Parse(txtQuantity.Text)
-            };
+                txtErrorName.Text = "Товар с таким названием есть";
+                return;
+            }
 
-            await storeProductService.Create(storeProductViewModel);
-
-            Productsview.WindowLoad();
-
-            this.Close();
         }
 
         private void txtName_TextChanged(object sender, TextChangedEventArgs e)
