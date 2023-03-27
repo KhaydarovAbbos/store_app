@@ -81,5 +81,12 @@ namespace StoreApp.Service.Services
                 return await storeRepository.UpdateAsync(existStore);
             }
         }
+
+        public async Task<bool> IsExist(string name)
+        {
+            var isExistStore = await storeRepository.GetAsync(x => x.Name.Trim() == name.Trim());
+
+            return isExistStore == null ? false : true;
+        }
     }
 }

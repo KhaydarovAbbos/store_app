@@ -19,5 +19,7 @@ namespace StoreApp.Service.Interfaces
         Task<IList<Store>> GetAll();
 
         Task<Store> Get(long id);
+
+        Task<bool> IsExist(string name); 
     }
 }

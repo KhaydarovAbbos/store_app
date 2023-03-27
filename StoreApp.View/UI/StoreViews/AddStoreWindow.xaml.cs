@@ -48,10 +48,18 @@ namespace StoreApp.View.UI.StoreViews
                     Name = txtName.Text,
                 };
 
-                var response = await storeService.Create(storeView);
+                if (!await storeService.IsExist(storeView.Name))
+                {
+                    var response = await storeService.Create(storeView);
 
-                Storeview.WindowLoad();
-                this.Close();
+                    Storeview.WindowLoad();
+                    this.Close();
+
+                }
+                else
+                {
+                    txtError.Text = "Есть магазин с таким названием";
+                }
             }
             catch (Exception ex)
             {
