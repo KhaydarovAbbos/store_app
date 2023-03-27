@@ -5,6 +5,7 @@ using StoreApp.Service.ViewModels;
 using StoreApp.View.UI.ProductsView;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
@@ -28,6 +29,9 @@ namespace StoreApp.View.UI.FastInsertProductViews
     {
         FastInsertProductView Productsview;
         IStoreProductService productService = new StoreProductService();
+        IReceiveReportService receiveReportService = new ReceiveReportService();
+        NumberFormatInfo numberFormatInfo = (NumberFormatInfo)CultureInfo.InvariantCulture.NumberFormat.Clone();
+        
 
 
         StoreProduct _product { get; set; }
@@ -40,12 +44,14 @@ namespace StoreApp.View.UI.FastInsertProductViews
             _product = product;
             Productsview = productsView;
 
+            numberFormatInfo.NumberGroupSeparator = " ";
+
             txtCategory.Text = _product.Product.SubCategory.Category.Name;
             txtSubCategory.Text = _product.Product.SubCategory.Name;
             txtName.Text = _product.Product.Name;
             txtBarcode.Text = _product.Product.Barcode;
-            txtArrivalPrice.Text = _product.Product.ArrivalPrice.ToString();
-            txtSellingPrice.Text = _product.Product.Price.ToString();
+            txtArrivalPrice.Text = _product.Product.ArrivalPrice.ToString("#,##", numberFormatInfo); ;
+            txtSellingPrice.Text = _product.Product.Price.ToString("#,##", numberFormatInfo); ;
 
             txtQuantity.Focus();
         }
@@ -81,9 +87,16 @@ namespace StoreApp.View.UI.FastInsertProductViews
                     SubcategoryId = _product.Product.SubCategory.Id,
                     Quantity = double.Parse(txtQuantity.Text)
                 };
-
                 await productService.Create(productViewModel);
             }
+
+            ReceiveReportViewModel receiveReportViewModel = new ReceiveReportViewModel()
+            {
+                ProductId = _product.Product.Id,
+                ProductName = _product.Product.Name,
+                Quantity = double.Parse(txtQuantity.Text)
+            };
+            await receiveReportService.CreateAsync(receiveReportViewModel);
 
             Productsview.WindowLoad();
 

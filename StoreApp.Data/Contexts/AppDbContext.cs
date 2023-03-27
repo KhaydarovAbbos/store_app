@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using StoreApp.Domain.Entities.Report;
 
 namespace StoreApp.Data.Contexts
 {
@@ -24,6 +25,7 @@ namespace StoreApp.Data.Contexts
         public DbSet<Product> Products { get; set; }
         public DbSet<StoreProduct> StoreProducts { get; set; }
 
+        public DbSet<ReceiveReport> ReceiveReports { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

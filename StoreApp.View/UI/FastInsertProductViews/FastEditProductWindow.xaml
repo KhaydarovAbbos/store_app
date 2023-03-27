@@ -128,7 +128,12 @@
             </Grid>
 
 
-            <TextBlock x:Name="txtErrorArrivalPrice" FontSize="13" Width="200" Foreground="Red"/>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock x:Name="txtErrorArrivalPrice" FontSize="13" Width="150" Foreground="Red" Margin="20 0 0 0" />
+
+                <TextBlock Margin="20 0 0 0" x:Name="txtArrivalPricelabel" Foreground="Black" VerticalAlignment="Top" FontSize="13"/>
+
+            </StackPanel>
 
 
             <Grid Margin="0 10 0 0 ">
@@ -152,8 +157,12 @@
                 </Border>
 
             </Grid>
-            <TextBlock x:Name="txtErrorSellingPrice" FontSize="13" Width="200" Foreground="Red"/>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock x:Name="txtErrorSellingPrice" FontSize="13" Width="150" Foreground="Red" Margin="20 0 0 0" />
 
+                <TextBlock Margin="20 0 0 0" x:Name="txtSellingPricelabel" Foreground="Black" VerticalAlignment="Top" FontSize="13"/>
+
+            </StackPanel>
 
             <Grid Margin="0 10 0 0 " x:Name="gridQuantity" Visibility="Visible">
 
@@ -176,8 +185,12 @@
                 </Border>
 
             </Grid>
-            <TextBlock x:Name="txtErrorQuantity" FontSize="13" Width="200" Foreground="Red"/>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock x:Name="txtErrorQuantity" FontSize="13" Width="150" Foreground="Red" Margin="30 0 0 0" />
 
+                <TextBlock Margin="20 0 0 0" x:Name="txtQuantitylabel" Foreground="Black" VerticalAlignment="Top" FontSize="13"/>
+
+            </StackPanel>
 
             <Button x:Name="BtnEdit" 
                     Click="BtnEdit_Click" Width="258"

@@ -4,6 +4,7 @@ using StoreApp.Service.Services;
 using StoreApp.Service.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -57,6 +58,11 @@ namespace StoreApp.View.UI.ProductsView
         {
             try
             {
+                NumberFormatInfo numberFormatInfo = (NumberFormatInfo)CultureInfo.InvariantCulture.NumberFormat.Clone();
+                numberFormatInfo.NumberGroupSeparator = " ";
+
+                txtArrivalPricelabel.Text = double.Parse(txtArrivalPrice.Text == "" ? "0" : txtArrivalPrice.Text).ToString("#,##", numberFormatInfo);
+
 
                 if (txtArrivalPrice.Text.Length == 0 || txtArrivalPrice.Text == "")
                     txtErrorArrivalPrice.Text = "Необходимый";
@@ -75,6 +81,10 @@ namespace StoreApp.View.UI.ProductsView
 
             try
             {
+                NumberFormatInfo numberFormatInfo = (NumberFormatInfo)CultureInfo.InvariantCulture.NumberFormat.Clone();
+                numberFormatInfo.NumberGroupSeparator = " ";
+
+                txtSellingPricelabel.Text = double.Parse(txtSellingPrice.Text == "" ? "0" : txtSellingPrice.Text).ToString("#,##", numberFormatInfo);
 
                 if (txtSellingPrice.Text.Length == 0 || txtSellingPrice.Text == "")
                     txtErrorSellingPrice.Text = "Необходимый";
@@ -92,7 +102,10 @@ namespace StoreApp.View.UI.ProductsView
             try
             {
 
+                NumberFormatInfo numberFormatInfo = (NumberFormatInfo)CultureInfo.InvariantCulture.NumberFormat.Clone();
+                numberFormatInfo.NumberGroupSeparator = " ";
 
+                txtQuantitylabel.Text = double.Parse(txtQuantity.Text == "" ? "0" : txtQuantity.Text).ToString("#,##", numberFormatInfo);
 
                 if (txtQuantity.Text.Length == 0 || txtQuantity.Text == "")
                     txtErrorQuantity.Text = "Необходимый";

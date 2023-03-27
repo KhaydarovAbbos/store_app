@@ -1,9 +1,11 @@
-﻿using StoreApp.Domain.Entities.Products;
+﻿using StoreApp.Data.IRepositories;
+using StoreApp.Domain.Entities.Products;
 using StoreApp.Service.Interfaces;
 using StoreApp.Service.Services;
 using StoreApp.Service.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
@@ -31,6 +33,7 @@ namespace StoreApp.View.UI.ProductsView
         ProductView Productsview;
         IProductService productService = new ProductService();
         IStoreProductService storeProductService = new StoreProductService();
+        IReceiveReportService receiveReportService = new ReceiveReportService(); 
 
         public AddProductWindow(Category category, SubCategory subCategory)
         {
@@ -125,8 +128,15 @@ namespace StoreApp.View.UI.ProductsView
                     StoreId = store_id,
                     Quantity = double.Parse(txtQuantity.Text)
                 };
-
                 await storeProductService.Create(storeProductViewModel);
+
+                ReceiveReportViewModel receiveReportViewModel = new ReceiveReportViewModel()
+                {
+                    ProductId = result.Id,
+                    ProductName = result.Name,
+                    Quantity = double.Parse(txtQuantity.Text)
+                };
+                await receiveReportService.CreateAsync(receiveReportViewModel);
 
                 Productsview.WindowLoad();
 
@@ -158,6 +168,11 @@ namespace StoreApp.View.UI.ProductsView
         {
             try
             {
+                NumberFormatInfo numberFormatInfo = (NumberFormatInfo)CultureInfo.InvariantCulture.NumberFormat.Clone();
+                numberFormatInfo.NumberGroupSeparator = " ";
+
+                txtArrivalPricelabel.Text = double.Parse(txtArrivalPrice.Text == "" ? "0" : txtArrivalPrice.Text).ToString("#,##", numberFormatInfo);
+
                 if (txtArrivalPrice.Text.Length == 0 || txtArrivalPrice.Text == "")
                 {
                     txtErrorArrivalPrice.Text = "Необходимый";
@@ -179,6 +194,12 @@ namespace StoreApp.View.UI.ProductsView
 
             try
             {
+                NumberFormatInfo numberFormatInfo = (NumberFormatInfo)CultureInfo.InvariantCulture.NumberFormat.Clone();
+                numberFormatInfo.NumberGroupSeparator = " ";
+
+                txtSellingPricelabel.Text = double.Parse(txtSellingPrice.Text == "" ? "0" : txtSellingPrice.Text).ToString("#,##", numberFormatInfo);
+
+
                 if (txtSellingPrice.Text.Length == 0 || txtSellingPrice.Text == "")
                 {
                     txtErrorSellingPrice.Text = "Необходимый";
@@ -225,6 +246,11 @@ namespace StoreApp.View.UI.ProductsView
         {
             try
             {
+                NumberFormatInfo numberFormatInfo = (NumberFormatInfo)CultureInfo.InvariantCulture.NumberFormat.Clone();
+                numberFormatInfo.NumberGroupSeparator = " ";
+
+                txtQuantitylabel.Text = double.Parse(txtQuantity.Text == "" ? "0" : txtQuantity.Text).ToString("#,##", numberFormatInfo);
+
                 if (txtQuantity.Text.Length == 0 || txtQuantity.Text == "")
                 {
                     txtErrorQuantity.Text = "Необходимый";
