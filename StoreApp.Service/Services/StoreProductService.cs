@@ -35,7 +35,6 @@ namespace StoreApp.Service.Services
                 ProductId = model.ProductId,
                 Quantity = model.Quantity,
             };
-            product.Create();
 
             return await storeProductRepository.CreatAsync(product);
         }
@@ -48,8 +47,6 @@ namespace StoreApp.Service.Services
 
             if (product != null)
             {
-                product.Delete();
-
                 await storeProductRepository.UpdateAsync(product);
 
                 response = true;
@@ -64,12 +61,12 @@ namespace StoreApp.Service.Services
 
         public async Task<StoreProduct> Get(long id)
         {
-            return await storeProductRepository.GetAsync(x => x.ProductId == id && x.State != ItemState.NoActive);
+            return await storeProductRepository.GetAsync(x => x.ProductId == id);
         }
 
         public async Task<IList<StoreProduct>> GetAll(long storeId, long categoryId, long subCategoryId)
         {
-            var stores = await storeProductRepository.GetAllAsync(x => x.State != ItemState.NoActive && x.Store.Id == storeId && x.Product.SubCategory.Id == subCategoryId && x.Product.SubCategory.Id == categoryId);
+            var stores = await storeProductRepository.GetAllAsync(x => x.Store.Id == storeId && x.Product.SubCategory.Id == subCategoryId && x.Product.SubCategory.Id == categoryId);
 
             return stores.OrderByDescending(x => x.Id).ToList();
         }
@@ -79,8 +76,8 @@ namespace StoreApp.Service.Services
 
             IList<StoreProduct> resultList = new List<StoreProduct>();
 
-            var products = await _db.Products.Where(x => x.State != ItemState.NoActive && x.SubCategory.State != ItemState.NoActive && x.Category.State != ItemState.NoActive).Include(c => c.SubCategory).Include(c => c.SubCategory.Category).ToListAsync();
-            var storeProducts = await _db.StoreProducts.Where(x => x.State != ItemState.NoActive && x.StoreId == storeId && x.SubCategory.State != ItemState.NoActive && x.SubCategory.Category.State != ItemState.NoActive && x.Store.State != ItemState.NoActive).Include(x => x.Product).Include(x => x.SubCategory).Include(x => x.Store).ToListAsync();
+            var products = await _db.Products.Include(c => c.SubCategory).Include(c => c.SubCategory.Category).ToListAsync();
+            var storeProducts = await _db.StoreProducts.Include(x => x.Product).Include(x => x.SubCategory).Include(x => x.Store).ToListAsync();
 
             foreach (var item in products)
             {
@@ -112,8 +109,8 @@ namespace StoreApp.Service.Services
         {
             IList<StoreProduct> resultList = new List<StoreProduct>();
 
-            var products = await _db.Products.Where(x => x.State != ItemState.NoActive && x.SubCategoryId == subCategoryId && x.SubCategory.State != ItemState.NoActive && x.Category.State != ItemState.NoActive).Include(c => c.SubCategory).Include(c => c.SubCategory.Category).ToListAsync();
-            var storeProducts = await _db.StoreProducts.Where(x => x.State != ItemState.NoActive && x.StoreId == storeId && x.SubcategoryId == subCategoryId && x.SubCategory.State != ItemState.NoActive && x.SubCategory.Category.State != ItemState.NoActive && x.Store.State != ItemState.NoActive).Include(x => x.Product).Include(x => x.SubCategory).Include(x => x.Store).ToListAsync();
+            var products = await _db.Products.Where(x => x.SubCategoryId == subCategoryId).Include(c => c.SubCategory).Include(c => c.SubCategory.Category).ToListAsync();
+            var storeProducts = await _db.StoreProducts.Where(x => x.StoreId == storeId && x.SubcategoryId == subCategoryId).Include(x => x.Product).Include(x => x.SubCategory).Include(x => x.Store).ToListAsync();
 
             foreach (var item in products)
             {

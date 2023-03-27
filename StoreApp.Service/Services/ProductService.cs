@@ -38,7 +38,6 @@ namespace StoreApp.Service.Services
                 Price = model.Price
 
             };
-            product.Create();
 
             return await productRepository.CreatAsync(product);
         }
@@ -51,9 +50,7 @@ namespace StoreApp.Service.Services
 
             if (product != null)
             {
-                product.Delete();
-
-                await productRepository.UpdateAsync(product);
+                await productRepository.DeleteAsync(x => x.Id == product.Id);
 
                 response = true;
             }
@@ -67,19 +64,19 @@ namespace StoreApp.Service.Services
 
         public async Task<Product> Get(long id)
         {
-            return await productRepository.GetAsync(x => x.Id == id && x.State != ItemState.NoActive);
+            return await productRepository.GetAsync(x => x.Id == id);
         }
 
         public async Task<IList<Product>> GetAll()
         {
-            var stores = await productRepository.GetAllAsync(x => x.State != ItemState.NoActive);
+            var stores = await productRepository.GetAllAsync();
 
             return stores.OrderByDescending(x => x.Id).ToList();
         }
 
         public async Task<IList<Product>> GetProducts()
         {
-            return await _db.Products.Where(x => x.State != ItemState.NoActive).Include(x => x.Category).Include(x => x.SubCategory).ToListAsync();
+            return await _db.Products.Include(x => x.Category).Include(x => x.SubCategory).ToListAsync();
         }
 
         public async Task<Product> Update(Product model)

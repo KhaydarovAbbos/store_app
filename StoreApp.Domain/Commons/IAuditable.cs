@@ -11,6 +11,5 @@ namespace StoreApp.Domain.Commons
     {
         public long Id { get; set; }
 
-        public ItemState State { get; set; }
     }
 }

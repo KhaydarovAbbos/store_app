@@ -20,16 +20,5 @@ namespace StoreApp.Domain.Entities.Users
         
         public string Password { get; set; }
         
-        public ItemState State { get; set; }
-
-        public void Create()
-        {
-            State = ItemState.Active;
-        }
-
-        public void Delete()
-        {
-            State = ItemState.NoActive;
-        }
     }
 }

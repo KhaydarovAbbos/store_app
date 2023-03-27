@@ -28,7 +28,6 @@ namespace StoreApp.Service.Services
             {
                 Name = model.Name
             };
-            category.Create();
 
             return await categoryRepository.CreatAsync(category);
 
@@ -42,8 +41,6 @@ namespace StoreApp.Service.Services
 
             if (store != null)
             {
-                store.Delete();
-
                 await categoryRepository.UpdateAsync(store);
 
                 response = true;
@@ -58,12 +55,12 @@ namespace StoreApp.Service.Services
 
         public async Task<Category> Get(long id)
         {
-            return await categoryRepository.GetAsync(x => x.Id == id && x.State != ItemState.NoActive);
+            return await categoryRepository.GetAsync(x => x.Id == id);
         }
 
         public async Task<IList<Category>> GetAll()
         {
-            var stores = await categoryRepository.GetAllAsync(x => x.State != ItemState.NoActive);
+            var stores = await categoryRepository.GetAllAsync();
 
             return stores.OrderByDescending(x => x.Id).ToList();
         }

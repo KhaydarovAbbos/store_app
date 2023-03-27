@@ -30,17 +30,5 @@ namespace StoreApp.Domain.Entities.Products
         public double ArrivalPrice { get; set; }
         
         public double Price { get; set; }
-
-        public ItemState State { get; set; }
-
-        public void Create()
-        {
-            State = ItemState.Active;
-        }
-
-        public void Delete()
-        {
-            State = ItemState.NoActive;
-        }
     }
 }

@@ -86,11 +86,9 @@ namespace StoreApp.View.UI.ProductsView
             {
                 if (txtBarcode.Text == "")
                 {
-
                     txtErrorBarocde.Text = "Необходимый";
                     txtBarcode.Focus();
                     return;
-
                 }
             }
 

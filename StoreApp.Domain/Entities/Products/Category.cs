@@ -16,16 +16,5 @@ namespace StoreApp.Domain.Entities.Products
 
         public string Name { get; set; }
 
-        public ItemState State { get; set; }
-
-        public void Create()
-        {
-            State = ItemState.Active;
-        }
-
-        public void Delete()
-        {
-            State = ItemState.NoActive;
-        }
     }
 }

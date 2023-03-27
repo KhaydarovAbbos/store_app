@@ -37,7 +37,6 @@ namespace StoreApp.Service.Services
                 Login = userSignUpViewModel.Login,
                 Password = userSignUpViewModel.Password,
             };
-            user.Create();
 
             return UserRepository.CreatAsync(user);
         }

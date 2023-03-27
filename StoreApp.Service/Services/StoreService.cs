@@ -29,7 +29,6 @@ namespace StoreApp.Service.Services
             {
                 Name = model.Name,
             };
-            store.Create();
 
             return await storeRepository.CreatAsync(store);
 
@@ -43,8 +42,6 @@ namespace StoreApp.Service.Services
 
             if (store != null)
             {
-                store.Delete();
-
                 await storeRepository.UpdateAsync(store);
 
                 response = true;
@@ -59,12 +56,12 @@ namespace StoreApp.Service.Services
 
         public async Task<Store> Get(long id)
         {
-            return await storeRepository.GetAsync(x => x.Id == id && x.State != ItemState.NoActive);
+            return await storeRepository.GetAsync(x => x.Id == id);
         }
 
         public async Task<IList<Store>> GetAll()
         {
-            var stores = await storeRepository.GetAllAsync(x => x.State != ItemState.NoActive);
+            var stores = await storeRepository.GetAllAsync();
 
             return stores.OrderByDescending(x => x.Id).ToList();
         }

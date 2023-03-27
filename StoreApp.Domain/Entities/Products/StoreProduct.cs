@@ -28,17 +28,5 @@ namespace StoreApp.Domain.Entities.Products
         public long ProductId { get; set; }
 
         public double Quantity { get; set; }
-
-        public ItemState State { get; set; }
-
-        public void Create()
-        {
-            State = ItemState.Active;
-        }
-
-        public void Delete()
-        {
-            State = ItemState.NoActive;
-        }
     }
 }
