@@ -62,7 +62,7 @@
             </Grid>
 
 
-            <Grid Margin="0 60 0 0">
+            <Grid Margin="0 40 0 0">
 
                 <TextBox 
                     x:Name="txtName"
@@ -114,6 +114,7 @@
                     Style="{StaticResource txtMain}"
                     Height="40"
                     PreviewTextInput="NumberValidationTextBox" 
+                    TextAlignment="Right"
                     Margin="10,0,10,0" 
                     FontSize="18" 
                     VerticalAlignment="Center"
@@ -131,7 +132,7 @@
             <StackPanel Orientation="Horizontal">
                 <TextBlock x:Name="txtErrorArrivalPrice" FontSize="13" Width="150" Foreground="Red" Margin="20 0 0 0" />
 
-                <TextBlock Margin="20 0 0 0" x:Name="txtArrivalPricelabel" Foreground="Black" VerticalAlignment="Top" FontSize="13"/>
+                <TextBlock Margin="-20 0 0 0" Width="160" x:Name="txtArrivalPricelabel" Foreground="Black" VerticalAlignment="Top" FontSize="19" TextAlignment="Right"/>
 
             </StackPanel>
 
@@ -144,6 +145,7 @@
                     Foreground="Black"
                     Style="{StaticResource txtMain}"
                     PreviewTextInput="NumberValidationTextBox" 
+                    TextAlignment="Right"
                     Height="40"
                     Margin="10,0,10,0" 
                     FontSize="18" 
@@ -160,7 +162,7 @@
             <StackPanel Orientation="Horizontal">
                 <TextBlock x:Name="txtErrorSellingPrice" FontSize="13" Width="150" Foreground="Red" Margin="20 0 0 0" />
 
-                <TextBlock Margin="20 0 0 0" x:Name="txtSellingPricelabel" Foreground="Black" VerticalAlignment="Top" FontSize="13"/>
+                <TextBlock Margin="-20 0 0 0" Width="160" x:Name="txtSellingPricelabel" Foreground="Black" VerticalAlignment="Top" FontSize="19" TextAlignment="Right"/>
 
             </StackPanel>
 
@@ -171,6 +173,7 @@
                     materialDesign:HintAssist.Hint="Количество" 
                     Foreground="Black"
                     Style="{StaticResource txtMain}"
+                    TextAlignment="Right"
                     Height="40"
                     Margin="10,0,10,0" 
                     FontSize="18" 
@@ -188,13 +191,13 @@
             <StackPanel Orientation="Horizontal">
                 <TextBlock x:Name="txtErrorQuantity" FontSize="13" Width="150" Foreground="Red" Margin="30 0 0 0" />
 
-                <TextBlock Margin="20 0 0 0" x:Name="txtQuantitylabel" Foreground="Black" VerticalAlignment="Top" FontSize="13"/>
+                <TextBlock Margin="-30 0 0 0" Width="160" x:Name="txtQuantitylabel" Foreground="Black" VerticalAlignment="Top" FontSize="19" TextAlignment="Right"/>
 
             </StackPanel>
 
             <Button x:Name="BtnEdit" 
                     Click="BtnEdit_Click" Width="258"
-                    Margin="0 20 0 0" 
+                    Margin="0 10 0 0" 
                     Content="Редактировать" 
                     Style="{StaticResource Button}" VerticalAlignment="Bottom">
 

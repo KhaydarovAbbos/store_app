@@ -90,6 +90,7 @@
                     Foreground="Black"
                     Style="{StaticResource txtMain}"
                     HorizontalAlignment="Center"
+                    TextAlignment="Right"
                     Width="250" 
                     Height="40"
                     PreviewTextInput="NumberValidationTextBox" 
@@ -109,7 +110,7 @@
             <StackPanel Orientation="Horizontal">
                 <TextBlock x:Name="txtErrorArrivalPrice" FontSize="13" Width="150" Foreground="Red" Margin="50 0 0 0" />
 
-                <TextBlock Margin="10 0 0 0" x:Name="txtArrivalPricelabel" Foreground="Black" VerticalAlignment="Top" FontSize="13"/>
+                <TextBlock Margin="-75 0 0 0" Width="160" x:Name="txtArrivalPricelabel" Foreground="Black" VerticalAlignment="Top" FontSize="19" TextAlignment="Right"/>
 
             </StackPanel>
             
@@ -124,6 +125,7 @@
                     Style="{StaticResource txtMain}"
                     Width="250" 
                     PreviewTextInput="NumberValidationTextBox" 
+                    TextAlignment="Right"
                     Height="40"
                     Margin="0,0,0,0" 
                     FontSize="18" 
@@ -141,7 +143,7 @@
             <StackPanel Orientation="Horizontal">
                 <TextBlock x:Name="txtErrorSellingPrice" FontSize="13" Width="150" Foreground="Red" Margin="50 0 0 0" />
 
-                <TextBlock Margin="10 0 0 0" x:Name="txtSellingPricelabel" Foreground="Black" VerticalAlignment="Top" FontSize="13"/>
+                <TextBlock Margin="-75 0 0 0" Width="160" x:Name="txtSellingPricelabel" Foreground="Black" VerticalAlignment="Top" FontSize="19" TextAlignment="Right"/>
 
             </StackPanel>
 
@@ -152,6 +154,7 @@
                     materialDesign:HintAssist.Hint="Количество" 
                     Foreground="Black"
                     Style="{StaticResource txtMain}"
+                    TextAlignment="Right"
                     Width="250" 
                     Height="40"
                     Margin="0,0,0,0" 
@@ -172,12 +175,12 @@
             <StackPanel Orientation="Horizontal">
                 <TextBlock x:Name="txtErrorQuantity" FontSize="13" Width="150" Foreground="Red" Margin="50 0 0 0" />
 
-                <TextBlock Margin="10 0 0 0" x:Name="txtQuantitylabel" Foreground="Black" VerticalAlignment="Top" FontSize="13"/>
+                <TextBlock Margin="-75 0 0 0" Width="160" x:Name="txtQuantitylabel" Foreground="Black" VerticalAlignment="Top" FontSize="19" TextAlignment="Right"/>
 
             </StackPanel>
             
 
-                <Grid x:Name="autoBarcodeGrid" VerticalAlignment="Top">
+                <Grid x:Name="autoBarcodeGrid" VerticalAlignment="Top" Margin="0 10 0 0">
                 <TextBlock Text="Есть ли штрих-код продукта?" x:Name="txtQuestion" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="16" Margin="0 -5 30 0"/>
 
                     <CheckBox Padding="0"
@@ -312,7 +315,7 @@
 
             <Button x:Name="BtnAdd" 
                     Click="BtnAdd_Click" Width="258"
-                    Margin="0 20 0 0" 
+                    Margin="0 10 0 0" 
                     Content="Создавать" 
                     Style="{StaticResource Button}" VerticalAlignment="Bottom">
 
