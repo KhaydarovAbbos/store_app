@@ -120,14 +120,6 @@ namespace StoreApp.View.UI.ProductsView
                 };
                 await storeProductService.Create(storeProductViewModel);
 
-                ReceiveReportViewModel receiveReportViewModel = new ReceiveReportViewModel()
-                {
-                    ProductId = result.Id,
-                    ProductName = result.Name,
-                    Quantity = double.Parse(txtQuantity.Text)
-                };
-                await receiveReportService.CreateAsync(receiveReportViewModel);
-
                 Productsview.WindowLoad();
 
                 this.Close();
