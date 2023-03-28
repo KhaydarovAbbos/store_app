@@ -117,9 +117,15 @@ namespace StoreApp.View.UI.CashViews
                                     Margin = new Thickness(10, 0, 0, 50)
                                 };
 
+                                Label label = new Label
+                                {
+                                    Content = product.Id,
+                                    Visibility = Visibility.Hidden
+                                };
+
                                 StackPanel stackPanelRow1 = new StackPanel
                                 {
-                                    Children = { txtProductName, txtQuantity }
+                                    Children = { txtProductName, txtQuantity, label }
                                 };
 
                                 border.Child = stackPanelRow1;
@@ -168,9 +174,15 @@ namespace StoreApp.View.UI.CashViews
                                 Margin = new Thickness(10, 0, 0, 50)
                             };
 
+                            Label label = new Label
+                            {
+                                Content = product.Id,
+                                Visibility = Visibility.Hidden
+                            };
+
                             StackPanel stackPanelRow1 = new StackPanel
                             {
-                                Children = { txtProductName, txtQuantity }
+                                Children = { txtProductName, txtQuantity, label }
                             };
 
                             border.Child = stackPanelRow1;
@@ -207,9 +219,31 @@ namespace StoreApp.View.UI.CashViews
 
         }
 
-        private void btnExit_Click(object sender, RoutedEventArgs e)
+        private async void btnExit_Click(object sender, RoutedEventArgs e)
         {
             mainWindow.AllCloseControls(4);
+
+            txtBarcode.Clear();
+            txtErrorBarcode.Text = "";
+
+            if (panelProduct.Children.Count > 0)
+            {
+                var item = panelProduct.Children;
+
+                for (int i = 0; i < panelProduct.Children.Count; i++)
+                {
+                    long productId = long.Parse((((item[i] as Border).Child as StackPanel).Children[2] as Label).Content.ToString());
+                    double productQuantity = double.Parse((((item[i] as Border).Child as StackPanel).Children[1] as TextBlock).Text.Split(":")[1].Trim());
+
+                    var product = await storeProductService.Get(productId);
+
+                    product.Quantity += productQuantity;
+
+                    await storeProductService.Update(product);
+
+                    panelProduct.Children.RemoveAt(i);
+                }
+            }
         }
     }
 }

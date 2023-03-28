@@ -47,7 +47,7 @@ namespace StoreApp.View.UI.CashViews
                 panel.Children.Clear();
             }
 
-            var stores = await cashService.GetAll();
+            var stores = await cashService.GetAll(long.Parse(StoremainView.store_id.Content.ToString()));
 
             Border borderAdd = new Border
             {

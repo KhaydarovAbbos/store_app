@@ -55,7 +55,7 @@ namespace StoreApp.Service.Services
 
         public async Task<StoreProduct> Get(long id)
         {
-            return await storeProductRepository.GetAsync(x => x.ProductId == id);
+            return await storeProductRepository.GetAsync(x => x.Id == id);
         }
 
         public async Task<StoreProduct> Get(long id, string barcode)

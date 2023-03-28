@@ -59,9 +59,9 @@ namespace StoreApp.Service.Services
             return await cashRepository.GetAsync(x => x.Id == id);
         }
 
-        public async Task<IList<Cash>> GetAll()
+        public async Task<IList<Cash>> GetAll(long storeId)
         {
-            var categories = await cashRepository.GetAllAsync();
+            var categories = await cashRepository.GetAllAsync(x => x.StoreId == storeId);
 
             return categories.OrderByDescending(x => x.Id).ToList();
         }

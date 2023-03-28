@@ -17,7 +17,7 @@ namespace StoreApp.Service.Interfaces
 
         Task<bool> Delete(long id);
 
-        Task<IList<Cash>> GetAll();
+        Task<IList<Cash>> GetAll(long storeId);
 
         Task<Cash> Get(long id);
 
