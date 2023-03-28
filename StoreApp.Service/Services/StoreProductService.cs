@@ -58,6 +58,30 @@ namespace StoreApp.Service.Services
             return await storeProductRepository.GetAsync(x => x.ProductId == id);
         }
 
+        public async Task<StoreProduct> Get(long id, string barcode)
+        {
+            var product = await _db.Products.FirstOrDefaultAsync(x => x.Barcode == barcode);
+
+            if (product != null)
+            {
+                var storeproduct = await _db.StoreProducts.FirstOrDefaultAsync(x => x.Product.Barcode == barcode && x.StoreId == id);
+
+                if (storeproduct != null)
+                {
+                    return storeproduct;
+                }
+                else
+                {
+                    return storeproduct = new StoreProduct() { Product = product };
+
+                }
+            }
+            else
+            {
+                return null;
+            }
+        }
+
 
         public async Task<IList<StoreProduct>> GetAll(long storeId)
         {

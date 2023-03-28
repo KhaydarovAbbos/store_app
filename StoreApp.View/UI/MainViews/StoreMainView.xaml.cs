@@ -42,6 +42,7 @@ namespace StoreApp.View.UI.MainViews
             productSubCategory_view.Visibility = Visibility.Hidden;
             products_view.Visibility = Visibility.Hidden;
             insert_products_view.Visibility = Visibility.Hidden;
+            cash_view.Visibility = Visibility.Hidden;
 
             if (i == -1)
             {
@@ -79,11 +80,20 @@ namespace StoreApp.View.UI.MainViews
                 insert_products_view.Visibility = Visibility.Visible;
                 insert_products_view.WindowLoad();
             }
+            if (i == 5)
+            {
+                cash_view.Visibility = Visibility.Visible;
+            }
         }
 
         private void fastInsert_MouseUp(object sender, MouseButtonEventArgs e)
         {
             AllCloseControls(4);
+        }
+
+        private void cash_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            AllCloseControls(5);
         }
 
         private void main_MouseUp(object sender, MouseButtonEventArgs e)

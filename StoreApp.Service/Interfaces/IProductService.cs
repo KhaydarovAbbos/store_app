@@ -16,6 +16,7 @@ namespace StoreApp.Service.Interfaces
         Task<IList<Product>> GetProducts();
 
         Task<Product> Get(long id);
+        Task<Product> Get(string barcode);
 
         Task<bool> IsExist(string name);
         Task<bool> IsExist(string name, long id);

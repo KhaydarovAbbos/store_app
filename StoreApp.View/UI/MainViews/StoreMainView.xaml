@@ -9,6 +9,7 @@
              xmlns:subcategoryview="clr-namespace:StoreApp.View.UI.SubCategoryViews"
              xmlns:productview="clr-namespace:StoreApp.View.UI.ProductsView"
              xmlns:productinsertview="clr-namespace:StoreApp.View.UI.FastInsertProductViews"
+             xmlns:cashviews="clr-namespace:StoreApp.View.UI.CashViews"
              mc:Ignorable="d" 
              d:DesignHeight="730" d:DesignWidth="1320" Background="#E5F6FF">
     <Grid x:Name="MainGrid">
@@ -84,7 +85,30 @@
                             </ListViewItem.Content>
                         </ListViewItem>
                     </ListView>
-                    
+
+                    <ListView Width="199" >
+                        <ListViewItem x:Name="cash" Foreground="Black" TextBlock.TextAlignment="Center" BorderThickness="1" BorderBrush="Gray" Margin="0 0 0 0" MouseUp="cash_MouseUp" >
+                            <ListViewItem.Content>
+
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+
+                                    <materialDesign:PackIcon  
+                                    Kind="StorePlus"
+                                    Foreground="Black" 
+                                    VerticalAlignment="Center" 
+                                    Margin="0,00,0,0" 
+                                    Height="35" Width="35"
+                                    />
+
+                                    <TextBlock Text="Касса" VerticalAlignment="Center" Margin="20 0 0 0" HorizontalAlignment="Center"  FontSize="16" FontWeight="Bold">
+
+                                    </TextBlock>
+
+                                </StackPanel>
+                            </ListViewItem.Content>
+                        </ListViewItem>
+                    </ListView>
+
                 </StackPanel>
 
 
@@ -191,6 +215,9 @@
 
                 <DockPanel  >
                     <productinsertview:FastInsertProductView x:Name="insert_products_view" Visibility="Hidden" />
+                </DockPanel>
+                <DockPanel  >
+                    <cashviews:CashView x:Name="cash_view" Visibility="Hidden" />
                 </DockPanel>
             </Grid>
 

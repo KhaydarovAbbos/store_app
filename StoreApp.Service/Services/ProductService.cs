@@ -60,6 +60,11 @@ namespace StoreApp.Service.Services
             return await productRepository.GetAsync(x => x.Id == id);
         }
 
+        public async Task<Product> Get(string barcode)
+        {
+            return await productRepository.GetAsync(x => x.Barcode == barcode);
+        }
+
         public async Task<IList<Product>> GetAll()
         {
             var products = await productRepository.GetAllAsync();

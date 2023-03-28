@@ -13,6 +13,8 @@ namespace StoreApp.Service.Interfaces
 
         Task<StoreProduct> Get(long id);
 
+        Task<StoreProduct> Get(long id, string barcode);
+
         Task<IList<StoreProduct>> GetAll(long storeId, long subCategoryId);
 
         Task<IList<StoreProduct>> GetAll(long storeId);
