@@ -1,5 +1,7 @@
 ﻿using StoreApp.Service.Interfaces;
 using StoreApp.Service.Services;
+using StoreApp.View.UI.MainViews;
+using StoreApp.View.UI.StoreViews;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,10 +26,16 @@ namespace StoreApp.View.UI.CashViews
     public partial class CashMainView : UserControl
     {
         ICashService cashService;
+        StoreMainView StoremainView;
 
         public CashMainView()
         {
             InitializeComponent();
+        }
+
+        public void GetMainView(StoreMainView storeMainView)
+        {
+            StoremainView = storeMainView;
         }
 
         public async void WindowLoad()
@@ -61,7 +69,7 @@ namespace StoreApp.View.UI.CashViews
                 FontSize = 25,
 
             };
-            //buttonAdd.Click += new RoutedEventHandler(btnAdd_Click);
+            buttonAdd.Click += new RoutedEventHandler(btnAdd_Click);
 
             borderAdd.Child = buttonAdd;
 
@@ -115,7 +123,7 @@ namespace StoreApp.View.UI.CashViews
                     }
                 };
                 button.Totalinfo = totalInfo;
-                //button.Click += new RoutedEventHandler(btnEnter_Click);
+                button.Click += new RoutedEventHandler(btnEnter_Click);
 
                 Grid grid = new Grid
                 {
@@ -140,7 +148,7 @@ namespace StoreApp.View.UI.CashViews
                     }
                 };
                 btnDelete.Totalinfo = totalInfo;
-                //btnDelete.Click += new RoutedEventHandler(btnDelete_Click);
+                btnDelete.Click += new RoutedEventHandler(btnDelete_Click);
 
                 MyButton btnEdit = new MyButton
                 {
@@ -161,7 +169,7 @@ namespace StoreApp.View.UI.CashViews
 
                 };
                 btnEdit.Totalinfo = totalInfo;
-                //btnEdit.Click += new RoutedEventHandler(btnEdit_Click);
+                btnEdit.Click += new RoutedEventHandler(btnEdit_Click);
 
                 StackPanel stackPanel = new StackPanel
                 {
@@ -173,6 +181,84 @@ namespace StoreApp.View.UI.CashViews
                 border.Child = grid;
 
                 panel.Children.Add(border);
+            }
+        }
+
+        private void btnAdd_Click(object sender, RoutedEventArgs e)
+        {
+
+            AddCashWindow  addCashWindow  = new AddCashWindow(this, long.Parse(StoreMainView.StoreId));
+            addCashWindow.ShowDialog();
+
+            Keyboard.ClearFocus();
+        }
+
+        private async void btnDelete_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                var result = MessageBox.Show("Вы уверены, что хотите удалить", "Осторожность", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+
+                if (result == MessageBoxResult.Yes)
+                {
+                    MyButton btnDelete = sender as MyButton;
+
+                    long id = btnDelete.Totalinfo.Id;
+
+                    if (id != 0)
+                    {
+                        cashService = new CashService();
+                        await cashService.Delete(id);
+
+                        WindowLoad();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message.ToString(), "xatolik", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void btnEdit_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                MyButton btnDelete = sender as MyButton;
+
+                long id = btnDelete.Totalinfo.Id;
+
+                EditCashWindow editCashWindow = new EditCashWindow();
+                editCashWindow.WindowLoad(id, this);
+                editCashWindow.ShowDialog();
+
+                Keyboard.ClearFocus();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message.ToString(), "xatolik", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void btnEnter_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                MyButton myButton = (MyButton)sender;
+
+                TextBlock textBlock = (TextBlock)myButton.Content;
+                string name = textBlock.Text;
+
+                //StoreMainView.Storename = name;
+                //StoreMainView.StoreId = myButton.Totalinfo.Id.ToString();
+
+                //MainView.AllCloseControls(2);
+
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message.ToString(), "xatolik", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
     }

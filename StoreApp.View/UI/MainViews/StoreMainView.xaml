@@ -219,6 +219,10 @@
                 <DockPanel  >
                     <cashviews:CashView x:Name="cash_view" Visibility="Hidden" />
                 </DockPanel>
+                <DockPanel>
+                    <cashviews:CashMainView x:Name="cash_main_view" Visibility="Hidden" />
+                </DockPanel>
+                
             </Grid>
 
 

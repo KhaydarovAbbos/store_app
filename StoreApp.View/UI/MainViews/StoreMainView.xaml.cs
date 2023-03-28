@@ -43,6 +43,7 @@ namespace StoreApp.View.UI.MainViews
             products_view.Visibility = Visibility.Hidden;
             insert_products_view.Visibility = Visibility.Hidden;
             cash_view.Visibility = Visibility.Hidden;
+            cash_main_view.Visibility = Visibility.Hidden;
 
             if (i == -1)
             {
@@ -82,7 +83,10 @@ namespace StoreApp.View.UI.MainViews
             }
             if (i == 5)
             {
-                cash_view.Visibility = Visibility.Visible;
+                cash_main_view.Visibility = Visibility.Visible;
+                cash_main_view.GetMainView(this);
+                cash_main_view.WindowLoad();
+
             }
         }
 
