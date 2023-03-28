@@ -246,15 +246,9 @@ namespace StoreApp.View.UI.CashViews
             {
                 MyButton myButton = (MyButton)sender;
 
-                TextBlock textBlock = (TextBlock)myButton.Content;
-                string name = textBlock.Text;
-
-                //StoreMainView.Storename = name;
-                //StoreMainView.StoreId = myButton.Totalinfo.Id.ToString();
-
-                //MainView.AllCloseControls(2);
-
-
+                CashView.cashName = myButton.Totalinfo.Name;
+                CashView.cashId = myButton.Totalinfo.Id;
+                StoremainView.Mainwindow.AllCloseControls(5);
             }
             catch (Exception ex)
             {

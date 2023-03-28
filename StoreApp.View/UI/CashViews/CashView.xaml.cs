@@ -25,11 +25,19 @@ namespace StoreApp.View.UI.CashViews
     {
         IProductService productService = new ProductService();
         IStoreProductService storeProductService = new StoreProductService();
-        
+        public MainWindow mainWindow;
+        public static string cashName;
+        public static long cashId;
 
         public CashView()
         {
             InitializeComponent();
+        }
+
+        public void GetmainWindow(MainWindow mainwindow)
+        {
+            mainWindow = mainwindow;
+            txtName.Text = "Название кассы : " + cashName;
         }
 
         private async void btnAddProduct_Click(object sender, RoutedEventArgs e)
@@ -60,7 +68,6 @@ namespace StoreApp.View.UI.CashViews
                                 {
                                     itemIndex = i;
                                 }
-                                
                             }
 
                             if (itemIndex != -1)
@@ -122,7 +129,6 @@ namespace StoreApp.View.UI.CashViews
                                 product.Quantity = product.Quantity - quantity;
                                 await storeProductService.Update(product);
                             }
-
                         }
                         else
                         {
@@ -135,7 +141,6 @@ namespace StoreApp.View.UI.CashViews
                                 BorderThickness = new Thickness(1),
                                 Margin = new Thickness(10, 10, 0, 0),
                                 CornerRadius = new CornerRadius(10)
-                       
                             };
 
                             TextBlock txtProductName = new TextBlock
@@ -200,6 +205,11 @@ namespace StoreApp.View.UI.CashViews
         private void Button_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void btnExit_Click(object sender, RoutedEventArgs e)
+        {
+            mainWindow.AllCloseControls(4);
         }
     }
 }

@@ -203,6 +203,21 @@
 
             <Grid>
 
+                <Button  Width="30" Height="20" Background="Transparent" BorderBrush="{x:Null}" Margin="10 0 0 0" Click="btnExit_Click" HorizontalAlignment="Left" Padding="0">
+                    <md:PackIcon x:Name="btnExit1" Kind="ArrowBack"
+                             
+                            Width="50" Height="40" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0 0 0 0">
+                        <md:PackIcon.Style>
+
+                            <Style TargetType="md:PackIcon">
+                                <Setter Property="Foreground" Value="Black"/>
+
+
+                            </Style>
+                        </md:PackIcon.Style>
+                    </md:PackIcon>
+                </Button>
+
                 <TextBlock x:Name="txtName" Text="Касса" VerticalAlignment="Center" Margin="20 0 0 0" FontSize="18" FontWeight="Bold" HorizontalAlignment="Center">
 
                 </TextBlock>

@@ -40,6 +40,7 @@ namespace StoreApp.View
             sign_up_view.Visibility = Visibility.Hidden;
             main_view.Visibility = Visibility.Hidden;
             store_main_view.Visibility = Visibility.Hidden;
+            cash_view.Visibility = Visibility.Hidden;
 
             if (i == 1)
             {
@@ -61,7 +62,11 @@ namespace StoreApp.View
                 store_main_view.Visibility = Visibility.Visible;
                 store_main_view.GetMainWindow(this);
             }
-
+            if (i == 5)
+            {
+                cash_view.Visibility = Visibility.Visible;
+                cash_view.GetmainWindow(this);
+            }
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

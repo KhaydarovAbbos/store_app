@@ -9,7 +9,7 @@ namespace StoreApp.View.UI.MainViews
     /// </summary>
     public partial class StoreMainView : UserControl
     {
-        MainWindow Mainwindow;
+        public MainWindow Mainwindow;
         public static string Storename, StoreId = "0";
         public static int gridColumn1Width = 200, gridColumn2Width = 1120;
 

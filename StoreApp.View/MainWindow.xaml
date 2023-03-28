@@ -6,6 +6,7 @@
         xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:logins="clr-namespace:StoreApp.View.UI.LoginViews"
         xmlns:menuviews="clr-namespace:StoreApp.View.UI.MainViews"
+        xmlns:cashviews="clr-namespace:StoreApp.View.UI.CashViews"
         xmlns:gif="http://wpfanimatedgif.codeplex.com"
         xmlns:local="clr-namespace:StoreApp.View"
         mc:Ignorable="d" Loaded="Window_Loaded"
@@ -82,6 +83,10 @@
 
         <DockPanel Grid.Row="1">
             <menuviews:StoreMainView x:Name="store_main_view" Visibility="Hidden"/>
+        </DockPanel>
+        
+        <DockPanel Grid.Row="1">
+            <cashviews:CashView x:Name="cash_view" Visibility="Hidden"/>
         </DockPanel>
     </Grid>
 </Window>
