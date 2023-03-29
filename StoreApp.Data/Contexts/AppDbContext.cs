@@ -23,6 +23,10 @@ namespace StoreApp.Data.Contexts
 
         public DbSet<Cash> Cashs { get; set; }
 
+        public DbSet<TabController> TabControllers { get; set; }
+
+        public DbSet<TabControlProduct> TabControlProducts { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseMySql("datasource = 127.0.0.1; port=3306; username = root; database=storeapp", new MySqlServerVersion(new Version(8, 0, 11)));
