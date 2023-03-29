@@ -255,8 +255,8 @@
                                                     <Border x:Name="Border" Background="#EDEDED" BorderThickness="1" BorderBrush="#ACACAC" Margin="2" CornerRadius="10 10 0 0">
 
                                                         <StackPanel Orientation="Horizontal">
-                                                            <ContentPresenter x:Name="ContentSite" ContentSource="Header" Margin="2" VerticalAlignment="Center" HorizontalAlignment="Center" Width="70"/>
-                                                            <Button Margin="0 0 2 0" Style="{StaticResource btnBorder5}" Width="20" Height="20" Content="X"  Foreground="Black" BorderBrush="Transparent" Background="Transparent" Click="btnDeleteTabitem_Click"/>
+                                                            <ContentPresenter x:Name="ContentSite"  ContentSource="Header" Margin="2" VerticalAlignment="Center" TextBlock.TextAlignment="Center" HorizontalAlignment="Center" Width="70"/>
+                                                            <Button Margin="0 0 2 0" HorizontalAlignment="Right" Style="{StaticResource btnBorder5}" Width="20" Height="20" Content="X"  Foreground="Black" BorderBrush="Transparent" Background="Transparent" Click="btnDeleteTabitem_Click"/>
                                                         </StackPanel>
                                                         
                                                     </Border>
@@ -299,10 +299,13 @@
                             <TabControl.Template>
                                 <ControlTemplate TargetType="TabControl">
                                     <Grid>
+                                        
                                         <Grid.RowDefinitions>
                                             <RowDefinition Height="Auto"/>
                                             <RowDefinition Height="*"/>
                                         </Grid.RowDefinitions>
+
+
                                         <Border BorderThickness="0,0,1,1" BorderBrush="#D0CEBF" Grid.Row="1">
                                             <Border BorderThickness="{TemplateBinding BorderThickness}" 
                                                 BorderBrush="{TemplateBinding BorderBrush}">
@@ -311,11 +314,46 @@
                                                 </Border>
                                             </Border>
                                         </Border>
-                                        <DockPanel IsItemsHost="True" LastChildFill="False" Margin="2,2,2,0" />
+
+                                        <StackPanel Orientation="Horizontal">
+
+                                            <Button Style="{StaticResource btnBorder5}" Width="30" Height="30" Background="Transparent"  Padding="0"  Click="btnaddtabItem_Click">
+                                                <StackPanel>
+                                                    <md:PackIcon  
+                                                            Kind="Add"
+                                                            Foreground="Black" 
+                                                            VerticalAlignment="Center" 
+                                                            FontWeight="Bold"
+                                                            Margin="0,00,0,0" 
+                                                            Width="30" 
+                                                            Height="30"
+                                                        />
+                                                </StackPanel>
+                                            </Button>
+                                            
+                                            <Button Style="{StaticResource btnBorder5}" Margin="5 0 0 0" Width="30" Height="30" Background="Transparent"  Padding="0" >
+                                                <StackPanel>
+                                                    <md:PackIcon  
+                                                            Kind="Pencil"
+                                                            Foreground="Black" 
+                                                            VerticalAlignment="Center" 
+                                                            Margin="0,00,0,0" 
+                                                            Width="30" 
+                                                            Height="30"
+                                                        />
+                                                </StackPanel>
+                                            </Button>
+
+                                            <DockPanel IsItemsHost="True" LastChildFill="False" Margin="2,2,2,0" />
+                                            
+                                        </StackPanel>
+                                        
+                                                
                                     </Grid>
                                 </ControlTemplate>
                             </TabControl.Template>
-
+                            
+                            
 
                         </TabControl>
                         

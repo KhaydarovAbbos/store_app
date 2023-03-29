@@ -112,13 +112,13 @@ namespace StoreApp.View.UI.CashViews
                         Background = Brushes.Transparent,
                         VerticalAlignment = VerticalAlignment.Center,
                         HorizontalAlignment = HorizontalAlignment.Center,
-                        Margin = new Thickness(10, 0, 0, 0),
+                        Margin = new Thickness(0, 0, 0, 0),
                         Text = product.ProductName,
                         TextWrapping = TextWrapping.Wrap,
                         FontWeight = FontWeights.Bold,
+                        TextAlignment = TextAlignment.Center,
                         FontSize = 25,
                         Width = 140,
-                        Height = 60,
                         TotalInfo = new TotalInfo { Id = product.ProductId, Name = product.ProductName }
                     };
 
@@ -161,9 +161,6 @@ namespace StoreApp.View.UI.CashViews
                         Children = { txtProductName, btnDelete }
                     };
 
-
-                    
-
                     borderProduct.Child = grid;
 
                     wrapPanel.Children.Add(borderProduct);
@@ -172,20 +169,9 @@ namespace StoreApp.View.UI.CashViews
                 tabItem.Content = wrapPanel;
                 tabControl.Items.Add(tabItem);
 
+                tabControl.SelectedIndex = tabControl.Items.Count - 1;
+
             }
-
-            MytabItem mytabItem = new MytabItem
-            {
-                Header = "+",
-                FontSize = 18,
-                Width = 40,
-                
-            };
-            mytabItem.MouseUp += new MouseButtonEventHandler(btnAddTabItem_Click);
-
-            tabControl.Items.Add(mytabItem);
-
-            tabControl.SelectedIndex = tabControl.Items.Count - 2;
         }
 
 
@@ -452,13 +438,6 @@ namespace StoreApp.View.UI.CashViews
 
                 AddToBasket(productId);              
             }
-
-        }
-
-        private async void btnAddTabItem_Click(object sender, MouseButtonEventArgs e)
-        {
-            AddTabControllerWindow addTabControllerWindow = new AddTabControllerWindow(this);
-            addTabControllerWindow.ShowDialog();
         }
 
         public async void AddToBasket(long id)
@@ -635,6 +614,12 @@ namespace StoreApp.View.UI.CashViews
                     }
                 }
             }
+        }
+
+        private void btnaddtabItem_Click(object sender, RoutedEventArgs e)
+        {
+            AddTabControllerWindow addTabControllerWindow = new AddTabControllerWindow(this);
+            addTabControllerWindow.ShowDialog();
         }
     }
 
