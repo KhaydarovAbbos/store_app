@@ -42,14 +42,14 @@ namespace StoreApp.Service.Services
             return await repository.GetAsync(x => x.Id == id);
         }
 
-        public async Task<IList<TabControlProduct>> GetAll(long storeId)
+        public async Task<IList<TabControlProduct>> GetAll(long controlId)
         {
-            return (await repository.GetAllAsync()).ToList();
+            return (await repository.GetAllAsync(x => x.TabControllerId == controlId)).ToList();
         }
 
-        public async Task<bool> IsExist(string name)
+        public async Task<bool> IsExist(string name, long controlId)
         {
-            var model = await repository.GetAsync(x => x.ProductName == name);
+            var model = await repository.GetAsync(x => x.ProductName == name && x.TabControllerId == controlId);
 
             return model == null ? false : true;
         }

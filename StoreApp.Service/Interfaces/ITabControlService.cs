@@ -16,7 +16,7 @@ namespace StoreApp.Service.Interfaces
 
         Task<bool> Delete(long id);
 
-        Task<IList<TabController>> GetAll(long storeId);
+        Task<IList<TabController>> GetAll();
 
         Task<TabController> Get(long id);
 

@@ -17,10 +17,10 @@ namespace StoreApp.Service.Interfaces
 
         Task<bool> Delete(long id);
 
-        Task<IList<TabControlProduct>> GetAll(long storeId);
+        Task<IList<TabControlProduct>> GetAll(long controlId);
 
         Task<TabControlProduct> Get(long id);
 
-        Task<bool> IsExist(string name);
+        Task<bool> IsExist(string name, long controlId);
     }
 }

@@ -66,6 +66,7 @@ namespace StoreApp.View
             {
                 cash_view.Visibility = Visibility.Visible;
                 cash_view.GetmainWindow(this);
+                cash_view.WindowLoad();
             }
         }
 

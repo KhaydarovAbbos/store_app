@@ -82,6 +82,13 @@ namespace StoreApp.Service.Services
             }
         }
 
+        public async Task<StoreProduct> Get(long productId, long storeId)
+        {
+
+            return await _db.StoreProducts.Include(x => x.Product).FirstOrDefaultAsync(x => x.Product.Id == productId && x.StoreId == storeId);
+
+             //await storeProductRepository.GetAsync(x => x.ProductId == productId && x.StoreId == storeId);
+        }
 
         public async Task<IList<StoreProduct>> GetAll(long storeId)
         {

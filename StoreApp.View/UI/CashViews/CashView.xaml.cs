@@ -1,9 +1,13 @@
-﻿using StoreApp.Service.Interfaces;
+﻿using StoreApp.Domain.Entities.Stores;
+using StoreApp.Service.Interfaces;
 using StoreApp.Service.Services;
 using StoreApp.View.UI.MainViews;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -15,6 +19,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using XAct;
+using static StoreApp.View.UI.StoreViews.StoreView;
 
 namespace StoreApp.View.UI.CashViews
 {
@@ -25,9 +31,13 @@ namespace StoreApp.View.UI.CashViews
     {
         IProductService productService = new ProductService();
         IStoreProductService storeProductService = new StoreProductService();
+        ITabControlService tabControlService = new TabControlService();
+        ITabControlProductService tabControlProductService = new TabControlProductService();
+
         public MainWindow mainWindow;
         public static string cashName;
         public static long cashId;
+        long SelectTabIndex = 0;
 
         public CashView()
         {
@@ -39,6 +49,145 @@ namespace StoreApp.View.UI.CashViews
             mainWindow = mainwindow;
             txtName.Text = "Название кассы : " + cashName;
         }
+
+        public async void WindowLoad()
+        {
+            tabControl.Items.Clear();
+
+            var tabitems = await tabControlService.GetAll();
+
+            foreach (var item in tabitems)
+            {
+                MytabItem tabItem = new MytabItem();
+                tabItem.Header = item.Name;
+                tabItem.TabController = item;
+
+                Border borderAdd = new Border
+                {
+                    Background = Brushes.White,
+                    Width = 200,
+                    Height = 100,
+                    BorderBrush = Brushes.Gray,
+                    BorderThickness = new Thickness(1),
+                    Margin = new Thickness(10, 10, 0, 0),
+                    CornerRadius = new CornerRadius(10),
+                };
+
+                MyButton buttonAdd = new MyButton
+                {
+                    Background = Brushes.Transparent,
+                    BorderBrush = Brushes.Transparent,
+                    Content = "+ Добавить",
+                    FontWeight = FontWeights.Bold,
+                    FontSize = 25,
+
+                };
+                buttonAdd.Click += new RoutedEventHandler(btnAddBorderProduct_Click);
+
+                borderAdd.Child = buttonAdd;
+
+                WrapPanel wrapPanel = new WrapPanel()
+                {
+                    Children = { borderAdd }
+                };
+
+                var products = await tabControlProductService.GetAll(item.Id);
+
+                foreach (var product in products)
+                {
+                    Border borderProduct = new Border
+                    {
+                        Background = Brushes.White,
+                        Width = 200,
+                        Height = 100,
+                        BorderBrush = Brushes.Gray,
+                        BorderThickness = new Thickness(1),
+                        Margin = new Thickness(10, 10, 0, 0),
+                        CornerRadius = new CornerRadius(10),
+                    };
+                    borderProduct.MouseUp += new MouseButtonEventHandler(btnBorder_Click);
+
+                    MyTextBlock txtProductName = new MyTextBlock
+                    {
+                        Background = Brushes.Transparent,
+                        VerticalAlignment = VerticalAlignment.Center,
+                        HorizontalAlignment = HorizontalAlignment.Center,
+                        Margin = new Thickness(10, 0, 0, 0),
+                        Text = product.ProductName,
+                        TextWrapping = TextWrapping.Wrap,
+                        FontWeight = FontWeights.Bold,
+                        FontSize = 25,
+                        Width = 140,
+                        Height = 60,
+                        TotalInfo = new TotalInfo { Id = product.ProductId, Name = product.ProductName }
+                    };
+
+
+                    MyButton btnDelete = new MyButton
+                    {
+                        Width = 40,
+                        Height = 35,
+                        Background = Brushes.White,
+                        BorderBrush = Brushes.White,
+                        Margin = new Thickness(0, 10, 0, 0),
+                        Padding = new Thickness(0),
+                        Content = new Image
+                        {
+                            Source = new BitmapImage(new Uri("../../Images/delete.png", UriKind.Relative)),
+                            VerticalAlignment = VerticalAlignment.Center,
+                            Width = 20,
+                            Height = 20
+                        }
+                    };
+                    btnDelete.Totalinfo = new TotalInfo { Id = product.Id, Name = product.ProductName};
+                    btnDelete.Click += new RoutedEventHandler(btnDelete_Click);
+
+                    Grid.SetColumn(txtProductName, 0);
+                    Grid.SetColumn(btnDelete, 1);
+
+                    ColumnDefinition c1 = new ColumnDefinition
+                    {
+                        Width = new GridLength(150, GridUnitType.Star)
+                    };
+
+                    ColumnDefinition c2 = new ColumnDefinition
+                    {
+                        Width = new GridLength(50, GridUnitType.Star)
+                    };
+
+                    Grid grid = new Grid
+                    {
+                        ColumnDefinitions = { c1, c2 },
+                        Children = { txtProductName, btnDelete }
+                    };
+
+
+                    
+
+                    borderProduct.Child = grid;
+
+                    wrapPanel.Children.Add(borderProduct);
+                }
+
+                tabItem.Content = wrapPanel;
+                tabControl.Items.Add(tabItem);
+
+            }
+
+            MytabItem mytabItem = new MytabItem
+            {
+                Header = "+",
+                FontSize = 18,
+                Width = 40,
+                
+            };
+            mytabItem.MouseUp += new MouseButtonEventHandler(btnAddTabItem_Click);
+
+            tabControl.Items.Add(mytabItem);
+
+            tabControl.SelectedIndex = tabControl.Items.Count - 2;
+        }
+
 
         private async void btnAddProduct_Click(object sender, RoutedEventArgs e)
         {
@@ -241,9 +390,261 @@ namespace StoreApp.View.UI.CashViews
 
                     await storeProductService.Update(product);
 
-                    panelProduct.Children.RemoveAt(i);
+                }
+                panelProduct.Children.Clear();
+            }
+        }
+
+        private async void btnDelete_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                MytabItem mytabItem = tabControl.SelectedItem as MytabItem;
+
+                var result = MessageBox.Show("Вы уверены, что хотите удалить", "Осторожность", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+
+                if (result == MessageBoxResult.Yes)
+                {
+                    MyButton btnDelete = sender as MyButton;
+
+                    long id = btnDelete.Totalinfo.Id;
+
+                    if (id != 0)
+                    {
+                        await tabControlProductService.Delete(id);
+                        int index = tabControl.Items.IndexOf(mytabItem);
+
+                        WindowLoad();
+
+                        tabControl.SelectedIndex = index;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message.ToString(), "xatolik", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void btnAddBorderProduct_Click(object sender, RoutedEventArgs e)
+        {
+            MytabItem mytabItem = tabControl.SelectedItem as MytabItem;
+
+            if (mytabItem != null)
+            {
+                long controlId = mytabItem.TabController.Id;
+                int index = tabControl.Items.IndexOf(mytabItem);
+
+                AddProductToControlWindow addProductToControlWindow = new AddProductToControlWindow(controlId, this);
+                addProductToControlWindow.ShowDialog();
+
+                tabControl.SelectedIndex = index;
+            }
+        }
+
+        private async void btnBorder_Click(object sender, MouseButtonEventArgs e)
+        {
+            Border border = sender as Border;
+
+            if (border != null)
+            {
+                long productId = ((border.Child as Grid).Children[0] as MyTextBlock).TotalInfo.Id;
+
+                AddToBasket(productId);              
+            }
+
+        }
+
+        private async void btnAddTabItem_Click(object sender, MouseButtonEventArgs e)
+        {
+            AddTabControllerWindow addTabControllerWindow = new AddTabControllerWindow(this);
+            addTabControllerWindow.ShowDialog();
+        }
+
+        public async void AddToBasket(long id)
+        {
+            storeProductService = new StoreProductService();
+
+            long storeId = long.Parse(StoreMainView.StoreId);
+            var product = await storeProductService.Get(id, storeId);
+            int itemIndex = -1;
+            int quantity = 1;
+
+            if (product != null && product.Quantity > 0)
+            {
+                var item = panelProduct.Children;
+
+                if (item.Count > 0)
+                {
+                    for (int i = 0; i < item.Count; i++)
+                    {
+                        string productName = (((item[i] as Border).Child as StackPanel).Children[0] as TextBlock).Text;
+
+                        if (product.Product.Name == productName)
+                        {
+                            itemIndex = i;
+                        }
+                    }
+
+                    if (itemIndex != -1)
+                    {
+                        double productQuantity = double.Parse((((item[itemIndex] as Border).Child as StackPanel).Children[1] as TextBlock).Text.Split(":")[1].Trim());
+                        (((item[itemIndex] as Border).Child as StackPanel).Children[1] as TextBlock).Text = $"Количество : {productQuantity + quantity}";
+
+                        product.Quantity = product.Quantity - quantity;
+                        await storeProductService.Update(product);
+                    }
+                    else
+                    {
+                        Border border = new Border
+                        {
+                            Background = Brushes.White,
+                            Width = 230,
+                            Height = 100,
+                            BorderBrush = Brushes.Gray,
+                            BorderThickness = new Thickness(1),
+                            Margin = new Thickness(10, 10, 0, 0),
+                            CornerRadius = new CornerRadius(10)
+
+                        };
+
+                        TextBlock txtProductName = new TextBlock
+                        {
+                            Background = Brushes.Transparent,
+                            VerticalAlignment = VerticalAlignment.Center,
+                            HorizontalAlignment = HorizontalAlignment.Center,
+                            Margin = new Thickness(10, 10, 0, 0),
+                            Text = product.Product.Name,
+                            TextWrapping = TextWrapping.Wrap,
+                            FontWeight = FontWeights.Bold,
+                            FontSize = 25,
+                            Width = 200,
+                            Height = 60
+                        };
+
+                        TextBlock txtQuantity = new TextBlock
+                        {
+                            VerticalAlignment = VerticalAlignment.Top,
+                            HorizontalAlignment = HorizontalAlignment.Center,
+                            Width = 200,
+                            Height = 20,
+                            FontSize = 16,
+                            Text = $"Количество : {quantity}",
+                            Margin = new Thickness(10, 0, 0, 50)
+                        };
+
+                        Label label = new Label
+                        {
+                            Content = product.Id,
+                            Visibility = Visibility.Hidden
+                        };
+
+                        StackPanel stackPanelRow1 = new StackPanel
+                        {
+                            Children = { txtProductName, txtQuantity, label }
+                        };
+
+                        border.Child = stackPanelRow1;
+
+                        panelProduct.Children.Add(border);
+
+                        product.Quantity = product.Quantity - quantity;
+                        await storeProductService.Update(product);
+                    }
+                }
+                else
+                {
+                    Border border = new Border
+                    {
+                        Background = Brushes.White,
+                        Width = 230,
+                        Height = 100,
+                        BorderBrush = Brushes.Gray,
+                        BorderThickness = new Thickness(1),
+                        Margin = new Thickness(10, 10, 0, 0),
+                        CornerRadius = new CornerRadius(10)
+                    };
+
+                    TextBlock txtProductName = new TextBlock
+                    {
+                        Background = Brushes.Transparent,
+                        VerticalAlignment = VerticalAlignment.Center,
+                        HorizontalAlignment = HorizontalAlignment.Center,
+                        Margin = new Thickness(10, 10, 0, 0),
+                        Text = product.Product.Name,
+                        TextWrapping = TextWrapping.Wrap,
+                        FontWeight = FontWeights.Bold,
+                        FontSize = 25,
+                        Width = 200,
+                        Height = 60
+                    };
+
+                    TextBlock txtQuantity = new TextBlock
+                    {
+                        VerticalAlignment = VerticalAlignment.Top,
+                        HorizontalAlignment = HorizontalAlignment.Center,
+                        Width = 200,
+                        Height = 20,
+                        FontSize = 16,
+                        Text = $"Количество : {quantity}",
+                        Margin = new Thickness(10, 0, 0, 50)
+                    };
+
+                    Label label = new Label
+                    {
+                        Content = product.Id,
+                        Visibility = Visibility.Hidden
+                    };
+
+                    StackPanel stackPanelRow1 = new StackPanel
+                    {
+                        Children = { txtProductName, txtQuantity, label }
+                    };
+
+                    border.Child = stackPanelRow1;
+
+                    panelProduct.Children.Add(border);
+
+                    product.Quantity -= quantity;
+                    await storeProductService.Update(product);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Количество товара недостаточно", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private async void btnDeleteTabitem_Click(object sender, RoutedEventArgs e)
+        {
+            MytabItem mytabItem = tabControl.SelectedItem as MytabItem;
+
+            if (mytabItem != null)
+            {
+                var result = MessageBox.Show("Вы уверены, что хотите удалить", "Осторожность", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+
+                if (result == MessageBoxResult.Yes)
+                {
+                    tabControl.Items.Remove(mytabItem);
+
+                    await tabControlService.Delete(mytabItem.TabController.Id);
+
+                    if (tabControl.Items.Count > 1)
+                    {
+                        tabControl.SelectedIndex = tabControl.Items.Count - 2;
+                    }
                 }
             }
         }
+    }
+
+    public class MytabItem : TabItem
+    {
+        public TabController TabController { get; set; }
+    }
+
+    public class MyTextBlock : TextBlock
+    {
+        public TotalInfo TotalInfo { get; set; }
     }
 }

@@ -34,7 +34,7 @@ namespace StoreApp.Service.Services
             return await tabControlRepository.GetAsync(x => x.Id == id);
         }
 
-        public async Task<IList<TabController>> GetAll(long storeId)
+        public async Task<IList<TabController>> GetAll()
         {
             return (await tabControlRepository.GetAllAsync()).ToList();
         }
