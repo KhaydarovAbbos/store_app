@@ -331,7 +331,7 @@
                                                 </StackPanel>
                                             </Button>
                                             
-                                            <Button Style="{StaticResource btnBorder5}" Margin="5 0 0 0" Width="30" Height="30" Background="Transparent"  Padding="0" >
+                                            <Button Style="{StaticResource btnBorder5}" Margin="5 0 0 0" Width="30" Height="30" Background="Transparent"  Padding="0" Click="btnEdittabItem_Click" >
                                                 <StackPanel>
                                                     <md:PackIcon  
                                                             Kind="Pencil"

@@ -54,6 +54,7 @@ namespace StoreApp.View.UI.CashViews
         {
             tabControl.Items.Clear();
 
+            tabControlService = new TabControlService();
             var tabitems = await tabControlService.GetAll();
 
             foreach (var item in tabitems)
@@ -620,6 +621,17 @@ namespace StoreApp.View.UI.CashViews
         {
             AddTabControllerWindow addTabControllerWindow = new AddTabControllerWindow(this);
             addTabControllerWindow.ShowDialog();
+        }
+
+        private void btnEdittabItem_Click(object sender, RoutedEventArgs e)
+        {
+            if(tabControl.Items.Count > 0)
+            {
+                EditTabItemWindow editTabItemWindow = new EditTabItemWindow(this);
+                editTabItemWindow.ShowDialog();
+
+
+            }
         }
     }
 
