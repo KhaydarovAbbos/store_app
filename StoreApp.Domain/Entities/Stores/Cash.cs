@@ -18,5 +18,7 @@ namespace StoreApp.Domain.Entities.Stores
         public Store Store { get; set; }
 
         public long StoreId { get; set; }
+
+        public string StoreName { get; set; }
     }
 }

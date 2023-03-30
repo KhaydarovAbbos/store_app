@@ -12,6 +12,5 @@ namespace StoreApp.Domain.Entities.Stores
 
         public string Name { get; set; }
 
-
     }
 }

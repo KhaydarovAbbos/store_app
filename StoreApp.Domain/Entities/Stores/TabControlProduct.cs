@@ -21,5 +21,7 @@ namespace StoreApp.Domain.Entities.Stores
         [ForeignKey(nameof(TabControllerId))]
         public TabController TabController { get; set; }
         public long TabControllerId { get; set; }
+
+        public string TabControllerName { get; set; }
     }
 }
