@@ -156,9 +156,13 @@ namespace StoreApp.View.UI.FastInsertProductViews
                 Name = txtName.Text,
                 ArrivalPrice = double.Parse(txtArrivalPrice.Text),
                 Price = double.Parse(txtSellingPrice.Text),
-                Barcode = txtBarcode.Text
+                Barcode = txtBarcode.Text,
+                CategoryName = _product.CategoryName,
+                SubCategoryName = _product.SubcategoryName
+
+                
             };
-            await productService.Update(product);
+            var result = await productService.Update(product);
 
 
             if (gridQuantity.Visibility == Visibility.Visible)
@@ -166,10 +170,18 @@ namespace StoreApp.View.UI.FastInsertProductViews
                 StoreProduct storeProduct = new StoreProduct()
                 {
                     Id = _product.Id,
-                    ProductId = _product.Product.Id,
+                    ProductId = result.Id,
+                    ProductName = result.Name,
                     Quantity = double.Parse(txtQuantity.Text),
                     StoreId = _product.StoreId,
-                    SubcategoryId = _product.Product.SubCategoryId,
+                    StoreName = _product.StoreName,
+                    CategoryId = result.CategoryId,
+                    CategoryName = result.CategoryName,
+                    SubcategoryId = result.SubCategoryId,
+                    SubcategoryName = result.SubCategoryName,
+                    Barcode = result.Barcode,
+                    ArrivalPrice = result.ArrivalPrice,
+                    Price = result.Price
                 };
 
                 await storeProductService.Update(storeProduct);

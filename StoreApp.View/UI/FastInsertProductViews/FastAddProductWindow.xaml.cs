@@ -72,9 +72,18 @@ namespace StoreApp.View.UI.FastInsertProductViews
                 StoreProductViewModel productViewModel = new StoreProductViewModel()
                 {
                     ProductId = _product.Product.Id,
+                    ProductName = _product.Product.Name,
                     StoreId = _product.StoreId,
+                    Storename = _product.StoreName,
+                    CategoryId = _product.CategoryId,
+                    CategoryName = _product.CategoryName,
                     SubcategoryId = _product.Product.SubCategory.Id,
-                    Quantity = double.Parse(txtQuantity.Text)
+                    SubcategoryName = _product.CategoryName,
+                    Quantity = double.Parse(txtQuantity.Text),
+                    ArrivalPrice = double.Parse(txtQuantity.Text),
+                    Price = double.Parse(txtQuantity.Text),
+                    Barcode = _product.Product.Barcode,
+
                 };
                 await productService.Create(productViewModel);
             }
@@ -83,7 +92,8 @@ namespace StoreApp.View.UI.FastInsertProductViews
             {
                 ProductId = _product.Product.Id,
                 ProductName = _product.Product.Name,
-                Quantity = double.Parse(txtQuantity.Text)
+                Quantity = double.Parse(txtQuantity.Text) 
+
             };
             await receiveReportService.CreateAsync(receiveReportViewModel);
 
