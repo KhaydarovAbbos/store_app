@@ -11,12 +11,12 @@ namespace StoreApp.Domain.Entities.Products
         [ForeignKey(nameof(CategoryId))]
         public Category Category { get; set; }
         public long CategoryId { get; set; }
-        
+        public string CategoryName { get; set; }
         
         [ForeignKey(nameof(SubCategoryId))]
         public SubCategory SubCategory { get; set; }
         public long SubCategoryId { get; set; }
-
+        public string SubCategoryName { get; set; }
 
         public string Name { get; set; }
 

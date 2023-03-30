@@ -48,6 +48,10 @@ namespace StoreApp.Data.Migrations
                     b.Property<long>("CategoryId")
                         .HasColumnType("bigint");
 
+                    b.Property<string>("CategoryName")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("longtext");
@@ -57,6 +61,10 @@ namespace StoreApp.Data.Migrations
 
                     b.Property<long>("SubCategoryId")
                         .HasColumnType("bigint");
+
+                    b.Property<string>("SubCategoryName")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
                     b.HasKey("Id");
 
@@ -71,19 +79,52 @@ namespace StoreApp.Data.Migrations
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
+                        .HasColumnType("bigint")
+                        .HasColumnName("Id");
+
+                    b.Property<double>("ArrivalPrice")
+                        .HasColumnType("double")
+                        .HasColumnName("ArrivalPrice");
+
+                    b.Property<string>("Barcode")
+                        .IsRequired()
+                        .HasColumnType("longtext")
+                        .HasColumnName("Barcode");
+
+                    b.Property<double>("Price")
+                        .HasColumnType("double")
+                        .HasColumnName("Price");
 
                     b.Property<long>("ProductId")
-                        .HasColumnType("bigint");
+                        .HasColumnType("bigint")
+                        .HasColumnName("ProductId");
+
+                    b.Property<string>("ProductName")
+                        .IsRequired()
+                        .HasColumnType("longtext")
+                        .HasColumnName("ProductName");
 
                     b.Property<double>("Quantity")
-                        .HasColumnType("double");
+                        .HasColumnType("double")
+                        .HasColumnName("Quantity");
 
                     b.Property<long>("StoreId")
-                        .HasColumnType("bigint");
+                        .HasColumnType("bigint")
+                        .HasColumnName("StoreId");
+
+                    b.Property<string>("StoreName")
+                        .IsRequired()
+                        .HasColumnType("longtext")
+                        .HasColumnName("StoreName");
 
                     b.Property<long>("SubcategoryId")
-                        .HasColumnType("bigint");
+                        .HasColumnType("bigint")
+                        .HasColumnName("SubcategoryId");
+
+                    b.Property<string>("SubcategoryName")
+                        .IsRequired()
+                        .HasColumnType("longtext")
+                        .HasColumnName("SubcategoryName");
 
                     b.HasKey("Id");
 
@@ -104,6 +145,10 @@ namespace StoreApp.Data.Migrations
 
                     b.Property<long>("CategoryId")
                         .HasColumnType("bigint");
+
+                    b.Property<string>("CategoryName")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -155,6 +200,10 @@ namespace StoreApp.Data.Migrations
                     b.Property<long>("StoreId")
                         .HasColumnType("bigint");
 
+                    b.Property<string>("StoreName")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
                     b.HasKey("Id");
 
                     b.HasIndex("StoreId");
@@ -192,6 +241,10 @@ namespace StoreApp.Data.Migrations
 
                     b.Property<long>("TabControllerId")
                         .HasColumnType("bigint");
+
+                    b.Property<string>("TabControllerName")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
                     b.HasKey("Id");
 
