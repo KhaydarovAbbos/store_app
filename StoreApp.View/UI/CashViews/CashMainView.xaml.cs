@@ -1,21 +1,12 @@
 ﻿using StoreApp.Service.Interfaces;
 using StoreApp.Service.Services;
 using StoreApp.View.UI.MainViews;
-using StoreApp.View.UI.StoreViews;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using static StoreApp.View.UI.StoreViews.StoreView;
 
 namespace StoreApp.View.UI.CashViews
@@ -187,7 +178,7 @@ namespace StoreApp.View.UI.CashViews
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
 
-            AddCashWindow  addCashWindow  = new AddCashWindow(this, long.Parse(StoreMainView.StoreId));
+            AddCashWindow addCashWindow = new AddCashWindow(this, long.Parse(StoreMainView.StoreId));
             addCashWindow.ShowDialog();
 
             Keyboard.ClearFocus();

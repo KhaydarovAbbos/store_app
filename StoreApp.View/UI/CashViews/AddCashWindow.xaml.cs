@@ -1,20 +1,9 @@
 ﻿using StoreApp.Service.Interfaces;
 using StoreApp.Service.Services;
 using StoreApp.Service.ViewModels;
-using StoreApp.View.UI.StoreViews;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace StoreApp.View.UI.CashViews
 {
@@ -52,7 +41,7 @@ namespace StoreApp.View.UI.CashViews
                 {
                     Name = txtName.Text,
                     StoreId = store.Id,
-                    StoreName = store.Name                    
+                    StoreName = store.Name
                 };
 
                 if (!await cashService.IsExist(cashViewView.Name))

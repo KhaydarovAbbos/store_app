@@ -18,7 +18,7 @@
         public double ArrivalPrice { get; set; }
 
         public double Price { get; set; }
-        public string Barcode { get; set; } 
+        public string Barcode { get; set; }
 
         public double Quantity { get; set; }
     }

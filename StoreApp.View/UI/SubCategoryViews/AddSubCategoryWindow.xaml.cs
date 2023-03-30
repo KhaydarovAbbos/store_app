@@ -1,7 +1,6 @@
 ﻿using StoreApp.Service.Interfaces;
 using StoreApp.Service.Services;
 using StoreApp.Service.ViewModels;
-using StoreApp.View.UI.MainViews;
 using System;
 using System.Windows;
 using System.Windows.Controls;

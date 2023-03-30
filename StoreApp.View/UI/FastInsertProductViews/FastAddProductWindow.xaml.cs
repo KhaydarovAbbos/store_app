@@ -92,7 +92,7 @@ namespace StoreApp.View.UI.FastInsertProductViews
             {
                 ProductId = _product.Product.Id,
                 ProductName = _product.Product.Name,
-                Quantity = double.Parse(txtQuantity.Text) 
+                Quantity = double.Parse(txtQuantity.Text)
 
             };
             await receiveReportService.CreateAsync(receiveReportViewModel);

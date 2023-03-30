@@ -1,8 +1,6 @@
 ﻿using StoreApp.Domain.Commons;
 using StoreApp.Domain.Entities.Stores;
-using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Text.Json.Serialization;
 
 namespace StoreApp.Domain.Entities.Products
 {
@@ -39,7 +37,7 @@ namespace StoreApp.Domain.Entities.Products
 
         [Column("SubcategoryName", Order = 8)]
         public string SubcategoryName { get; set; }
-        
+
         [ForeignKey(nameof(ProductId))]
         public Product Product { get; set; }
 

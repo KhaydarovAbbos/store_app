@@ -160,7 +160,7 @@ namespace StoreApp.View.UI.FastInsertProductViews
                 CategoryName = _product.CategoryName,
                 SubCategoryName = _product.SubcategoryName
 
-                
+
             };
             var result = await productService.Update(product);
 

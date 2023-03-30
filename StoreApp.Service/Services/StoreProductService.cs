@@ -3,7 +3,6 @@ using StoreApp.Data.Contexts;
 using StoreApp.Data.IRepositories;
 using StoreApp.Data.Repositories;
 using StoreApp.Domain.Entities.Products;
-using StoreApp.Domain.Entities.Stores;
 using StoreApp.Service.Interfaces;
 using StoreApp.Service.ViewModels;
 
@@ -37,7 +36,7 @@ namespace StoreApp.Service.Services
                 Price = model.Price,
                 CategoryId = model.CategoryId,
                 CategoryName = model.CategoryName,
-                
+
             };
 
             return await storeProductRepository.CreatAsync(product);
@@ -97,7 +96,7 @@ namespace StoreApp.Service.Services
 
             return await _db.StoreProducts.Include(x => x.Product).FirstOrDefaultAsync(x => x.Product.Id == productId && x.StoreId == storeId);
 
-             //await storeProductRepository.GetAsync(x => x.ProductId == productId && x.StoreId == storeId);
+            //await storeProductRepository.GetAsync(x => x.ProductId == productId && x.StoreId == storeId);
         }
 
         public async Task<IList<StoreProduct>> GetAll(long storeId)

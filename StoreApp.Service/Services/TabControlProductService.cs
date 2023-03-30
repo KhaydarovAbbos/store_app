@@ -5,11 +5,6 @@ using StoreApp.Data.Repositories;
 using StoreApp.Domain.Entities.Stores;
 using StoreApp.Service.Interfaces;
 using StoreApp.Service.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace StoreApp.Service.Services
 {
@@ -32,7 +27,7 @@ namespace StoreApp.Service.Services
                 ProductName = model.ProductName,
                 TabControllerId = model.TabControllerId,
                 TabControllerName = model.TabControllerName,
-                
+
             };
 
             return await repository.CreatAsync(tabControlProduct);

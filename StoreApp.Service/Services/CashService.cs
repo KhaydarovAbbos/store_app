@@ -2,15 +2,9 @@
 using StoreApp.Data.Contexts;
 using StoreApp.Data.IRepositories;
 using StoreApp.Data.Repositories;
-using StoreApp.Domain.Entities.Products;
 using StoreApp.Domain.Entities.Stores;
 using StoreApp.Service.Interfaces;
 using StoreApp.Service.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace StoreApp.Service.Services
 {
@@ -90,7 +84,7 @@ namespace StoreApp.Service.Services
 
         public async Task<bool> IsExist(string name)
         {
-            var isExistCash= await cashRepository.GetAsync(x => x.Name.Trim() == name.Trim());
+            var isExistCash = await cashRepository.GetAsync(x => x.Name.Trim() == name.Trim());
 
             return isExistCash == null ? false : true;
 

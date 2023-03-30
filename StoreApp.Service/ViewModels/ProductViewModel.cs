@@ -10,12 +10,12 @@
 
         public string Barcode { get; set; }
         public long CategoryId { get; set; }
-        
+
         public string CategoryName { get; set; }
-        
+
         public long SubCategoryId { get; set; }
 
-        public string SubCategoryName { get; set;}
+        public string SubCategoryName { get; set; }
 
 
     }

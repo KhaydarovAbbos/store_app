@@ -18,7 +18,7 @@ namespace StoreApp.View.UI.SubCategoryViews
         ISubCategoryService subCategoryService = new SubCategoryService();
         ICategoryService categoryService = new CategoryService();
         IProductService productService = new ProductService();
-        IStoreProductService storeProductService = new StoreProductService();   
+        IStoreProductService storeProductService = new StoreProductService();
 
 
         public EditSubCategoryWindow(SubCategoryView productSubCategoryView, long id)
@@ -61,7 +61,7 @@ namespace StoreApp.View.UI.SubCategoryViews
 
                 if (!await subCategoryService.IsExist(subCategory.Name))
                 {
-                    var result =  await subCategoryService.Update(subCategory);
+                    var result = await subCategoryService.Update(subCategory);
 
                     await productService.UpdateSubcategoryname(result.Name, result.Id);
                     await storeProductService.UpdateSubcategoryname(result.Name, result.Id);

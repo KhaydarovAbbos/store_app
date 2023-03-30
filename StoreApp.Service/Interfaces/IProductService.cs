@@ -1,6 +1,5 @@
 ﻿using StoreApp.Domain.Entities.Products;
 using StoreApp.Service.ViewModels;
-using System.Diagnostics.SymbolStore;
 
 namespace StoreApp.Service.Interfaces
 {

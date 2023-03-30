@@ -3,24 +3,12 @@ using StoreApp.Service.Interfaces;
 using StoreApp.Service.Services;
 using StoreApp.View.UI.MainViews;
 using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using XAct;
 using static StoreApp.View.UI.StoreViews.StoreView;
 
 namespace StoreApp.View.UI.CashViews
@@ -50,7 +38,7 @@ namespace StoreApp.View.UI.CashViews
             mainWindow = mainwindow;
             txtName.Text = "Название кассы : " + cashName;
 
-            
+
         }
 
         public async void WindowLoad()
@@ -147,7 +135,7 @@ namespace StoreApp.View.UI.CashViews
                             Height = 20
                         }
                     };
-                    btnDelete.Totalinfo = new TotalInfo { Id = product.Id, Name = product.ProductName};
+                    btnDelete.Totalinfo = new TotalInfo { Id = product.Id, Name = product.ProductName };
                     btnDelete.Click += new RoutedEventHandler(btnDelete_Click);
 
                     Grid.SetColumn(txtProductName, 0);
@@ -443,7 +431,7 @@ namespace StoreApp.View.UI.CashViews
             {
                 long productId = ((border.Child as Grid).Children[0] as MyTextBlock).TotalInfo.Id;
 
-                AddToBasket(productId);              
+                AddToBasket(productId);
             }
         }
 
@@ -633,7 +621,7 @@ namespace StoreApp.View.UI.CashViews
 
         private void btnEdittabItem_Click(object sender, RoutedEventArgs e)
         {
-            if(tabControl.Items.Count > 0)
+            if (tabControl.Items.Count > 0)
             {
                 EditTabItemWindow editTabItemWindow = new EditTabItemWindow(this);
                 editTabItemWindow.ShowDialog();

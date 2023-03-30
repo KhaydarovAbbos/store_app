@@ -1,5 +1,4 @@
-﻿using StoreApp.Data.IRepositories;
-using StoreApp.Domain.Entities.Products;
+﻿using StoreApp.Domain.Entities.Products;
 using StoreApp.Service.Interfaces;
 using StoreApp.Service.Services;
 using StoreApp.Service.ViewModels;
@@ -192,7 +191,7 @@ namespace StoreApp.View.UI.ProductsView
                     StoreId = _product.StoreId,
                     StoreName = _product.StoreName,
                     SubcategoryId = result.SubCategoryId,
-                    SubcategoryName= result.SubCategoryName,
+                    SubcategoryName = result.SubCategoryName,
                     Barcode = result.Barcode,
                     Price = result.Price,
                     ArrivalPrice = result.ArrivalPrice,
@@ -227,7 +226,6 @@ namespace StoreApp.View.UI.ProductsView
 
                         e.Handled = true;
                 }
-
                 else
                     e.Handled = true;
 

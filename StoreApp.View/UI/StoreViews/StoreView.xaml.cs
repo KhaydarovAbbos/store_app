@@ -58,7 +58,7 @@ namespace StoreApp.View.UI.StoreViews
                 Content = "+ Добавить",
                 FontWeight = FontWeights.Bold,
                 FontSize = 25,
-                
+
             };
             buttonAdd.Click += new RoutedEventHandler(btnAdd_Click);
 

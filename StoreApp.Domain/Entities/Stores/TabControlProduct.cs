@@ -1,10 +1,5 @@
 ﻿using StoreApp.Domain.Entities.Products;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace StoreApp.Domain.Entities.Stores
 {
@@ -17,7 +12,7 @@ namespace StoreApp.Domain.Entities.Stores
         public long TabControllerId { get; set; }
 
         public string TabControllerName { get; set; }
-        
+
         [ForeignKey(nameof(ProductId))]
         public Product Product { get; set; }
         public long ProductId { get; set; }
