@@ -18,6 +18,8 @@ namespace StoreApp.View.UI.FastInsertProductViews
         StoreProduct _product;
         IProductService productService = new ProductService();
         IStoreProductService storeProductService = new StoreProductService();
+        ITabControlProductService controlProductService = new TabControlProductService();
+        IReceiveReportService receiveReportService = new ReceiveReportService();
 
         public FastEditProductWindow(StoreProduct product, FastInsertProductView productsview)
         {
@@ -158,7 +160,8 @@ namespace StoreApp.View.UI.FastInsertProductViews
                 Price = double.Parse(txtSellingPrice.Text),
                 Barcode = txtBarcode.Text,
                 CategoryName = _product.CategoryName,
-                SubCategoryName = _product.SubcategoryName
+                SubCategoryName = _product.SubcategoryName,
+                
 
 
             };
@@ -186,6 +189,9 @@ namespace StoreApp.View.UI.FastInsertProductViews
 
                 await storeProductService.Update(storeProduct);
             }
+
+            await controlProductService.UpdateProductName(result.Name, result.Id);
+            await receiveReportService.UpdateProductName(result.Name, result.Id);
 
             Productsview.WindowLoad();
 

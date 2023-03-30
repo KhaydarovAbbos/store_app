@@ -91,6 +91,9 @@ namespace StoreApp.View.UI.CashViews
 
                 foreach (var product in products)
                 {
+
+                    var storeProduct = await storeProductService.Get(product.Product.Id, long.Parse(StoreMainView.StoreId));
+
                     Border borderProduct = new Border
                     {
                         Background = Brushes.White,
@@ -118,6 +121,21 @@ namespace StoreApp.View.UI.CashViews
                         TotalInfo = new TotalInfo { Id = product.ProductId, Name = product.ProductName }
                     };
 
+                    TextBlock txtQuantity = new TextBlock
+                    {
+                        VerticalAlignment = VerticalAlignment.Top,
+                        HorizontalAlignment = HorizontalAlignment.Center,
+                        Width = 200,
+                        Height = 20,
+                        FontSize = 16,
+                        Text = $"Количество : {storeProduct.Quantity}",
+                        Margin = new Thickness(10, 0, 0, 50)
+                    };
+
+                    StackPanel stackPanelRow1 = new StackPanel
+                    {
+                        Children = { txtProductName, txtQuantity}
+                    };
 
                     MyButton btnDelete = new MyButton
                     {
