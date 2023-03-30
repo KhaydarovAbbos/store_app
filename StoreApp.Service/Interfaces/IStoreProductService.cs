@@ -23,5 +23,6 @@ namespace StoreApp.Service.Interfaces
 
         Task UpdateCategoryName(string name, long categoryId);
         Task UpdateStoreName(string name, long storeId);
+        Task UpdateSubcategoryname(string name, long subCategoryId);
     }
 }

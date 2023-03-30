@@ -23,6 +23,6 @@ namespace StoreApp.Service.Interfaces
         Task<bool> IsExist(string name, long id);
 
         Task UpdateCategoryName(string name, long categoryId);
-
+        Task UpdateSubcategoryname(string name, long subCategoryId);
     }
 }

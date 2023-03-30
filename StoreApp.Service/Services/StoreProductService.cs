@@ -3,6 +3,7 @@ using StoreApp.Data.Contexts;
 using StoreApp.Data.IRepositories;
 using StoreApp.Data.Repositories;
 using StoreApp.Domain.Entities.Products;
+using StoreApp.Domain.Entities.Stores;
 using StoreApp.Service.Interfaces;
 using StoreApp.Service.ViewModels;
 
@@ -210,6 +211,18 @@ namespace StoreApp.Service.Services
             foreach (var item in existProducts)
             {
                 item.StoreName = name;
+
+                await Update(item);
+            }
+        }
+
+        public async Task UpdateSubcategoryname(string name, long subCategoryId)
+        {
+            var existProducts = await _db.StoreProducts.Where(x => x.SubcategoryId == subCategoryId).ToListAsync();
+
+            foreach (var item in existProducts)
+            {
+                item.SubcategoryName = name;
 
                 await Update(item);
             }
