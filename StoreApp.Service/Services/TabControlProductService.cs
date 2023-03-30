@@ -26,7 +26,9 @@ namespace StoreApp.Service.Services
             {
                 ProductId = model.ProductId,
                 ProductName = model.ProductName,
-                TabControllerId = model.TabControllerId
+                TabControllerId = model.TabControllerId,
+                TabControllerName = model.TabControllerName,
+                
             };
 
             return await repository.CreatAsync(tabControlProduct);
@@ -65,6 +67,7 @@ namespace StoreApp.Service.Services
             else
             {
                 existModel.ProductName = model.ProductName;
+                existModel.TabControllerName = model.TabControllerName;
 
                 return await repository.UpdateAsync(existModel);
             }

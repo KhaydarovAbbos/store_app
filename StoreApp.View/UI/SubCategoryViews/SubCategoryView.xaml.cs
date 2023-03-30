@@ -16,7 +16,7 @@ namespace StoreApp.View.UI.SubCategoryViews
     /// </summary>
     public partial class SubCategoryView : UserControl
     {
-        StoreMainView StoremainView;
+        public StoreMainView StoremainView;
         ISubCategoryService SubCategoryService { get; set; }
 
         public SubCategoryView()

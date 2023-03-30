@@ -426,10 +426,9 @@ namespace StoreApp.View.UI.CashViews
 
             if (mytabItem != null)
             {
-                long controlId = mytabItem.TabController.Id;
                 int index = tabControl.Items.IndexOf(mytabItem);
 
-                AddProductToControlWindow addProductToControlWindow = new AddProductToControlWindow(controlId, this);
+                AddProductToControlWindow addProductToControlWindow = new AddProductToControlWindow(mytabItem.TabController, this);
                 addProductToControlWindow.ShowDialog();
 
                 tabControl.SelectedIndex = index;

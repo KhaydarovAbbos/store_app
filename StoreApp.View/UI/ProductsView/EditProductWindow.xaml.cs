@@ -152,19 +152,27 @@ namespace StoreApp.View.UI.ProductsView
                 Name = txtName.Text,
                 ArrivalPrice = double.Parse(txtArrivalPrice.Text),
                 Price = double.Parse(txtSellingPrice.Text),
-                Barcode = txtBarcode.Text
+                Barcode = txtBarcode.Text,
+                CategoryName = _product.SubCategory.CategoryName,
+                SubCategoryName = _product.SubcategoryName
             };
 
-            await productService.Update(product);
+            var result = await productService.Update(product);
 
             if (_product.Id == 0)
             {
                 StoreProductViewModel storeViewModel = new StoreProductViewModel()
                 {
-                    ProductId = _product.Product.Id,
+                    ProductId = result.Id,
                     StoreId = _product.StoreId,
-                    SubcategoryId = _product.Product.SubCategoryId,
+                    SubcategoryId = result.SubCategoryId,
                     Quantity = double.Parse(txtQuantity.Text),
+                    Barcode = result.Barcode,
+                    ProductName = result.Name,
+                    SubcategoryName = result.SubCategoryName,
+                    Storename = _product.StoreName,
+                    ArrivalPrice = result.ArrivalPrice,
+                    Price = result.Price,
                 };
 
                 await storeProductService.Create(storeViewModel);
@@ -175,11 +183,16 @@ namespace StoreApp.View.UI.ProductsView
                 StoreProduct storeProduct = new StoreProduct()
                 {
                     Id = _product.Id,
-                    ProductId = _product.Product.Id,
+                    ProductId = result.Id,
+                    ProductName = result.Name,
                     Quantity = double.Parse(txtQuantity.Text),
                     StoreId = _product.StoreId,
-                    SubcategoryId = _product.Product.SubCategoryId,
-
+                    StoreName = _product.StoreName,
+                    SubcategoryId = result.SubCategoryId,
+                    SubcategoryName= result.SubCategoryName,
+                    Barcode = result.Barcode,
+                    Price = result.Price,
+                    ArrivalPrice = result.ArrivalPrice,
                 };
 
                 await storeProductService.Update(storeProduct);

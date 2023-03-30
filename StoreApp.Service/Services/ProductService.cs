@@ -28,8 +28,9 @@ namespace StoreApp.Service.Services
                 CategoryId = model.CategoryId,
                 ArrivalPrice = model.Arrivalprice,
                 Barcode = model.Barcode,
-                Price = model.Price
-
+                Price = model.Price,
+                CategoryName = model.CategoryName,
+                SubCategoryName = model.SubCategoryName,
             };
 
             return await productRepository.CreatAsync(product);
@@ -105,6 +106,8 @@ namespace StoreApp.Service.Services
                 existProduct.Price = model.Price;
                 existProduct.ArrivalPrice = model.ArrivalPrice;
                 existProduct.Barcode = model.Barcode;
+                existProduct.CategoryName = model.CategoryName;
+                existProduct.SubCategoryName = model.SubCategoryName;
 
                 return await productRepository.UpdateAsync(existProduct);
             }

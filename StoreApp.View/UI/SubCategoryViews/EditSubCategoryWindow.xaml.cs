@@ -14,7 +14,9 @@ namespace StoreApp.View.UI.SubCategoryViews
     {
         SubCategoryView ProductsubCategoryView;
         long subCategoryid = 0;
-        ISubCategoryService categoryService = new SubCategoryService();
+        long categoryId = 0;
+        ISubCategoryService subCategoryService = new SubCategoryService();
+        ICategoryService categoryService = new CategoryService();
 
 
         public EditSubCategoryWindow(SubCategoryView productSubCategoryView, long id)
@@ -46,25 +48,26 @@ namespace StoreApp.View.UI.SubCategoryViews
                     return;
                 }
 
+                var category = await categoryService.Get(categoryId);
+
                 SubCategory subCategory = new SubCategory()
                 {
                     Id = subCategoryid,
                     Name = txtName.Text,
+                    CategoryName = category.Name
                 };
 
-                if (!await categoryService.IsExist(subCategory.Name))
+                if (!await subCategoryService.IsExist(subCategory.Name))
                 {
-                    await categoryService.Update(subCategory);
+                    await subCategoryService.Update(subCategory);
 
                     ProductsubCategoryView.WindowLoad();
                     this.Close();
-
                 }
                 else
                 {
                     txtError.Text = "Есть подкатегория с таким названием";
                 }
-
             }
             catch (Exception ex)
             {
@@ -74,10 +77,10 @@ namespace StoreApp.View.UI.SubCategoryViews
 
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
-
-            var subcategory = await categoryService.Get(subCategoryid);
+            var subcategory = await subCategoryService.Get(subCategoryid);
 
             txtName.Text = subcategory.Name;
+            categoryId = subcategory.CategoryId;
         }
     }
 }

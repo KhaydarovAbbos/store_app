@@ -21,6 +21,7 @@ namespace StoreApp.Service.Services
             {
                 Name = model.Name,
                 CategoryId = model.CategoryId,
+                CategoryName = model.CategoryName,
 
             };
 
@@ -70,6 +71,7 @@ namespace StoreApp.Service.Services
             else
             {
                 existSubcategory.Name = model.Name;
+                existSubcategory.CategoryName = model.CategoryName;
 
                 return await SubCategoryRepository.UpdateAsync(existSubcategory);
             }

@@ -28,6 +28,7 @@ namespace StoreApp.Service.Services
             {
                 Name = model.Name,
                 StoreId = model.StoreId,
+                StoreName = model.StoreName
             };
 
             return await cashRepository.CreatAsync(cash);
@@ -77,6 +78,7 @@ namespace StoreApp.Service.Services
             else
             {
                 existCash.Name = model.Name;
+                existCash.StoreName = model.StoreName;
 
                 return await cashRepository.UpdateAsync(existCash);
             }

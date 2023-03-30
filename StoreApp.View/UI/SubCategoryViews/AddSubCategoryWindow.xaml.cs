@@ -1,6 +1,7 @@
 ﻿using StoreApp.Service.Interfaces;
 using StoreApp.Service.Services;
 using StoreApp.Service.ViewModels;
+using StoreApp.View.UI.MainViews;
 using System;
 using System.Windows;
 using System.Windows.Controls;
@@ -15,6 +16,7 @@ namespace StoreApp.View.UI.SubCategoryViews
         SubCategoryView subCategoryView;
         long CategoryId = 0;
         ISubCategoryService SubCategoryService = new SubCategoryService();
+        ICategoryService CategoryService = new CategoryService();
 
         public AddSubCategoryWindow(SubCategoryView productSubCategoryView, int categoryId)
         {
@@ -34,10 +36,13 @@ namespace StoreApp.View.UI.SubCategoryViews
                     return;
                 }
 
+                var category = await CategoryService.Get(CategoryId);
+
                 SubCategoryViewModel model = new SubCategoryViewModel()
                 {
                     Name = txtName.Text,
-                    CategoryId = CategoryId
+                    CategoryId = category.Id,
+                    CategoryName = category.Name
                 };
 
                 if (!await SubCategoryService.IsExist(model.Name))
@@ -47,7 +52,6 @@ namespace StoreApp.View.UI.SubCategoryViews
                     subCategoryView.WindowLoad();
 
                     this.Close();
-
                 }
                 else
                 {

@@ -1,6 +1,7 @@
 ﻿using StoreApp.Domain.Entities.Stores;
 using StoreApp.Service.Interfaces;
 using StoreApp.Service.Services;
+using StoreApp.View.UI.MainViews;
 using StoreApp.View.UI.StoreViews;
 using System;
 using System.Collections.Generic;
@@ -26,6 +27,7 @@ namespace StoreApp.View.UI.CashViews
         CashMainView CashMainview { get; set; }
         long CashId;
         ICashService cashService = new CashService();
+        IStoreService storeService = new StoreService();
 
         public EditCashWindow()
         {
@@ -52,20 +54,21 @@ namespace StoreApp.View.UI.CashViews
                     return;
                 }
 
-                Cash store = new Cash()
+                var store = await storeService.Get(long.Parse(StoreMainView.StoreId));
+
+                Cash cash = new Cash()
                 {
                     Id = CashId,
-                    Name = txtName.Text
+                    Name = txtName.Text,
+                    StoreName = store.Name,
                 };
 
-
-                if (!await cashService.IsExist(store.Name))
+                if (!await cashService.IsExist(cash.Name))
                 {
-                    var result = await cashService.Update(store);
+                    var result = await cashService.Update(cash);
 
                     CashMainview.WindowLoad();
                     this.Close();
-
                 }
                 else
                 {

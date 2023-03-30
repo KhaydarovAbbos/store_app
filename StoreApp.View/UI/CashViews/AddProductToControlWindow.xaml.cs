@@ -1,4 +1,5 @@
 ﻿using StoreApp.Domain.Entities.Products;
+using StoreApp.Domain.Entities.Stores;
 using StoreApp.Service.Interfaces;
 using StoreApp.Service.Services;
 using StoreApp.Service.ViewModels;
@@ -27,14 +28,14 @@ namespace StoreApp.View.UI.CashViews
         IStoreProductService storeProductService = new StoreProductService();
         ITabControlProductService tabControlProductService = new TabControlProductService();
 
-        long ControlId;
+        TabController TabController;
         CashView Cashview;
 
-        public AddProductToControlWindow(long controlId, CashView cashView)
+        public AddProductToControlWindow(TabController tabController, CashView cashView)
         {
             InitializeComponent();
-            ControlId = controlId;
             Cashview = cashView;
+            TabController = tabController;
         }
 
         private async void Window_Loaded(object sender, RoutedEventArgs e)
@@ -49,11 +50,11 @@ namespace StoreApp.View.UI.CashViews
 
         private async void datagridProducts_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            StoreProduct storeProduct = datagridProducts.SelectedItems[0] as StoreProduct;
+            StoreProduct storeProduct = datagridProducts.SelectedItem as StoreProduct;
 
             if (storeProduct != null)
             {
-                bool result = await tabControlProductService.IsExist(storeProduct.Product.Name, ControlId);
+                bool result = await tabControlProductService.IsExist(storeProduct.Product.Name, TabController.Id);
 
                 if (!result)
                 {
@@ -61,7 +62,8 @@ namespace StoreApp.View.UI.CashViews
                     {
                         ProductId = storeProduct.Product.Id,
                         ProductName = storeProduct.Product.Name,
-                        TabControllerId = ControlId
+                        TabControllerId = TabController.Id,
+                        TabControllerName = TabController.Name
                     };
 
                     await tabControlProductService.Create(model);
@@ -70,7 +72,6 @@ namespace StoreApp.View.UI.CashViews
                 }
 
                 this.Close();
-    
             }
 
         }

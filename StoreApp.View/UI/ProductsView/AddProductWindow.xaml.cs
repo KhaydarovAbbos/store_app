@@ -104,26 +104,34 @@ namespace StoreApp.View.UI.ProductsView
                     Price = double.Parse(txtSellingPrice.Text),
                     Barcode = txtBarcode.Text,
                     SubCategoryId = ProductSubcategory.Id,
-                    CategoryId = Productcategory.Id
+                    CategoryId = Productcategory.Id,
+                    CategoryName = Productcategory.Name,
+                    SubCategoryName = ProductSubcategory.Name,
 
                 };
                 var result = await productService.Create(productViewModel);
 
                 var store_id = long.Parse(Productsview.StoremainView.store_id.Content.ToString());
+                var store_name = Productsview.StoremainView.txtStoreName.Text.ToString();
 
                 StoreProductViewModel storeProductViewModel = new StoreProductViewModel()
                 {
                     ProductId = result.Id,
                     SubcategoryId = result.SubCategoryId,
                     StoreId = store_id,
-                    Quantity = double.Parse(txtQuantity.Text)
+                    Quantity = double.Parse(txtQuantity.Text),
+                    Barcode = result.Barcode,
+                    ProductName = result.Name,
+                    SubcategoryName = result.SubCategoryName,
+                    Storename = store_name,
+                    ArrivalPrice = result.ArrivalPrice,
+                    Price = result.Price
                 };
                 await storeProductService.Create(storeProductViewModel);
 
                 Productsview.WindowLoad();
 
                 this.Close();
-
             }
             else
             {

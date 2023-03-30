@@ -28,6 +28,14 @@ namespace StoreApp.Service.Services
                 SubcategoryId = model.SubcategoryId,
                 ProductId = model.ProductId,
                 Quantity = model.Quantity,
+                Barcode = model.Barcode,
+                ProductName = model.ProductName,
+                StoreName = model.Storename,
+                SubcategoryName = model.SubcategoryName,
+                ArrivalPrice = model.ArrivalPrice,
+                Price = model.Price,
+                
+                
             };
 
             return await storeProductRepository.CreatAsync(product);
@@ -169,7 +177,13 @@ namespace StoreApp.Service.Services
             }
             else
             {
+                existProduct.ProductName = model.ProductName;
                 existProduct.Quantity = model.Quantity;
+                existProduct.Barcode = model.Barcode;
+                existProduct.StoreName = model.StoreName;
+                existProduct.SubcategoryName = model.SubcategoryName;
+                existProduct.ArrivalPrice = model.ArrivalPrice;
+                existProduct.Price = model.Price;
 
                 return await storeProductRepository.UpdateAsync(existProduct);
             }

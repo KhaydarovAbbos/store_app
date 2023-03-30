@@ -25,6 +25,7 @@ namespace StoreApp.View.UI.CashViews
     {
         CashMainView CashMainview { get; set; }
         ICashService cashService = new CashService();
+        StoreService storeService = new StoreService();
         long StoreId;
 
         public AddCashWindow(CashMainView cashMainView, long storeId)
@@ -45,10 +46,13 @@ namespace StoreApp.View.UI.CashViews
                     return;
                 }
 
+                var store = await storeService.Get(StoreId);
+
                 CashViewModel cashViewView = new CashViewModel()
                 {
                     Name = txtName.Text,
-                    StoreId = StoreId
+                    StoreId = store.Id,
+                    StoreName = store.Name                    
                 };
 
                 if (!await cashService.IsExist(cashViewView.Name))

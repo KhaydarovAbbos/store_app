@@ -11,5 +11,7 @@ namespace StoreApp.Service.ViewModels
         public string Name { get; set; }
 
         public long StoreId { get; set; }
+
+        public string StoreName { get; set; }
     }
 }
