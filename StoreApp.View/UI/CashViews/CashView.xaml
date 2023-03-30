@@ -395,7 +395,7 @@
                         <StackPanel Orientation="Horizontal">
 
                             
-                            <TextBox TextChanged="txtBarcode_TextChanged" Margin="0 5 0 0 " x:Name="txtBarcode" Style="{StaticResource txtMain}" Width="190" Height="30" Foreground="Black" VerticalAlignment="Top">
+                            <TextBox TextChanged="txtBarcode_TextChanged" Margin="0 5 0 0 " x:Name="txtBarcode" Style="{StaticResource txtMain}" Width="190" Height="30" Foreground="Black" VerticalAlignment="Top" PreviewKeyDown="txtBarcode_PreviewKeyDown" PreviewTextInput="txtBarcode_PreviewTextInput">
 
                             </TextBox>
                             <Button Margin="5 5 0 0" VerticalAlignment="Top" x:Name="btnAddProduct" Style="{StaticResource btnBorder5}" Width="90" Height="30" Background="White"  Content="Добавит" FontSize="18" Click="btnAddProduct_Click">

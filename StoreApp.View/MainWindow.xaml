@@ -10,7 +10,7 @@
         xmlns:gif="http://wpfanimatedgif.codeplex.com"
         xmlns:local="clr-namespace:StoreApp.View"
         mc:Ignorable="d" Loaded="Window_Loaded"
-        Height="730" Width="1335" WindowStartupLocation="CenterScreen" WindowStyle="SingleBorderWindow" Icon="{x:Null}">
+        Height="730" Width="1335" WindowStartupLocation="CenterScreen" WindowStyle="SingleBorderWindow" Icon="{x:Null}" Closing="Window_Closing">
     <Window.Background>
         <LinearGradientBrush EndPoint="0,1" StartPoint="1, 1" >
             <GradientStop Color="#B651C2" Offset="0"/>

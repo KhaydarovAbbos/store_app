@@ -79,5 +79,22 @@ namespace StoreApp.View
         {
             AllCloseControls(1);
         }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (cash_view.Visibility == Visibility.Visible)
+            {
+                int count = cash_view.panelProduct.Children.Count;
+
+                if (count > 0)
+                {
+                    MessageBox.Show("Очистите корзинка, чтобы выйти из программы", "Предупреждение", MessageBoxButton.OK, MessageBoxImage.Warning);
+
+                    e.Cancel = true;
+                    return;
+                }
+
+            }
+        }
     }
 }
