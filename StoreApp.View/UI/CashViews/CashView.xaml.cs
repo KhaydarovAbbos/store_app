@@ -29,10 +29,10 @@ namespace StoreApp.View.UI.CashViews
     /// </summary>
     public partial class CashView : UserControl
     {
-        IProductService productService = new ProductService();
-        IStoreProductService storeProductService = new StoreProductService();
-        ITabControlService tabControlService = new TabControlService();
-        ITabControlProductService tabControlProductService = new TabControlProductService();
+        IProductService productService;
+        IStoreProductService storeProductService;
+        ITabControlService tabControlService;
+        ITabControlProductService tabControlProductService;
 
         public MainWindow mainWindow;
         public static string cashName;
@@ -48,13 +48,19 @@ namespace StoreApp.View.UI.CashViews
         {
             mainWindow = mainwindow;
             txtName.Text = "Название кассы : " + cashName;
+
+            
         }
 
         public async void WindowLoad()
         {
+            productService = new ProductService();
+            storeProductService = new StoreProductService();
+            tabControlService = new TabControlService();
+            tabControlProductService = new TabControlProductService();
+
             tabControl.Items.Clear();
 
-            tabControlService = new TabControlService();
             var tabitems = await tabControlService.GetAll();
 
             foreach (var item in tabitems)
@@ -621,6 +627,8 @@ namespace StoreApp.View.UI.CashViews
         {
             AddTabControllerWindow addTabControllerWindow = new AddTabControllerWindow(this);
             addTabControllerWindow.ShowDialog();
+
+            Keyboard.ClearFocus();
         }
 
         private void btnEdittabItem_Click(object sender, RoutedEventArgs e)
@@ -630,6 +638,7 @@ namespace StoreApp.View.UI.CashViews
                 EditTabItemWindow editTabItemWindow = new EditTabItemWindow(this);
                 editTabItemWindow.ShowDialog();
 
+                Keyboard.ClearFocus();
 
             }
         }

@@ -66,11 +66,12 @@ namespace StoreApp.View.UI.CashViews
                     BorderBrush = Brushes.Gray,
                     BorderThickness = new Thickness(1),
                     Margin = new Thickness(10, 10, 0, 0),
-                    CornerRadius = new CornerRadius(10)
+                    CornerRadius = new CornerRadius(10),
+                    Padding = new Thickness(0)
                     
                 };
-                border.MouseUp += new MouseButtonEventHandler(btnBorder_Click);
-                
+                //border.MouseUp += new MouseButtonEventHandler(btnBorder_Click);
+
 
                 MyTextBlock txtName = new MyTextBlock
                 {
@@ -87,21 +88,38 @@ namespace StoreApp.View.UI.CashViews
                     TotalInfo = new TotalInfo { Id = item.Id, Name = item.Name }
                 };
 
+                MyButton myButton = new MyButton
+                {
+                    Background = Brushes.Transparent,
+                    BorderBrush = Brushes.Transparent,
+                    Content = txtName,
+                };
+                myButton.Click += new RoutedEventHandler(MyButton_Click);
 
-                border.Child = txtName;
+
+                border.Child = myButton;
 
                 panel.Children.Add(border);
 
             }
         }
 
+        private void MyButton_Click(object sender, RoutedEventArgs e)
+        {
+            MyButton myButton = sender as MyButton;
+
+            txtName.Text = (myButton.Content as MyTextBlock).Text;
+
+            myTextBlock = myButton.Content as MyTextBlock;
+        }
+
         private void btnBorder_Click(object sender, MouseButtonEventArgs e)
         {
-            Border border = sender as Border;
+            //Border border = sender as Border;
 
-            txtName.Text = (border.Child as MyTextBlock).Text;
+            //txtName.Text = (border.Child as MyTextBlock).Text;
 
-            myTextBlock = border.Child as MyTextBlock;
+            //myTextBlock = border.Child as MyTextBlock;
         }
     }
 }

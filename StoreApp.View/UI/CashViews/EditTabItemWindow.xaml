@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:StoreApp.View.UI.CashViews"
+        xmlns:mybutton="clr-namespace:StoreApp.View.UI.MainViews"
         mc:Ignorable="d"
         Title="" Height="300" Width="600" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Loaded="Window_Loaded">
 
@@ -186,6 +187,15 @@
                 </Setter.Value>
             </Setter>
         </Style>
+
+        <Style x:Key="{x:Type mybutton:StoreMainView}" TargetType="{x:Type mybutton:StoreMainView}">
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Cursor" Value="Hand"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
     </Window.Resources>
     
     <Grid Background="#E5F6FF">
@@ -197,7 +207,7 @@
         <Grid Grid.Row="0">
 
             <ScrollViewer HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Disabled" Margin="10" Background="Transparent">
-                <WrapPanel x:Name="panel">
+                <WrapPanel x:Name="panel" Height="60">
                     
                 </WrapPanel>
             </ScrollViewer>
@@ -209,11 +219,15 @@
 
             <StackPanel Orientation="Horizontal" Height="40" >
                 <TextBox x:Name="txtName" Margin="60 0 100 0"  Style="{StaticResource txtMain}" Width="250" Foreground="Black" Padding="0 0 0 0"  FontSize="20">
-                    
+                    <TextBox.Effect>
+                        <DropShadowEffect ShadowDepth="1"/>
+                    </TextBox.Effect>
                 </TextBox>
 
                 <Button x:Name="btnSave" HorizontalAlignment="Right" Style="{StaticResource btnBorder5}" Width="120" Background="#57B846" BorderBrush="#57B846" Content="Сохранять" Foreground="White" Click="btnSave_Click">
-                    
+                    <Button.Effect>
+                        <DropShadowEffect ShadowDepth="1"/>
+                    </Button.Effect>
                 </Button>
                 
             </StackPanel>

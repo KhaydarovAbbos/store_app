@@ -31,6 +31,8 @@ namespace StoreApp.View.UI.CashViews
             InitializeComponent();
 
             Cashview = cashView;
+
+            txtName.Focus();
         }
 
         private async void BtnAdd_Click(object sender, RoutedEventArgs e)
