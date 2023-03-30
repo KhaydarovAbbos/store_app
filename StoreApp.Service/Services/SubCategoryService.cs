@@ -83,5 +83,23 @@ namespace StoreApp.Service.Services
 
             return isExistSubCategory == null ? false : true;
         }
+
+        public async Task<bool> UpdateCategoryName(string name, long subcategoryId)
+        {
+            var existSubcategory = await Get(subcategoryId);
+
+            if (existSubcategory == null)
+            {
+                return false;
+            }
+            else
+            {
+                existSubcategory.CategoryName = name;
+
+                await SubCategoryRepository.UpdateAsync(existSubcategory);
+
+                return true;
+            }
+        }
     }
 }

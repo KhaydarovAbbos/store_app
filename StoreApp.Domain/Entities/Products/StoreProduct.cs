@@ -21,31 +21,40 @@ namespace StoreApp.Domain.Entities.Products
         [Column("StoreName", Order = 4)]
         public string StoreName { get; set; }
 
+        [ForeignKey(nameof(CategoryId))]
+        public Category Category { get; set; }
+
+        [Column("CategoryId", Order = 5)]
+        public long CategoryId { get; set; }
+
+        [Column("CategoryName", Order = 6)]
+        public string CategoryName { get; set; }
+
+
         [ForeignKey(nameof(SubcategoryId))]
         public SubCategory SubCategory { get; set; }
 
-        [Column("SubcategoryId", Order = 5)]
+        [Column("SubcategoryId", Order = 7)]
         public long SubcategoryId { get; set; }
 
-        [Column("SubcategoryName", Order = 6)]
+        [Column("SubcategoryName", Order = 8)]
         public string SubcategoryName { get; set; }
-
         
         [ForeignKey(nameof(ProductId))]
         public Product Product { get; set; }
 
-        [Column("ProductId", Order = 7)]
+        [Column("ProductId", Order = 9)]
         public long ProductId { get; set; }
 
-        [Column("ProductName", Order = 8)]
+        [Column("ProductName", Order = 10)]
         public string ProductName { get; set; }
 
-        [Column("ArrivalPrice", Order = 9)]
+        [Column("ArrivalPrice", Order = 11)]
         public double ArrivalPrice { get; set; }
 
-        [Column("Price", Order = 10)]
+        [Column("Price", Order = 12)]
         public double Price { get; set; }
-        [Column("Quantity", Order = 11)]
+        [Column("Quantity", Order = 13)]
         public double Quantity { get; set; }
     }
 }

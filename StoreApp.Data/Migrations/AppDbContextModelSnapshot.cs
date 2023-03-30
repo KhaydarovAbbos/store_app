@@ -91,6 +91,15 @@ namespace StoreApp.Data.Migrations
                         .HasColumnType("longtext")
                         .HasColumnName("Barcode");
 
+                    b.Property<long>("CategoryId")
+                        .HasColumnType("bigint")
+                        .HasColumnName("CategoryId");
+
+                    b.Property<string>("CategoryName")
+                        .IsRequired()
+                        .HasColumnType("longtext")
+                        .HasColumnName("CategoryName");
+
                     b.Property<double>("Price")
                         .HasColumnType("double")
                         .HasColumnName("Price");
@@ -127,6 +136,8 @@ namespace StoreApp.Data.Migrations
                         .HasColumnName("SubcategoryName");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CategoryId");
 
                     b.HasIndex("ProductId");
 
@@ -310,6 +321,12 @@ namespace StoreApp.Data.Migrations
 
             modelBuilder.Entity("StoreApp.Domain.Entities.Products.StoreProduct", b =>
                 {
+                    b.HasOne("StoreApp.Domain.Entities.Products.Category", "Category")
+                        .WithMany()
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("StoreApp.Domain.Entities.Products.Product", "Product")
                         .WithMany()
                         .HasForeignKey("ProductId")
@@ -327,6 +344,8 @@ namespace StoreApp.Data.Migrations
                         .HasForeignKey("SubcategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Category");
 
                     b.Navigation("Product");
 

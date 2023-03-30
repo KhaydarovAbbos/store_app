@@ -16,6 +16,9 @@ namespace StoreApp.View.UI.CategoryViews
         CategoryView ProductCategory;
         long Categoryid;
         ICategoryService categoryService = new CategoryService();
+        ISubCategoryService subCategoryService = new SubCategoryService();
+        IProductService productService = new ProductService();
+        IStoreProductService storeProductService = new StoreProductService();
 
         public EditCategoryWindow(CategoryView Categoryview, long id)
         {
@@ -42,7 +45,11 @@ namespace StoreApp.View.UI.CategoryViews
 
                 if (!await categoryService.IsExist(category.Name))
                 {
-                    await categoryService.Update(category);
+                    var response = await categoryService.Update(category);
+
+                    await subCategoryService.UpdateCategoryName(response.Name, response.Id);
+                    await productService.UpdateCategoryName(response.Name, response.Id);
+                    await storeProductService.UpdateCategoryName(response.Name, response.Id);
 
                     ProductCategory.WindowLoad();
                     this.Close();

@@ -1,5 +1,6 @@
 ﻿using StoreApp.Domain.Entities.Products;
 using StoreApp.Service.ViewModels;
+using System.Diagnostics.SymbolStore;
 
 namespace StoreApp.Service.Interfaces
 {
@@ -20,6 +21,8 @@ namespace StoreApp.Service.Interfaces
 
         Task<bool> IsExist(string name);
         Task<bool> IsExist(string name, long id);
+
+        Task UpdateCategoryName(string name, long categoryId);
 
     }
 }

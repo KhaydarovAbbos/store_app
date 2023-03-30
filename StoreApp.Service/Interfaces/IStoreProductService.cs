@@ -21,5 +21,7 @@ namespace StoreApp.Service.Interfaces
 
         Task<IList<StoreProduct>> GetAll(long storeId);
 
+        Task UpdateCategoryName(string name, long categoryId);
+
     }
 }

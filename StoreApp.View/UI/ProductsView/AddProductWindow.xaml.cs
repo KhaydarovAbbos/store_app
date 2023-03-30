@@ -125,7 +125,9 @@ namespace StoreApp.View.UI.ProductsView
                     SubcategoryName = result.SubCategoryName,
                     Storename = store_name,
                     ArrivalPrice = result.ArrivalPrice,
-                    Price = result.Price
+                    Price = result.Price,
+                    CategoryId = result.CategoryId,
+                    CategoryName = result.CategoryName,
                 };
                 await storeProductService.Create(storeProductViewModel);
 

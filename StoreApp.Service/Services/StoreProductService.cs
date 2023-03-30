@@ -34,7 +34,8 @@ namespace StoreApp.Service.Services
                 SubcategoryName = model.SubcategoryName,
                 ArrivalPrice = model.ArrivalPrice,
                 Price = model.Price,
-                
+                CategoryId = model.CategoryId,
+                CategoryName = model.CategoryName,
                 
             };
 
@@ -184,8 +185,21 @@ namespace StoreApp.Service.Services
                 existProduct.SubcategoryName = model.SubcategoryName;
                 existProduct.ArrivalPrice = model.ArrivalPrice;
                 existProduct.Price = model.Price;
+                existProduct.CategoryName = model.CategoryName;
 
                 return await storeProductRepository.UpdateAsync(existProduct);
+            }
+        }
+
+        public async Task UpdateCategoryName(string name, long categoryId)
+        {
+            var existProducts = await _db.StoreProducts.Where(x => x.CategoryId == categoryId).ToListAsync();
+
+            foreach (var item in existProducts)
+            {
+                item.CategoryName = name;
+
+                await Update(item);
             }
         }
     }

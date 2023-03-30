@@ -112,5 +112,17 @@ namespace StoreApp.Service.Services
                 return await productRepository.UpdateAsync(existProduct);
             }
         }
+
+        public async Task UpdateCategoryName(string name, long categoryId)
+        {
+            var existProducts = await _db.Products.Where(x => x.CategoryId == categoryId).ToListAsync();
+
+            foreach (var item in existProducts)
+            {
+                item.CategoryName = name;
+
+                await productRepository.UpdateAsync(item);
+            }
+        }
     }
 }

@@ -16,5 +16,7 @@ namespace StoreApp.Service.Interfaces
         Task<SubCategory> Get(long id);
 
         Task<bool> IsExist(string name);
+
+        Task<bool> UpdateCategoryName(string name, long subcategoryId);
     }
 }

@@ -193,6 +193,9 @@ namespace StoreApp.Data.Migrations
                     StoreId = table.Column<long>(type: "bigint", nullable: false),
                     StoreName = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
+                    CategoryId = table.Column<long>(type: "bigint", nullable: false),
+                    CategoryName = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
                     SubcategoryId = table.Column<long>(type: "bigint", nullable: false),
                     SubcategoryName = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
@@ -206,6 +209,12 @@ namespace StoreApp.Data.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_StoreProducts", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_StoreProducts_Categories_CategoryId",
+                        column: x => x.CategoryId,
+                        principalTable: "Categories",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_StoreProducts_Products_ProductId",
                         column: x => x.ProductId,
@@ -277,6 +286,11 @@ namespace StoreApp.Data.Migrations
                 name: "IX_ReceiveReports_ProductId",
                 table: "ReceiveReports",
                 column: "ProductId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_StoreProducts_CategoryId",
+                table: "StoreProducts",
+                column: "CategoryId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_StoreProducts_ProductId",

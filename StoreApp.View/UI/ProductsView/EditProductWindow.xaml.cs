@@ -193,6 +193,8 @@ namespace StoreApp.View.UI.ProductsView
                     Barcode = result.Barcode,
                     Price = result.Price,
                     ArrivalPrice = result.ArrivalPrice,
+                    CategoryId = result.CategoryId,
+                    CategoryName = result.CategoryName,
                 };
 
                 await storeProductService.Update(storeProduct);
