@@ -6,5 +6,7 @@ namespace StoreApp.Service.Interfaces
     public interface IReceiveReportService
     {
         Task<ReceiveReport> CreateAsync(ReceiveReportViewModel receive);
+
+        Task UpdateProductName(string name, long productId);
     }
 }

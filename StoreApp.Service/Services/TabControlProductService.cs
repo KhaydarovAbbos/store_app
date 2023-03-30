@@ -1,4 +1,6 @@
-﻿using StoreApp.Data.IRepositories;
+﻿using Microsoft.EntityFrameworkCore;
+using StoreApp.Data.Contexts;
+using StoreApp.Data.IRepositories;
 using StoreApp.Data.Repositories;
 using StoreApp.Domain.Entities.Stores;
 using StoreApp.Service.Interfaces;
@@ -14,10 +16,12 @@ namespace StoreApp.Service.Services
     public class TabControlProductService : ITabControlProductService
     {
         ITabControlProductRepository repository { get; set; }
+        AppDbContext _db;
 
         public TabControlProductService()
         {
             repository = new TabControlProductRepository();
+            _db = new AppDbContext();
         }
 
         public async Task<TabControlProduct> Create(TabControlProductViewModel model)
@@ -70,6 +74,18 @@ namespace StoreApp.Service.Services
                 existModel.TabControllerName = model.TabControllerName;
 
                 return await repository.UpdateAsync(existModel);
+            }
+        }
+
+        public async Task UpdateProductName(string name, long productId)
+        {
+            var list = await _db.TabControlProducts.Where(x => x.ProductId == productId).ToListAsync();
+
+            foreach (var item in list)
+            {
+                item.ProductName = name;
+
+                await Update(item);
             }
         }
     }

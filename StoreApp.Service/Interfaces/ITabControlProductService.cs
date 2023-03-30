@@ -22,5 +22,7 @@ namespace StoreApp.Service.Interfaces
         Task<TabControlProduct> Get(long id);
 
         Task<bool> IsExist(string name, long controlId);
+
+        Task UpdateProductName(string name, long productId);
     }
 }

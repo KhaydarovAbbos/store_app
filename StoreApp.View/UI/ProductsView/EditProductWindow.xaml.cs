@@ -1,4 +1,5 @@
-﻿using StoreApp.Domain.Entities.Products;
+﻿using StoreApp.Data.IRepositories;
+using StoreApp.Domain.Entities.Products;
 using StoreApp.Service.Interfaces;
 using StoreApp.Service.Services;
 using StoreApp.Service.ViewModels;
@@ -20,6 +21,8 @@ namespace StoreApp.View.UI.ProductsView
         StoreProduct _product;
         IProductService productService = new ProductService();
         IStoreProductService storeProductService = new StoreProductService();
+        ITabControlProductService controlProductService = new TabControlProductService();
+        IReceiveReportService receiveReportService = new ReceiveReportService();
 
         public EditProductWindow(StoreProduct product, ProductView productsview)
         {
@@ -199,6 +202,9 @@ namespace StoreApp.View.UI.ProductsView
 
                 await storeProductService.Update(storeProduct);
             }
+
+            await controlProductService.UpdateProductName(result.Name, result.Id);
+            await receiveReportService.UpdateProductName(result.Name, result.Id);
 
             Productsview.WindowLoad();
 
