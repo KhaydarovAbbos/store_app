@@ -1,4 +1,6 @@
-﻿using StoreApp.Data.IRepositories;
+﻿using Microsoft.EntityFrameworkCore;
+using StoreApp.Data.Contexts;
+using StoreApp.Data.IRepositories;
 using StoreApp.Data.Repositories;
 using StoreApp.Domain.Entities.Products;
 using StoreApp.Domain.Entities.Stores;
@@ -15,10 +17,12 @@ namespace StoreApp.Service.Services
     public class CashService : ICashService
     {
         ICashRepository cashRepository { get; set; }
+        AppDbContext _db;
 
         public CashService()
         {
             cashRepository = new CashRepository();
+            _db = new AppDbContext();
         }
 
         public async Task<Cash> Create(CashViewModel model)
@@ -92,5 +96,16 @@ namespace StoreApp.Service.Services
 
         }
 
+        public async Task UpdateStoreName(string name, long storeId)
+        {
+            var cashs = await _db.Cashs.Where(x => x.StoreId == storeId).ToListAsync();
+
+            foreach (var item in cashs)
+            {
+                item.StoreName = name;
+
+                await Update(item);
+            }
+        }
     }
 }

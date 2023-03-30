@@ -15,6 +15,8 @@ namespace StoreApp.View.UI.StoreViews
         StoreView Storeview { get; set; }
         long ShopId;
         IStoreService storeService = new StoreService();
+        ICashService cashService = new CashService();
+        IStoreProductService storeProductService = new StoreProductService();
 
         public EditStoreWindow()
         {
@@ -47,14 +49,15 @@ namespace StoreApp.View.UI.StoreViews
                     Name = txtName.Text
                 };
 
-
                 if (!await storeService.IsExist(store.Name))
                 {
                     var result = await storeService.Update(store);
 
+                    await storeProductService.UpdateStoreName(result.Name, result.Id);
+                    await cashService.UpdateStoreName(result.Name, result.Id);
+
                     Storeview.WindowLoad();
                     this.Close();
-
                 }
                 else
                 {

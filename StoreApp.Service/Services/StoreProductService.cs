@@ -202,5 +202,17 @@ namespace StoreApp.Service.Services
                 await Update(item);
             }
         }
+
+        public async Task UpdateStoreName(string name, long storeId)
+        {
+            var existProducts = await _db.StoreProducts.Where(x => x.CategoryId == storeId).ToListAsync();
+
+            foreach (var item in existProducts)
+            {
+                item.StoreName = name;
+
+                await Update(item);
+            }
+        }
     }
 }

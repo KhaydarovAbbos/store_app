@@ -22,5 +22,7 @@ namespace StoreApp.Service.Interfaces
         Task<Cash> Get(long id);
 
         Task<bool> IsExist(string name);
+
+        Task UpdateStoreName(string name, long storeId);
     }
 }
