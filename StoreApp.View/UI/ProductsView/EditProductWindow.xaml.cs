@@ -4,6 +4,7 @@ using StoreApp.Service.Services;
 using StoreApp.Service.ViewModels;
 using System;
 using System.Globalization;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -15,6 +16,7 @@ namespace StoreApp.View.UI.ProductsView
     /// </summary>
     public partial class EditProductWindow : Window
     {
+        MainWindow mainWindow = Application.Current.Windows.Cast<Window>().FirstOrDefault(window => window is MainWindow) as MainWindow;
         ProductView Productsview;
         long productId;
         StoreProduct _product;
@@ -111,6 +113,7 @@ namespace StoreApp.View.UI.ProductsView
 
         private async void BtnEdit_Click(object sender, RoutedEventArgs e)
         {
+
             if (txtName.Text == "")
             {
                 txtErrorName.Text = "Необходимый";
@@ -147,6 +150,8 @@ namespace StoreApp.View.UI.ProductsView
                 txtBarcode.Focus();
                 return;
             }
+
+            mainWindow.SetEffect();
 
             Product product = new Product()
             {
@@ -208,6 +213,7 @@ namespace StoreApp.View.UI.ProductsView
             Productsview.WindowLoad();
 
             this.Close();
+            mainWindow.RemoveEffect();
         }
 
         private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)

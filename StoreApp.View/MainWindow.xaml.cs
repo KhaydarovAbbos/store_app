@@ -24,9 +24,10 @@ namespace StoreApp.View
 
         public void SetEffect()
         {
-            myEffect.Radius = 5;
+            myEffect.Radius = 1;
             Effect = myEffect;
             giff.Visibility = Visibility.Visible;
+            this.IsEnabled = false;
         }
 
         public void RemoveEffect()
@@ -34,6 +35,7 @@ namespace StoreApp.View
             myEffect.Radius = 0;
             Effect = myEffect;
             giff.Visibility = Visibility.Hidden;
+            this.IsEnabled = true;
         }
 
         public void AllCloseControls(int i)
@@ -49,6 +51,7 @@ namespace StoreApp.View
             {
                 sign_in_view.Visibility = Visibility.Visible;
                 sign_in_view.LoadWindow();
+
             }
             if (i == 2)
             {

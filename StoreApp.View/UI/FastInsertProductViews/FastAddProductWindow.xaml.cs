@@ -2,6 +2,7 @@
 using StoreApp.Service.Interfaces;
 using StoreApp.Service.Services;
 using StoreApp.Service.ViewModels;
+using StoreApp.View.UI.MainViews;
 using System;
 using System.Globalization;
 using System.Text.RegularExpressions;
@@ -64,6 +65,8 @@ namespace StoreApp.View.UI.FastInsertProductViews
             if (_product.Id != 0)
             {
                 _product.Quantity = double.Parse(txtQuantity.Text) + _product.Quantity;
+                _product.ArrivalPrice = _product.ArrivalPrice;
+                _product.Price = _product.Price;
 
                 await productService.Update(_product);
             }
@@ -73,15 +76,15 @@ namespace StoreApp.View.UI.FastInsertProductViews
                 {
                     ProductId = _product.Product.Id,
                     ProductName = _product.Product.Name,
-                    StoreId = _product.StoreId,
-                    Storename = _product.StoreName,
+                    StoreId = long.Parse(StoreMainView.StoreId),
+                    Storename = StoreMainView.Storename,
                     CategoryId = _product.CategoryId,
                     CategoryName = _product.CategoryName,
                     SubcategoryId = _product.Product.SubCategory.Id,
                     SubcategoryName = _product.CategoryName,
                     Quantity = double.Parse(txtQuantity.Text),
-                    ArrivalPrice = double.Parse(txtQuantity.Text),
-                    Price = double.Parse(txtQuantity.Text),
+                    ArrivalPrice = _product.ArrivalPrice,
+                    Price = _product.Price,
                     Barcode = _product.Product.Barcode,
 
                 };

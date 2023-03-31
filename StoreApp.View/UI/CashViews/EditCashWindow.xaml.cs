@@ -52,7 +52,7 @@ namespace StoreApp.View.UI.CashViews
                     StoreName = store.Name,
                 };
 
-                if (!await cashService.IsExist(cash.Name))
+                if (!await cashService.IsExist(cash.Name, store.Id))
                 {
                     var result = await cashService.Update(cash);
 

@@ -186,8 +186,7 @@ namespace StoreApp.View.UI.CashViews
                 tabItem.Content = wrapPanel;
                 tabControl.Items.Add(tabItem);
 
-                tabControl.SelectedIndex = tabControl.Items.Count - 1;
-
+                tabControl.SelectedIndex = 0;
             }
         }
 
@@ -689,16 +688,13 @@ namespace StoreApp.View.UI.CashViews
                     }
                     panelProduct.Children.Clear();
                 }
-
-
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Ошибка", "", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(ex.Message, "", MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
             mainWindow.RemoveEffect();
-
         }
     }
 

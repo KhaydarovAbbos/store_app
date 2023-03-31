@@ -5,6 +5,7 @@ using StoreApp.Data.Repositories;
 using StoreApp.Domain.Entities.Products;
 using StoreApp.Service.Interfaces;
 using StoreApp.Service.ViewModels;
+using System.Reflection.Metadata;
 
 namespace StoreApp.Service.Services
 {
@@ -99,9 +100,25 @@ namespace StoreApp.Service.Services
         public async Task<StoreProduct> Get(long productId, long storeId)
         {
 
-            return await _db.StoreProducts.Include(x => x.Product).FirstOrDefaultAsync(x => x.Product.Id == productId && x.StoreId == storeId);
+            var storeProduct = await _db.StoreProducts.Include(x => x.Product).FirstOrDefaultAsync(x => x.Product.Id == productId && x.StoreId == storeId);
 
-            //await storeProductRepository.GetAsync(x => x.ProductId == productId && x.StoreId == storeId);
+            if (storeProduct != null)
+            {
+                return storeProduct;
+            }
+            else
+            {
+                var product = await _db.Products.Include(x => x.Category).Include(x => x.SubCategory).FirstOrDefaultAsync(x => x.Id == productId);
+
+                storeProduct = new StoreProduct() 
+                { 
+                    Quantity = 0,
+                    Product = product 
+                };
+
+                return storeProduct;
+            }
+
         }
 
         public async Task<IList<StoreProduct>> GetAll(long storeId)
@@ -131,6 +148,13 @@ namespace StoreApp.Service.Services
                 else
                 {
                     product.Product = item;
+                    product.CategoryId = item.CategoryId;
+                    product.CategoryName = item.CategoryName;
+                    product.SubcategoryId = item.SubCategoryId;
+                    product.SubcategoryName = item.SubCategoryName;
+                    product.ArrivalPrice = item.ArrivalPrice;
+                    product.Price = item.Price;
+                    product.Quantity = 0;
                     resultList.Add(product);
                 }
             }

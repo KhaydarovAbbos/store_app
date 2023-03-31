@@ -82,9 +82,9 @@ namespace StoreApp.Service.Services
             }
         }
 
-        public async Task<bool> IsExist(string name)
+        public async Task<bool> IsExist(string name, long storeId)
         {
-            var isExistCash = await cashRepository.GetAsync(x => x.Name.Trim() == name.Trim());
+            var isExistCash = await cashRepository.GetAsync(x => x.Name.Trim() == name.Trim() && x.StoreId == storeId);
 
             return isExistCash == null ? false : true;
 

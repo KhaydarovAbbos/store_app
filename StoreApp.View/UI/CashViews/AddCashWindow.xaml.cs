@@ -44,7 +44,7 @@ namespace StoreApp.View.UI.CashViews
                     StoreName = store.Name
                 };
 
-                if (!await cashService.IsExist(cashViewView.Name))
+                if (!await cashService.IsExist(cashViewView.Name, store.Id))
                 {
                     var response = await cashService.Create(cashViewView);
 
