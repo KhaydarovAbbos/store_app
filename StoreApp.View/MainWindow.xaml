@@ -10,7 +10,7 @@
         xmlns:gif="http://wpfanimatedgif.codeplex.com"
         xmlns:local="clr-namespace:StoreApp.View"
         mc:Ignorable="d" Loaded="Window_Loaded"
-        Height="730" Width="1335" WindowStartupLocation="CenterScreen" WindowStyle="SingleBorderWindow" Icon="{x:Null}" Closing="Window_Closing">
+        Height="768" Width="1024" WindowStartupLocation="CenterScreen" Icon="{x:Null}" Closing="Window_Closing" ResizeMode="NoResize">
     <Window.Background>
         <LinearGradientBrush EndPoint="0,1" StartPoint="1, 1" >
             <GradientStop Color="#B651C2" Offset="0"/>
@@ -77,16 +77,16 @@
             </Grid>
         </Grid>
 
-        <DockPanel Grid.Row="1">
-            <menuviews:MainView x:Name="main_view" Visibility="Hidden"/>
+        <DockPanel Grid.Row="1"> 
+            <menuviews:MainView x:Name="main_view" Visibility="Hidden" Width="Auto" Height="Auto"/>
         </DockPanel>
 
         <DockPanel Grid.Row="1">
-            <menuviews:StoreMainView x:Name="store_main_view" Visibility="Hidden"/>
+            <menuviews:StoreMainView x:Name="store_main_view" Visibility="Hidden" Width="Auto" Height="Auto"/>
         </DockPanel>
         
         <DockPanel Grid.Row="1">
-            <cashviews:CashView x:Name="cash_view" Visibility="Hidden"/>
+            <cashviews:CashView x:Name="cash_view" Visibility="Hidden" Width="Auto" Height="Auto"/>
         </DockPanel>
     </Grid>
 </Window>

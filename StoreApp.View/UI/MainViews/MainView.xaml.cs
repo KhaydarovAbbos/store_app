@@ -10,7 +10,7 @@ namespace StoreApp.View.UI.MainViews
     public partial class MainView : UserControl
     {
         MainWindow Mainwindow;
-        public static int gridColumn1Width = 200, gridColumn2Width = 1120;
+        public static int gridColumn1Width = 170, gridColumn2Width = 854;
 
         public MainView()
         {
@@ -21,27 +21,27 @@ namespace StoreApp.View.UI.MainViews
         {
             Mainwindow = mainWindow;
 
-            MainGrid.ColumnDefinitions[0].Width = new GridLength(StoreMainView.gridColumn1Width, GridUnitType.Pixel);
-            MainGrid.ColumnDefinitions[1].Width = new GridLength(StoreMainView.gridColumn2Width, GridUnitType.Pixel);
+            //MainGrid.ColumnDefinitions[0].Width = new GridLength(StoreMainView.gridColumn1Width, GridUnitType.Pixel);
+            //MainGrid.ColumnDefinitions[1].Width = new GridLength(StoreMainView.gridColumn2Width, GridUnitType.Pixel);
         }
 
         private void btnMenu_Click(object sender, RoutedEventArgs e)
         {
-            if (MainGrid.ColumnDefinitions[0].Width.Value == 200)
+            if (MainGrid.ColumnDefinitions[0].Width.Value == 170)
             {
-                MainGrid.ColumnDefinitions[0].Width = new GridLength(60, GridUnitType.Pixel);
-                MainGrid.ColumnDefinitions[1].Width = new GridLength(1260, GridUnitType.Pixel);
+                MainGrid.ColumnDefinitions[0].Width = new GridLength(50, GridUnitType.Pixel);
+                MainGrid.ColumnDefinitions[1].Width = new GridLength(974, GridUnitType.Pixel);
 
-                gridColumn1Width = 60;
-                gridColumn2Width = 1260;
+                gridColumn1Width = 50;
+                gridColumn2Width = 974;
             }
             else
             {
-                MainGrid.ColumnDefinitions[0].Width = new GridLength(200, GridUnitType.Pixel);
-                MainGrid.ColumnDefinitions[1].Width = new GridLength(1120, GridUnitType.Pixel);
+                MainGrid.ColumnDefinitions[0].Width = new GridLength(170, GridUnitType.Pixel);
+                MainGrid.ColumnDefinitions[1].Width = new GridLength(854, GridUnitType.Pixel);
 
-                gridColumn1Width = 200;
-                gridColumn2Width = 1120;
+                gridColumn1Width = 170;
+                gridColumn2Width = 854;
             }
         }
 

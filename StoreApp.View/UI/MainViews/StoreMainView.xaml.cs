@@ -25,8 +25,8 @@ namespace StoreApp.View.UI.MainViews
             txtStoreName.Text = Storename;
             store_id.Content = StoreId;
 
-            MainGrid.ColumnDefinitions[0].Width = new GridLength(MainView.gridColumn1Width, GridUnitType.Pixel);
-            MainGrid.ColumnDefinitions[1].Width = new GridLength(MainView.gridColumn2Width, GridUnitType.Pixel);
+           // MainGrid.ColumnDefinitions[0].Width = new GridLength(MainView.gridColumn1Width, GridUnitType.Pixel);
+            //MainGrid.ColumnDefinitions[1].Width = new GridLength(MainView.gridColumn2Width, GridUnitType.Pixel);
 
         }
 
@@ -113,21 +113,21 @@ namespace StoreApp.View.UI.MainViews
 
         private void btnMenu_Click(object sender, RoutedEventArgs e)
         {
-            if (MainGrid.ColumnDefinitions[0].Width.Value == 200)
+            if (MainGrid.ColumnDefinitions[0].Width.Value == 170)
             {
-                MainGrid.ColumnDefinitions[0].Width = new GridLength(60, GridUnitType.Pixel);
-                MainGrid.ColumnDefinitions[1].Width = new GridLength(1260, GridUnitType.Pixel);
+                MainGrid.ColumnDefinitions[0].Width = new GridLength(50, GridUnitType.Pixel);
+                MainGrid.ColumnDefinitions[1].Width = new GridLength(1974, GridUnitType.Pixel);
 
-                gridColumn1Width = 60;
-                gridColumn2Width = 1260;
+                gridColumn1Width = 50;
+                gridColumn2Width = 974;
             }
             else
             {
-                MainGrid.ColumnDefinitions[0].Width = new GridLength(200, GridUnitType.Pixel);
-                MainGrid.ColumnDefinitions[1].Width = new GridLength(1120, GridUnitType.Pixel);
+                MainGrid.ColumnDefinitions[0].Width = new GridLength(170, GridUnitType.Pixel);
+                MainGrid.ColumnDefinitions[1].Width = new GridLength(854, GridUnitType.Pixel);
 
-                gridColumn1Width = 200;
-                gridColumn2Width = 1120;
+                gridColumn1Width = 170;
+                gridColumn2Width = 854;
             }
         }
     }

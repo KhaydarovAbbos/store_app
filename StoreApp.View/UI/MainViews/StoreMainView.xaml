@@ -11,10 +11,10 @@
              xmlns:productinsertview="clr-namespace:StoreApp.View.UI.FastInsertProductViews"
              xmlns:cashviews="clr-namespace:StoreApp.View.UI.CashViews"
              mc:Ignorable="d" 
-             d:DesignHeight="730" d:DesignWidth="1320" Background="#E5F6FF">
+             d:DesignHeight="768" d:DesignWidth="1024" Background="#E5F6FF">
     <Grid x:Name="MainGrid">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="170"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
@@ -28,7 +28,7 @@
 
                 <StackPanel>
 
-                    <Button Width="40" Height="30" x:Name="btnMenu" Margin="10 5 0 5" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="0" Background="Transparent" BorderBrush="Black" Click="btnMenu_Click">
+                    <Button Width="40" Height="30" x:Name="btnMenu" Margin="3 5 0 5" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="0" Background="Transparent" BorderBrush="Black" Click="btnMenu_Click">
                         <Button.Content>
                             <materialDesign:PackIcon  
                                     Kind="Menu" Margin="0 0 0 0"
@@ -40,7 +40,7 @@
                     </Button>
 
 
-                    <ListView Width="199" >
+                    <ListView Width="170" >
                         <ListViewItem x:Name="create" Foreground="Black" TextBlock.TextAlignment="Center" BorderThickness="1" BorderBrush="Gray" Margin="0 0 0 0" MouseUp="create_MouseUp" >
                             <ListViewItem.Content>
 
@@ -54,7 +54,7 @@
                                     Height="35" Width="35"
                                     />
 
-                                    <TextBlock Text="Создать товар" VerticalAlignment="Center" Margin="20 0 0 0" HorizontalAlignment="Center"  FontSize="16" FontWeight="Bold">
+                                    <TextBlock Text="Создать товар" VerticalAlignment="Center" TextWrapping="Wrap" Margin="5 0 0 0" HorizontalAlignment="Center"  FontSize="16" FontWeight="Bold">
 
                                     </TextBlock>
 
@@ -63,7 +63,7 @@
                         </ListViewItem>
                     </ListView>
 
-                    <ListView Width="199" >
+                    <ListView Width="170" >
                         <ListViewItem x:Name="fastInsert" Foreground="Black" TextBlock.TextAlignment="Center" BorderThickness="1" BorderBrush="Gray" Margin="0 0 0 0" MouseUp="fastInsert_MouseUp" >
                             <ListViewItem.Content>
 
@@ -77,7 +77,7 @@
                                     Height="35" Width="35"
                                     />
 
-                                    <TextBlock Text="Склад" VerticalAlignment="Center" Margin="20 0 0 0" HorizontalAlignment="Center"  FontSize="16" FontWeight="Bold">
+                                    <TextBlock Text="Склад" VerticalAlignment="Center" Margin="5 0 0 0" HorizontalAlignment="Center"  FontSize="16" FontWeight="Bold">
 
                                     </TextBlock>
 
@@ -86,7 +86,7 @@
                         </ListViewItem>
                     </ListView>
 
-                    <ListView Width="199" >
+                    <ListView Width="170" >
                         <ListViewItem x:Name="cash" Foreground="Black" TextBlock.TextAlignment="Center" BorderThickness="1" BorderBrush="Gray" Margin="0 0 0 0" MouseUp="cash_MouseUp" >
                             <ListViewItem.Content>
 
@@ -100,7 +100,7 @@
                                     Height="35" Width="35"
                                     />
 
-                                    <TextBlock Text="Касса" VerticalAlignment="Center" Margin="20 0 0 0" HorizontalAlignment="Center"  FontSize="16" FontWeight="Bold">
+                                    <TextBlock Text="Касса" VerticalAlignment="Center" Margin="5 0 0 0" HorizontalAlignment="Center"  FontSize="16" FontWeight="Bold">
 
                                     </TextBlock>
 
@@ -112,7 +112,7 @@
                 </StackPanel>
 
 
-                <ListView Width="199" Grid.Row="1">
+                <ListView Width="170" Grid.Row="1">
                     <ListViewItem x:Name="main" Foreground="Black" TextBlock.TextAlignment="Center" BorderThickness="1" BorderBrush="Gray" Margin="0 0 0 0" MouseUp="main_MouseUp" >
                         <ListViewItem.Content>
 
@@ -126,7 +126,7 @@
                                     Height="35" Width="35"
                                     />
 
-                                <TextBlock Text="Главное окно" VerticalAlignment="Center" Margin="20 0 0 0" HorizontalAlignment="Center"  FontSize="16" FontWeight="Bold">
+                                <TextBlock Text="Главное окно" VerticalAlignment="Center" Margin="5 0 0 0" HorizontalAlignment="Center"  FontSize="16" FontWeight="Bold">
 
                                 </TextBlock>
 
