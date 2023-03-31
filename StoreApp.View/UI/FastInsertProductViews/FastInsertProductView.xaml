@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:StoreApp.View.UI.FastInsertProductViews"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
-             d:DesignHeight="688" d:DesignWidth="1240" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
+             Height="726" Width="1024" >
 
     <Grid Background="#E5F6FF">
 
@@ -29,7 +29,7 @@
         </Border>
 
         <Grid Grid.Row="1" Margin="0 10 0 0">
-            <StackPanel VerticalAlignment="Center" Orientation="Horizontal" Margin="20 0 0 0">
+            <StackPanel VerticalAlignment="Center" Orientation="Horizontal" Margin="10 0 0 0">
                 <Button x:Name="btnAdd" Width="160" Height="40" VerticalAlignment="Center" Style="{StaticResource Button}" Background="White" Click="btnAdd_Click">
 
                     <StackPanel Orientation="Horizontal">
@@ -79,10 +79,10 @@
         </Grid>
        
 
-        <Grid Grid.Row="2" Margin="0 20 0 0">
+        <Grid Grid.Row="2" Margin="0 5 0 0">
 
 
-            <Border CornerRadius="5"  Background="White" Margin="20 0 20 20" BorderBrush="#E0E6ED" BorderThickness="2">
+            <Border CornerRadius="5"  Background="White" Margin="10 0 10 10" BorderBrush="#E0E6ED" BorderThickness="2">
                 
             <DataGrid 
                 x:Name="datagridProducts"
@@ -165,14 +165,14 @@
                 </DataGrid.Resources>
 
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Код" Width="70" TextBlock.TextAlignment="Center" Binding="{Binding Product.Id}" IsReadOnly="True"/>
-                        <DataGridTextColumn Header="Имя" Width="200*" Binding="{ Binding Product.Name}" IsReadOnly="True" />
-                        <DataGridTextColumn Header="Категорий" Width="170*" Binding="{ Binding Product.Category.Name}" IsReadOnly="True"/>
-                        <DataGridTextColumn Header="Подкатегорий" Width="170*" Binding="{ Binding Product.SubCategory.Name}" IsReadOnly="True"/>
-                        <DataGridTextColumn Header="Штрих-код" Width="200" Binding="{ Binding Product.Barcode}" IsReadOnly="True"/>
-                        <DataGridTextColumn Header="Себестоимость" Width="150*" Binding="{ Binding Product.ArrivalPrice}" IsReadOnly="True"/>
-                        <DataGridTextColumn Header="Цена" Width="150*" Binding="{ Binding Product.Price}" IsReadOnly="True"/>
-                        <DataGridTextColumn Header="Количество" Width="150" Binding="{ Binding Quantity}" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="Код" Width="60" TextBlock.TextAlignment="Center" Binding="{Binding Product.Id}" IsReadOnly="True"/>
+                        <DataGridTextColumn Header="Имя" Width="220*" Binding="{ Binding Product.Name}" IsReadOnly="True" />
+                        <DataGridTextColumn Header="Категорий" Width="200*" Binding="{ Binding Product.Category.Name}" IsReadOnly="True"/>
+                        <DataGridTextColumn Header="Подкатегорий" Width="200*" Binding="{ Binding Product.SubCategory.Name}" IsReadOnly="True"/>
+                        <DataGridTextColumn Header="Штрих-код" Width="150" Binding="{ Binding Product.Barcode}" IsReadOnly="True"/>
+                        <DataGridTextColumn Header="Себе-мость" Width="100" Binding="{ Binding Product.ArrivalPrice}" IsReadOnly="True"/>
+                        <DataGridTextColumn Header="Цена" Width="100" Binding="{ Binding Product.Price}" IsReadOnly="True"/>
+                        <DataGridTextColumn Header="Кол-во" Width="100" Binding="{ Binding Quantity}" IsReadOnly="True"/>
                     
                 </DataGrid.Columns>
                 
