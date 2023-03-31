@@ -6,7 +6,7 @@
              xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:local="clr-namespace:StoreApp.View.UI.SubCategoryViews"
              mc:Ignorable="d" 
-             d:DesignHeight="730" d:DesignWidth="1320">
+             Height="726" d:DesignWidth="854">
     <UserControl.Resources>
         <SolidColorBrush x:Key="StandardBorderBrush" Color="#888" />
         <SolidColorBrush x:Key="StandardBackgroundBrush" Color="Black" />
@@ -204,7 +204,6 @@
 
             <Grid>
 
-
                 <Button  Width="30" Height="20" Background="Transparent" BorderBrush="{x:Null}" Margin="10 0 0 0" Click="btnExit_Click" HorizontalAlignment="Left" Padding="0">
                     <md:PackIcon x:Name="btnExit1" Kind="ArrowBack"
                              
@@ -229,13 +228,9 @@
         </Border>
 
 
-        <Grid Grid.Row="1" Margin="0 20 0 10">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition Width="9*"/>
-            </Grid.ColumnDefinitions>
+        <Grid Grid.Row="1" Margin="0 10 0 10">
 
-            <ScrollViewer Margin="20,10,10,10" VerticalScrollBarVisibility="Visible" Grid.ColumnSpan="2" >
+            <ScrollViewer Margin="10,10,10,10" VerticalScrollBarVisibility="Visible" Grid.ColumnSpan="2" >
 
                 <WrapPanel Background="#E5F6FF" x:Name="panel" >
 

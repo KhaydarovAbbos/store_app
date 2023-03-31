@@ -116,7 +116,7 @@ namespace StoreApp.View.UI.MainViews
             if (MainGrid.ColumnDefinitions[0].Width.Value == 170)
             {
                 MainGrid.ColumnDefinitions[0].Width = new GridLength(50, GridUnitType.Pixel);
-                MainGrid.ColumnDefinitions[1].Width = new GridLength(1974, GridUnitType.Pixel);
+                MainGrid.ColumnDefinitions[1].Width = new GridLength(974, GridUnitType.Pixel);
 
                 gridColumn1Width = 50;
                 gridColumn2Width = 974;

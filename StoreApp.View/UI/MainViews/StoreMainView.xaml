@@ -202,7 +202,7 @@
             <Grid Grid.Row="2">
                 
                 <DockPanel >
-                    <categoryview:CategoryView x:Name="productcategory_view" Visibility="Hidden" />
+                    <categoryview:CategoryView x:Name="productcategory_view" Visibility="Hidden"  Height="Auto" Width="Auto"/>
                 </DockPanel>
             
                 <DockPanel  >
@@ -214,13 +214,13 @@
                 </DockPanel>
 
                 <DockPanel  >
-                    <productinsertview:FastInsertProductView x:Name="insert_products_view" Visibility="Hidden" />
+                    <productinsertview:FastInsertProductView x:Name="insert_products_view" Visibility="Hidden"  Height="Auto" Width="Auto"/>
                 </DockPanel>
                 <DockPanel  >
-                    <cashviews:CashView x:Name="cash_view" Visibility="Hidden" />
+                    <cashviews:CashView x:Name="cash_view" Visibility="Hidden"  Height="Auto" Width="Auto"/>
                 </DockPanel>
                 <DockPanel>
-                    <cashviews:CashMainView x:Name="cash_main_view" Visibility="Hidden" />
+                    <cashviews:CashMainView x:Name="cash_main_view" Visibility="Hidden"  Height="Auto" Width="Auto"/>
                 </DockPanel>
                 
             </Grid>
