@@ -31,7 +31,7 @@ namespace StoreApp.Service.Services
 
         public async Task<IList<TabController>> GetAll()
         {
-            return (await tabControlRepository.GetAllAsync()).ToList();
+            return (await tabControlRepository.GetAllAsync()).OrderByDescending(x => x.Id).ToList();
         }
 
 

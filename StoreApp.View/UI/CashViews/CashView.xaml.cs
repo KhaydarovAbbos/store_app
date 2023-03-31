@@ -4,6 +4,7 @@ using StoreApp.Service.Services;
 using StoreApp.View.UI.MainViews;
 using System;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -665,7 +666,40 @@ namespace StoreApp.View.UI.CashViews
             e.Handled = regex.IsMatch(e.Text);
         }
 
+        public async Task WindowClose()
+        {
+            try
+            {
+                mainWindow.SetEffect();
 
+                if (panelProduct.Children.Count > 0)
+                {
+                    var item = panelProduct.Children;
+
+                    for (int i = 0; i < panelProduct.Children.Count; i++)
+                    {
+                        long productId = long.Parse((((item[i] as Border).Child as StackPanel).Children[2] as Label).Content.ToString());
+                        double productQuantity = double.Parse((((item[i] as Border).Child as StackPanel).Children[1] as TextBlock).Text.Split(":")[1].Trim());
+
+                        var product = await storeProductService.Get(productId);
+
+                        product.Quantity += productQuantity;
+
+                        await storeProductService.Update(product);
+                    }
+                    panelProduct.Children.Clear();
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ошибка", "", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+
+            mainWindow.RemoveEffect();
+
+        }
     }
 
     public class MytabItem : TabItem

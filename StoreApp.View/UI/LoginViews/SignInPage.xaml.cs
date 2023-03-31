@@ -103,7 +103,6 @@ namespace StoreApp.View.UI.LoginViews
                             writer.WriteLine(txtLogin.Text + " " + txtPassword.Password);
                         }
                     }
-
                 }
             }
             else

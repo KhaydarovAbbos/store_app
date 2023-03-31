@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media.Effects;
 
@@ -25,12 +26,14 @@ namespace StoreApp.View
         {
             myEffect.Radius = 5;
             Effect = myEffect;
+            giff.Visibility = Visibility.Visible;
         }
 
         public void RemoveEffect()
         {
             myEffect.Radius = 0;
             Effect = myEffect;
+            giff.Visibility = Visibility.Hidden;
         }
 
         public void AllCloseControls(int i)
@@ -80,20 +83,19 @@ namespace StoreApp.View
             AllCloseControls(1);
         }
 
-        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        private async void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             if (cash_view.Visibility == Visibility.Visible)
             {
                 int count = cash_view.panelProduct.Children.Count;
 
-                if (count > 0)
+                if (count !=  0)
                 {
-                    MessageBox.Show("Очистите корзинка, чтобы выйти из программы", "Предупреждение", MessageBoxButton.OK, MessageBoxImage.Warning);
-
                     e.Cancel = true;
-                    return;
+                    await cash_view.WindowClose();
+                    AllCloseControls(-1);
+                    this.Close();
                 }
-
             }
         }
     }
