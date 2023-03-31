@@ -92,7 +92,7 @@ namespace StoreApp.View.UI.CashViews
                 foreach (var product in products)
                 {
 
-                    var storeProduct = await storeProductService.Get(product.Product.Id, long.Parse(StoreMainView.StoreId));
+                    var storeProduct = await storeProductService.Get(product.ProductId, long.Parse(StoreMainView.StoreId));
 
                     Border borderProduct = new Border
                     {
@@ -111,29 +111,31 @@ namespace StoreApp.View.UI.CashViews
                         Background = Brushes.Transparent,
                         VerticalAlignment = VerticalAlignment.Center,
                         HorizontalAlignment = HorizontalAlignment.Center,
-                        Margin = new Thickness(0, 0, 0, 0),
+                        Margin = new Thickness(0, 10, 0, 0),
                         Text = product.ProductName,
                         TextWrapping = TextWrapping.Wrap,
                         FontWeight = FontWeights.Bold,
                         TextAlignment = TextAlignment.Center,
                         FontSize = 25,
+                        Height = 60,
                         Width = 140,
                         TotalInfo = new TotalInfo { Id = product.ProductId, Name = product.ProductName }
                     };
 
                     TextBlock txtQuantity = new TextBlock
                     {
-                        VerticalAlignment = VerticalAlignment.Top,
+                        VerticalAlignment = VerticalAlignment.Bottom,
                         HorizontalAlignment = HorizontalAlignment.Center,
-                        Width = 200,
+                        Width = 140,
                         Height = 20,
                         FontSize = 16,
                         Text = $"Количество : {storeProduct.Quantity}",
-                        Margin = new Thickness(10, 0, 0, 50)
+                        Margin = new Thickness(10, 0, 0, 0)
                     };
 
                     StackPanel stackPanelRow1 = new StackPanel
                     {
+                        VerticalAlignment = VerticalAlignment.Center,
                         Children = { txtProductName, txtQuantity}
                     };
 
@@ -156,7 +158,7 @@ namespace StoreApp.View.UI.CashViews
                     btnDelete.Totalinfo = new TotalInfo { Id = product.Id, Name = product.ProductName };
                     btnDelete.Click += new RoutedEventHandler(btnDelete_Click);
 
-                    Grid.SetColumn(txtProductName, 0);
+                    Grid.SetColumn(stackPanelRow1, 0);
                     Grid.SetColumn(btnDelete, 1);
 
                     ColumnDefinition c1 = new ColumnDefinition
@@ -172,7 +174,7 @@ namespace StoreApp.View.UI.CashViews
                     Grid grid = new Grid
                     {
                         ColumnDefinitions = { c1, c2 },
-                        Children = { txtProductName, btnDelete }
+                        Children = { stackPanelRow1, btnDelete }
                     };
 
                     borderProduct.Child = grid;
@@ -447,7 +449,7 @@ namespace StoreApp.View.UI.CashViews
 
             if (border != null)
             {
-                long productId = ((border.Child as Grid).Children[0] as MyTextBlock).TotalInfo.Id;
+                long productId = (((border.Child as Grid).Children[0] as StackPanel).Children[0] as MyTextBlock).TotalInfo.Id;
 
                 AddToBasket(productId);
             }
