@@ -1,8 +1,10 @@
-﻿using StoreApp.Domain.Entities.Stores;
+﻿using StoreApp.Domain.Entities.Products;
+using StoreApp.Domain.Entities.Stores;
 using StoreApp.Service.Interfaces;
 using StoreApp.Service.Services;
 using StoreApp.View.UI.MainViews;
 using System;
+using System.Globalization;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
@@ -208,141 +210,8 @@ namespace StoreApp.View.UI.CashViews
                 {
                     if (product.Quantity > 0)
                     {
-
-                        if (item.Count > 0)
-                        {
-                            for (int i = 0; i < item.Count; i++)
-                            {
-                                string productName = (((item[i] as Border).Child as StackPanel).Children[0] as TextBlock).Text;
-
-                                if (product.Product.Name == productName)
-                                {
-                                    itemIndex = i;
-                                }
-                            }
-
-                            if (itemIndex != -1)
-                            {
-                                double productQuantity = double.Parse((((item[itemIndex] as Border).Child as StackPanel).Children[1] as TextBlock).Text.Split(":")[1].Trim());
-                                (((item[itemIndex] as Border).Child as StackPanel).Children[1] as TextBlock).Text = $"Количество : {productQuantity + quantity}";
-
-                                product.Quantity = product.Quantity - quantity;
-                                await storeProductService.Update(product);
-                            }
-                            else
-                            {
-                                Border border = new Border
-                                {
-                                    Background = Brushes.White,
-                                    Width = 230,
-                                    Height = 100,
-                                    BorderBrush = Brushes.Gray,
-                                    BorderThickness = new Thickness(1),
-                                    Margin = new Thickness(10, 10, 0, 0),
-                                    CornerRadius = new CornerRadius(10)
-
-                                };
-
-                                TextBlock txtProductName = new TextBlock
-                                {
-                                    Background = Brushes.Transparent,
-                                    VerticalAlignment = VerticalAlignment.Center,
-                                    HorizontalAlignment = HorizontalAlignment.Center,
-                                    Margin = new Thickness(10, 10, 0, 0),
-                                    Text = product.Product.Name,
-                                    TextWrapping = TextWrapping.Wrap,
-                                    FontWeight = FontWeights.Bold,
-                                    FontSize = 25,
-                                    Width = 200,
-                                    Height = 60
-                                };
-
-                                TextBlock txtQuantity = new TextBlock
-                                {
-                                    VerticalAlignment = VerticalAlignment.Top,
-                                    HorizontalAlignment = HorizontalAlignment.Center,
-                                    Width = 200,
-                                    Height = 20,
-                                    FontSize = 16,
-                                    Text = $"Количество : {quantity}",
-                                    Margin = new Thickness(10, 0, 0, 50)
-                                };
-
-                                Label label = new Label
-                                {
-                                    Content = product.Id,
-                                    Visibility = Visibility.Hidden
-                                };
-
-                                StackPanel stackPanelRow1 = new StackPanel
-                                {
-                                    Children = { txtProductName, txtQuantity, label }
-                                };
-
-                                border.Child = stackPanelRow1;
-
-                                panelProduct.Children.Add(border);
-
-                                product.Quantity = product.Quantity - quantity;
-                                await storeProductService.Update(product);
-                            }
-                        }
-                        else
-                        {
-                            Border border = new Border
-                            {
-                                Background = Brushes.White,
-                                Width = 230,
-                                Height = 100,
-                                BorderBrush = Brushes.Gray,
-                                BorderThickness = new Thickness(1),
-                                Margin = new Thickness(10, 10, 0, 0),
-                                CornerRadius = new CornerRadius(10)
-                            };
-
-                            TextBlock txtProductName = new TextBlock
-                            {
-                                Background = Brushes.Transparent,
-                                VerticalAlignment = VerticalAlignment.Center,
-                                HorizontalAlignment = HorizontalAlignment.Center,
-                                Margin = new Thickness(10, 10, 0, 0),
-                                Text = product.Product.Name,
-                                TextWrapping = TextWrapping.Wrap,
-                                FontWeight = FontWeights.Bold,
-                                FontSize = 25,
-                                Width = 200,
-                                Height = 60
-                            };
-
-                            TextBlock txtQuantity = new TextBlock
-                            {
-                                VerticalAlignment = VerticalAlignment.Top,
-                                HorizontalAlignment = HorizontalAlignment.Center,
-                                Width = 200,
-                                Height = 20,
-                                FontSize = 16,
-                                Text = $"Количество : {quantity}",
-                                Margin = new Thickness(10, 0, 0, 50)
-                            };
-
-                            Label label = new Label
-                            {
-                                Content = product.Id,
-                                Visibility = Visibility.Hidden
-                            };
-
-                            StackPanel stackPanelRow1 = new StackPanel
-                            {
-                                Children = { txtProductName, txtQuantity, label }
-                            };
-
-                            border.Child = stackPanelRow1;
-
-                            panelProduct.Children.Add(border);
-
-                            product.Quantity = product.Quantity - quantity;
-                            await storeProductService.Update(product);
-                        }
+                        AddToBasket(product.ProductId);
+                        //txtBarcode.Clear();
                     }
                     else
                     {
@@ -383,8 +252,8 @@ namespace StoreApp.View.UI.CashViews
 
                 for (int i = 0; i < panelProduct.Children.Count; i++)
                 {
-                    long productId = long.Parse((((item[i] as Border).Child as StackPanel).Children[2] as Label).Content.ToString());
-                    double productQuantity = double.Parse((((item[i] as Border).Child as StackPanel).Children[1] as TextBlock).Text.Split(":")[1].Trim());
+                    long productId = (item[i] as MyBorder).TotalInfo.Id;
+                    double productQuantity = double.Parse(((((item[i] as MyBorder).Child as Grid).Children[0] as StackPanel).Children[1] as MyTextBlock).Text.Split("шт")[0].Trim());
 
                     var product = await storeProductService.Get(productId);
 
@@ -458,6 +327,8 @@ namespace StoreApp.View.UI.CashViews
         public async void AddToBasket(long id)
         {
             storeProductService = new StoreProductService();
+            NumberFormatInfo numberFormatInfo = (NumberFormatInfo)CultureInfo.InvariantCulture.NumberFormat.Clone();
+            numberFormatInfo.NumberGroupSeparator = " ";
 
             long storeId = long.Parse(StoreMainView.StoreId);
             var product = await storeProductService.Get(id, storeId);
@@ -472,7 +343,7 @@ namespace StoreApp.View.UI.CashViews
                 {
                     for (int i = 0; i < item.Count; i++)
                     {
-                        string productName = (((item[i] as Border).Child as StackPanel).Children[0] as TextBlock).Text;
+                        string productName = (item[i] as MyBorder).TotalInfo.Name;
 
                         if (product.Product.Name == productName)
                         {
@@ -482,27 +353,28 @@ namespace StoreApp.View.UI.CashViews
 
                     if (itemIndex != -1)
                     {
-                        double productQuantity = double.Parse((((item[itemIndex] as Border).Child as StackPanel).Children[1] as TextBlock).Text.Split(":")[1].Trim());
-                        (((item[itemIndex] as Border).Child as StackPanel).Children[1] as TextBlock).Text = $"Количество : {productQuantity + quantity}";
+                        double productQuantity = double.Parse(((((item[itemIndex] as MyBorder).Child as Grid).Children[0] as StackPanel).Children[1] as MyTextBlock).Text.Split("шт")[0].Trim()) + quantity;
+                        ((((item[itemIndex] as MyBorder).Child as Grid).Children[0] as StackPanel).Children[1] as MyTextBlock).Text = $"{productQuantity} шт  X  {(product.Price).ToString("#,##", numberFormatInfo)}  =  {(productQuantity * product.Price).ToString("#,##", numberFormatInfo)}";
 
                         product.Quantity = product.Quantity - quantity;
                         await storeProductService.Update(product);
-                    }
+                    }                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
                     else
                     {
-                        Border border = new Border
+                        MyBorder border = new MyBorder
                         {
                             Background = Brushes.White,
-                            Width = 230,
+                            Width = 299,
                             Height = 100,
                             BorderBrush = Brushes.Gray,
                             BorderThickness = new Thickness(1),
-                            Margin = new Thickness(10, 10, 0, 0),
-                            CornerRadius = new CornerRadius(10)
-
+                            Margin = new Thickness(9, 10, 0, 0),
+                            HorizontalAlignment = HorizontalAlignment.Center,
+                            CornerRadius = new CornerRadius(10),
+                            TotalInfo = new TotalInfo { Id = product.Id, Name = product.ProductName },
                         };
 
-                        TextBlock txtProductName = new TextBlock
+                        MyTextBlock txtProductName = new MyTextBlock
                         {
                             Background = Brushes.Transparent,
                             VerticalAlignment = VerticalAlignment.Center,
@@ -511,19 +383,22 @@ namespace StoreApp.View.UI.CashViews
                             Text = product.Product.Name,
                             TextWrapping = TextWrapping.Wrap,
                             FontWeight = FontWeights.Bold,
+                            TotalInfo = new TotalInfo { Id = product.Id, Name = product.ProductName },
                             FontSize = 25,
                             Width = 200,
                             Height = 60
                         };
 
-                        TextBlock txtQuantity = new TextBlock
+                        MyTextBlock txtQuantity = new MyTextBlock
                         {
                             VerticalAlignment = VerticalAlignment.Top,
                             HorizontalAlignment = HorizontalAlignment.Center,
-                            Width = 200,
+                            Width = 239,
                             Height = 20,
+                            FontWeight = FontWeights.Bold,
                             FontSize = 16,
-                            Text = $"Количество : {quantity}",
+                            TotalInfo = new TotalInfo { Id = product.Id, Name = product.ProductName },
+                            Text = $"{quantity} шт  X  {(product.Price).ToString("#,##", numberFormatInfo)}  =  {(quantity * product.Price).ToString("#,##", numberFormatInfo)}",
                             Margin = new Thickness(10, 0, 0, 50)
                         };
 
@@ -533,33 +408,100 @@ namespace StoreApp.View.UI.CashViews
                             Visibility = Visibility.Hidden
                         };
 
+                        ColumnDefinition c1 = new ColumnDefinition
+                        {
+                            Width = new GridLength(249, GridUnitType.Star)
+                        };
+
+                        ColumnDefinition c2 = new ColumnDefinition
+                        {
+                            Width = new GridLength(50, GridUnitType.Star)
+                        };
+
                         StackPanel stackPanelRow1 = new StackPanel
                         {
                             Children = { txtProductName, txtQuantity, label }
                         };
 
-                        border.Child = stackPanelRow1;
+                        MyButton btnDelete = new MyButton
+                        {
+                            Width = 40,
+                            Height = 35,
+                            Background = Brushes.White,
+                            BorderBrush = Brushes.White,
+                            Margin = new Thickness(0, 10, 0, 0),
+                            VerticalAlignment = VerticalAlignment.Center,
+                            Padding = new Thickness(0),
+                            Totalinfo = new TotalInfo { Id = product.Id, Name = product.ProductName },
+                            Content = new Image
+                            {
+                                Source = new BitmapImage(new Uri("../../Images/delete.png", UriKind.Relative)),
+                                VerticalAlignment = VerticalAlignment.Center,
+                                Width = 20,
+                                Height = 20
+                            }
+                        };
+                        btnDelete.Click += new RoutedEventHandler(btnBasketDelete_Click);
+
+                        MyButton btnEdit = new MyButton
+                        {
+                            Width = 40,
+                            Height = 35,
+                            Background = Brushes.White,
+                            BorderBrush = Brushes.White,
+                            VerticalAlignment = VerticalAlignment.Center,
+                            Margin = new Thickness(0, 10, 0, 0),
+                            Padding = new Thickness(0),
+                            Totalinfo = new TotalInfo { Id = product.Id, Name = product.ProductName },
+                            Content = new Image
+                            {
+                                Source = new BitmapImage(new Uri("../../Images/pencil.png", UriKind.Relative)),
+                                VerticalAlignment = VerticalAlignment.Center,
+                                Width = 20,
+                                Height = 20
+
+                            }
+                        };
+                        btnEdit.Click += new RoutedEventHandler(btnEdit_Click);
+
+                        StackPanel stackPanel = new StackPanel
+                        {
+                            Children = { btnEdit, btnDelete }
+                        };
+
+                        Grid.SetColumn(stackPanelRow1, 0);
+                        Grid.SetColumn(stackPanel, 1);
+
+                        Grid grid = new Grid
+                        {
+                            ColumnDefinitions = { c1, c2 },
+                            Children = { stackPanelRow1, stackPanel }
+                        };
+
+                        border.Child = grid;
 
                         panelProduct.Children.Add(border);
 
-                        product.Quantity = product.Quantity - quantity;
+                        product.Quantity -= quantity;
                         await storeProductService.Update(product);
                     }
                 }
                 else
                 {
-                    Border border = new Border
+                    MyBorder border = new MyBorder
                     {
                         Background = Brushes.White,
-                        Width = 230,
+                        Width = 299,
                         Height = 100,
                         BorderBrush = Brushes.Gray,
                         BorderThickness = new Thickness(1),
-                        Margin = new Thickness(10, 10, 0, 0),
-                        CornerRadius = new CornerRadius(10)
+                        Margin = new Thickness(9, 10, 0, 0),
+                        HorizontalAlignment = HorizontalAlignment.Center,
+                        CornerRadius = new CornerRadius(10),
+                        TotalInfo = new TotalInfo { Id = product.Id, Name = product.ProductName },
                     };
 
-                    TextBlock txtProductName = new TextBlock
+                    MyTextBlock txtProductName = new MyTextBlock
                     {
                         Background = Brushes.Transparent,
                         VerticalAlignment = VerticalAlignment.Center,
@@ -568,19 +510,22 @@ namespace StoreApp.View.UI.CashViews
                         Text = product.Product.Name,
                         TextWrapping = TextWrapping.Wrap,
                         FontWeight = FontWeights.Bold,
+                        TotalInfo = new TotalInfo { Id = product.Id, Name = product.ProductName },
                         FontSize = 25,
                         Width = 200,
                         Height = 60
                     };
 
-                    TextBlock txtQuantity = new TextBlock
+                    MyTextBlock txtQuantity = new MyTextBlock
                     {
                         VerticalAlignment = VerticalAlignment.Top,
                         HorizontalAlignment = HorizontalAlignment.Center,
-                        Width = 200,
+                        Width = 239,
                         Height = 20,
+                        FontWeight = FontWeights.Bold,
                         FontSize = 16,
-                        Text = $"Количество : {quantity}",
+                        TotalInfo = new TotalInfo { Id = product.Id, Name = product.ProductName },
+                        Text = $"{quantity} шт  X  {(product.Price).ToString("#,##", numberFormatInfo)}  =  {(quantity * product.Price).ToString("#,##", numberFormatInfo)}",
                         Margin = new Thickness(10, 0, 0, 50)
                     };
 
@@ -590,12 +535,81 @@ namespace StoreApp.View.UI.CashViews
                         Visibility = Visibility.Hidden
                     };
 
+                    ColumnDefinition c1 = new ColumnDefinition
+                    {
+                        Width = new GridLength(249, GridUnitType.Star)
+                    };
+
+                    ColumnDefinition c2 = new ColumnDefinition
+                    {
+                        Width = new GridLength(50, GridUnitType.Star)
+                    };
+
                     StackPanel stackPanelRow1 = new StackPanel
                     {
                         Children = { txtProductName, txtQuantity, label }
                     };
 
-                    border.Child = stackPanelRow1;
+                    MyButton btnDelete = new MyButton
+                    {
+                        Width = 40,
+                        Height = 35,
+                        Background = Brushes.White,
+                        BorderBrush = Brushes.White,
+                        Margin = new Thickness(0, 10, 0, 0),
+                        VerticalAlignment = VerticalAlignment.Center,
+                        Padding = new Thickness(0),
+                        Totalinfo = new TotalInfo { Id= product.Id, Name = product.ProductName },
+                        Content = new Image
+                        {
+                            Source = new BitmapImage(new Uri("../../Images/delete.png", UriKind.Relative)),
+                            VerticalAlignment = VerticalAlignment.Center,
+                            Width = 20,
+                            Height = 20
+                        }
+                    };
+                    btnDelete.Click += new RoutedEventHandler(btnBasketDelete_Click);
+
+                    MyButton btnEdit = new MyButton
+                    {
+                        Width = 40,
+                        Height = 35,
+                        Background = Brushes.White,
+                        BorderBrush = Brushes.White,
+                        VerticalAlignment = VerticalAlignment.Center,
+                        Margin = new Thickness(0, 10, 0, 0),
+                        Padding = new Thickness(0),
+                        Totalinfo = new TotalInfo { Id = product.Id, Name = product.ProductName },
+                        Content = new Image
+                        {
+                            Source = new BitmapImage(new Uri("../../Images/pencil.png", UriKind.Relative)),
+                            VerticalAlignment = VerticalAlignment.Center,
+                            Width = 20,
+                            Height = 20
+
+                        }
+
+                    };
+                    btnEdit.Click += new RoutedEventHandler(btnEdit_Click);
+
+                    StackPanel stackPanel = new StackPanel
+                    {
+                        Children = { btnEdit, btnDelete }
+                    };
+
+
+                    Grid.SetColumn(stackPanelRow1, 0);
+                    Grid.SetColumn(stackPanel, 1);
+
+                    Grid grid = new Grid
+                    {
+                        ColumnDefinitions = {c1, c2},
+                        Children = { stackPanelRow1, stackPanel}
+
+                    };
+
+
+                    border.Child = grid;
 
                     panelProduct.Children.Add(border);
 
@@ -665,6 +679,70 @@ namespace StoreApp.View.UI.CashViews
             e.Handled = regex.IsMatch(e.Text);
         }
 
+        private async void btnEdit_Click(object sender, RoutedEventArgs e)
+        {
+            MyButton myButton = sender as MyButton;
+
+            if (myButton != null)
+            {
+
+                string productName = myButton.Totalinfo.Name;
+
+                if (panelProduct.Children.Count > 0)
+                {
+                    var item = panelProduct.Children;
+
+                    for (int i = 0; i < panelProduct.Children.Count; i++)
+                    {
+                        if ((item[i] as MyBorder).TotalInfo.Name == productName)
+                        {
+                            var product = await storeProductService.Get(myButton.Totalinfo.Id);
+
+                            EditBasketProduct editBasketProduct = new EditBasketProduct(product);
+                            editBasketProduct.ShowDialog();
+
+                            Keyboard.ClearFocus();
+                        }
+                    }
+                }
+            }
+        }
+
+        private async void btnBasketDelete_Click(object sender, RoutedEventArgs e)
+        {
+            MyButton myButton = sender as MyButton;
+
+            if (myButton != null)
+            {
+                var result = MessageBox.Show("Вы уверены, что хотите удалить", "Осторожность", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+
+                if (result == MessageBoxResult.Yes)
+                {
+                    string productName = myButton.Totalinfo.Name;
+
+                    if (panelProduct.Children.Count > 0)
+                    {
+                        var item = panelProduct.Children;
+
+                        for (int i = 0; i < panelProduct.Children.Count; i++)
+                        {
+                            if ((item[i] as MyBorder).TotalInfo.Name == productName)
+                            {
+                                var product = await storeProductService.Get(myButton.Totalinfo.Id);
+
+                                double productQuantity = double.Parse(((((item[i] as MyBorder).Child as Grid).Children[0] as StackPanel).Children[1] as MyTextBlock).Text.Split("шт")[0].Trim());
+                                product.Quantity += productQuantity;
+
+                                await storeProductService.Update(product);
+
+                                panelProduct.Children.RemoveAt(i);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
         public async Task WindowClose()
         {
             try
@@ -677,8 +755,9 @@ namespace StoreApp.View.UI.CashViews
 
                     for (int i = 0; i < panelProduct.Children.Count; i++)
                     {
-                        long productId = long.Parse((((item[i] as Border).Child as StackPanel).Children[2] as Label).Content.ToString());
-                        double productQuantity = double.Parse((((item[i] as Border).Child as StackPanel).Children[1] as TextBlock).Text.Split(":")[1].Trim());
+                        long productId = (item[i] as MyBorder).TotalInfo.Id; 
+
+                        double productQuantity = double.Parse(((((item[i] as MyBorder).Child as Grid).Children[0] as StackPanel).Children[1] as MyTextBlock).Text.Split("шт")[0].Trim());
 
                         var product = await storeProductService.Get(productId);
 
@@ -704,6 +783,11 @@ namespace StoreApp.View.UI.CashViews
     }
 
     public class MyTextBlock : TextBlock
+    {
+        public TotalInfo TotalInfo { get; set; }
+    }
+
+    public class MyBorder : Border
     {
         public TotalInfo TotalInfo { get; set; }
     }

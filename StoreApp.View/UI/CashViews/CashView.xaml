@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:StoreApp.View.UI.CashViews"
              xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
-            d:DesignHeight="730" d:DesignWidth="1320">
+             Height="726" d:DesignWidth="1024">
     <UserControl.Resources>
         <SolidColorBrush x:Key="StandardBorderBrush" Color="#888" />
         <SolidColorBrush x:Key="StandardBackgroundBrush" Color="Black" />
@@ -226,12 +226,10 @@
         </Border>
 
         <Grid Grid.Row="1" Margin="0 20 0 10">
-
             
-
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="300"/>
+                <ColumnDefinition Width="350"/>
             </Grid.ColumnDefinitions>
 
             <Grid Grid.Column="0">
