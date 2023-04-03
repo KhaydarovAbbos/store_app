@@ -241,7 +241,7 @@ namespace StoreApp.View.UI.CashViews
 
         private async void btnExit_Click(object sender, RoutedEventArgs e)
         {
-            mainWindow.AllCloseControls(4);
+            storeProductService = new StoreProductService();
 
             txtBarcode.Clear();
             txtErrorBarcode.Text = "";
@@ -264,6 +264,8 @@ namespace StoreApp.View.UI.CashViews
                 }
                 panelProduct.Children.Clear();
             }
+
+            mainWindow.AllCloseControls(4);
         }
 
         private async void btnDelete_Click(object sender, RoutedEventArgs e)
@@ -297,7 +299,7 @@ namespace StoreApp.View.UI.CashViews
             }
         }
 
-        private void btnAddBorderProduct_Click(object sender, RoutedEventArgs e)
+        private async void btnAddBorderProduct_Click(object sender, RoutedEventArgs e)
         {
             MytabItem mytabItem = tabControl.SelectedItem as MytabItem;
 
@@ -308,6 +310,132 @@ namespace StoreApp.View.UI.CashViews
                 AddProductToControlWindow addProductToControlWindow = new AddProductToControlWindow(mytabItem.TabController, this);
                 addProductToControlWindow.ShowDialog();
 
+                Border borderAdd = new Border
+                {
+                    Background = Brushes.White,
+                    Width = 200,
+                    Height = 100,
+                    BorderBrush = Brushes.Gray,
+                    BorderThickness = new Thickness(1),
+                    Margin = new Thickness(10, 10, 0, 0),
+                    CornerRadius = new CornerRadius(10),
+                };
+
+                MyButton buttonAdd = new MyButton
+                {
+                    Background = Brushes.Transparent,
+                    BorderBrush = Brushes.Transparent,
+                    Content = "+ Добавить",
+                    FontWeight = FontWeights.Bold,
+                    FontSize = 25,
+
+                };
+                buttonAdd.Click += new RoutedEventHandler(btnAddBorderProduct_Click);
+
+                borderAdd.Child = buttonAdd;
+
+                WrapPanel wrapPanel = new WrapPanel()
+                {
+                    Children = { borderAdd }
+                };
+
+                var products = await tabControlProductService.GetAll(mytabItem.TabController.Id);
+
+                foreach (var product in products)
+                {
+
+                    var storeProduct = await storeProductService.Get(product.ProductId, long.Parse(StoreMainView.StoreId));
+
+                    Border borderProduct = new Border
+                    {
+                        Background = Brushes.White,
+                        Width = 200,
+                        Height = 100,
+                        BorderBrush = Brushes.Gray,
+                        BorderThickness = new Thickness(1),
+                        Margin = new Thickness(10, 10, 0, 0),
+                        CornerRadius = new CornerRadius(10),
+                    };
+                    borderProduct.MouseUp += new MouseButtonEventHandler(btnBorder_Click);
+
+                    MyTextBlock txtProductName = new MyTextBlock
+                    {
+                        Background = Brushes.Transparent,
+                        VerticalAlignment = VerticalAlignment.Center,
+                        HorizontalAlignment = HorizontalAlignment.Center,
+                        Margin = new Thickness(0, 10, 0, 0),
+                        Text = product.ProductName,
+                        TextWrapping = TextWrapping.Wrap,
+                        FontWeight = FontWeights.Bold,
+                        TextAlignment = TextAlignment.Center,
+                        FontSize = 25,
+                        Height = 60,
+                        Width = 140,
+                        TotalInfo = new TotalInfo { Id = product.ProductId, Name = product.ProductName }
+                    };
+
+                    TextBlock txtQuantity = new TextBlock
+                    {
+                        VerticalAlignment = VerticalAlignment.Bottom,
+                        HorizontalAlignment = HorizontalAlignment.Center,
+                        Width = 140,
+                        Height = 20,
+                        FontSize = 16,
+                        Text = $"Количество : {storeProduct.Quantity}",
+                        Margin = new Thickness(10, 0, 0, 0)
+                    };
+
+                    StackPanel stackPanelRow1 = new StackPanel
+                    {
+                        VerticalAlignment = VerticalAlignment.Center,
+                        Children = { txtProductName, txtQuantity }
+                    };
+
+                    MyButton btnDelete = new MyButton
+                    {
+                        Width = 40,
+                        Height = 35,
+                        Background = Brushes.White,
+                        BorderBrush = Brushes.White,
+                        Margin = new Thickness(0, 10, 0, 0),
+                        Padding = new Thickness(0),
+                        Content = new Image
+                        {
+                            Source = new BitmapImage(new Uri("../../Images/delete.png", UriKind.Relative)),
+                            VerticalAlignment = VerticalAlignment.Center,
+                            Width = 20,
+                            Height = 20
+                        }
+                    };
+                    btnDelete.Totalinfo = new TotalInfo { Id = product.Id, Name = product.ProductName };
+                    btnDelete.Click += new RoutedEventHandler(btnDelete_Click);
+
+                    Grid.SetColumn(stackPanelRow1, 0);
+                    Grid.SetColumn(btnDelete, 1);
+
+                    ColumnDefinition c1 = new ColumnDefinition
+                    {
+                        Width = new GridLength(150, GridUnitType.Star)
+                    };
+
+                    ColumnDefinition c2 = new ColumnDefinition
+                    {
+                        Width = new GridLength(50, GridUnitType.Star)
+                    };
+
+                    Grid grid = new Grid
+                    {
+                        ColumnDefinitions = { c1, c2 },
+                        Children = { stackPanelRow1, btnDelete }
+                    };
+
+                    borderProduct.Child = grid;
+
+                    wrapPanel.Children.Add(borderProduct);
+                }
+
+                mytabItem.Content = wrapPanel;
+                tabControl.Items.Refresh();
                 tabControl.SelectedIndex = index;
             }
         }
@@ -365,7 +493,7 @@ namespace StoreApp.View.UI.CashViews
                         {
                             Background = Brushes.White,
                             Width = 299,
-                            Height = 100,
+                            Height = 60,
                             BorderBrush = Brushes.Gray,
                             BorderThickness = new Thickness(1),
                             Margin = new Thickness(9, 10, 0, 0),
@@ -423,26 +551,6 @@ namespace StoreApp.View.UI.CashViews
                             Children = { txtProductName, txtQuantity, label }
                         };
 
-                        MyButton btnDelete = new MyButton
-                        {
-                            Width = 40,
-                            Height = 35,
-                            Background = Brushes.White,
-                            BorderBrush = Brushes.White,
-                            Margin = new Thickness(0, 10, 0, 0),
-                            VerticalAlignment = VerticalAlignment.Center,
-                            Padding = new Thickness(0),
-                            Totalinfo = new TotalInfo { Id = product.Id, Name = product.ProductName },
-                            Content = new Image
-                            {
-                                Source = new BitmapImage(new Uri("../../Images/delete.png", UriKind.Relative)),
-                                VerticalAlignment = VerticalAlignment.Center,
-                                Width = 20,
-                                Height = 20
-                            }
-                        };
-                        btnDelete.Click += new RoutedEventHandler(btnBasketDelete_Click);
-
                         MyButton btnEdit = new MyButton
                         {
                             Width = 40,
@@ -464,18 +572,14 @@ namespace StoreApp.View.UI.CashViews
                         };
                         btnEdit.Click += new RoutedEventHandler(btnEdit_Click);
 
-                        StackPanel stackPanel = new StackPanel
-                        {
-                            Children = { btnEdit, btnDelete }
-                        };
 
                         Grid.SetColumn(stackPanelRow1, 0);
-                        Grid.SetColumn(stackPanel, 1);
+                        Grid.SetColumn(btnEdit, 1);
 
                         Grid grid = new Grid
                         {
                             ColumnDefinitions = { c1, c2 },
-                            Children = { stackPanelRow1, stackPanel }
+                            Children = { stackPanelRow1, btnEdit }
                         };
 
                         border.Child = grid;
@@ -492,28 +596,29 @@ namespace StoreApp.View.UI.CashViews
                     {
                         Background = Brushes.White,
                         Width = 299,
-                        Height = 100,
+                        Height = 60,
                         BorderBrush = Brushes.Gray,
                         BorderThickness = new Thickness(1),
-                        Margin = new Thickness(9, 10, 0, 0),
+                        Margin = new Thickness(9, 5, 0, 0),
                         HorizontalAlignment = HorizontalAlignment.Center,
                         CornerRadius = new CornerRadius(10),
                         TotalInfo = new TotalInfo { Id = product.Id, Name = product.ProductName },
                     };
+                    border.Mous
 
                     MyTextBlock txtProductName = new MyTextBlock
                     {
                         Background = Brushes.Transparent,
                         VerticalAlignment = VerticalAlignment.Center,
                         HorizontalAlignment = HorizontalAlignment.Center,
-                        Margin = new Thickness(10, 10, 0, 0),
+                        Margin = new Thickness(5, 5, 0, 0),
                         Text = product.Product.Name,
                         TextWrapping = TextWrapping.Wrap,
                         FontWeight = FontWeights.Bold,
                         TotalInfo = new TotalInfo { Id = product.Id, Name = product.ProductName },
-                        FontSize = 25,
-                        Width = 200,
-                        Height = 60
+                        FontSize = 22,
+                        Width = 238,
+                        Height = 30
                     };
 
                     MyTextBlock txtQuantity = new MyTextBlock
@@ -521,12 +626,12 @@ namespace StoreApp.View.UI.CashViews
                         VerticalAlignment = VerticalAlignment.Top,
                         HorizontalAlignment = HorizontalAlignment.Center,
                         Width = 239,
-                        Height = 20,
+                        Height = 18,
                         FontWeight = FontWeights.Bold,
                         FontSize = 16,
                         TotalInfo = new TotalInfo { Id = product.Id, Name = product.ProductName },
                         Text = $"{quantity} шт  X  {(product.Price).ToString("#,##", numberFormatInfo)}  =  {(quantity * product.Price).ToString("#,##", numberFormatInfo)}",
-                        Margin = new Thickness(10, 0, 0, 50)
+                        Margin = new Thickness(10, 0, 0, 70)
                     };
 
                     Label label = new Label
@@ -550,26 +655,6 @@ namespace StoreApp.View.UI.CashViews
                         Children = { txtProductName, txtQuantity, label }
                     };
 
-                    MyButton btnDelete = new MyButton
-                    {
-                        Width = 40,
-                        Height = 35,
-                        Background = Brushes.White,
-                        BorderBrush = Brushes.White,
-                        Margin = new Thickness(0, 10, 0, 0),
-                        VerticalAlignment = VerticalAlignment.Center,
-                        Padding = new Thickness(0),
-                        Totalinfo = new TotalInfo { Id= product.Id, Name = product.ProductName },
-                        Content = new Image
-                        {
-                            Source = new BitmapImage(new Uri("../../Images/delete.png", UriKind.Relative)),
-                            VerticalAlignment = VerticalAlignment.Center,
-                            Width = 20,
-                            Height = 20
-                        }
-                    };
-                    btnDelete.Click += new RoutedEventHandler(btnBasketDelete_Click);
-
                     MyButton btnEdit = new MyButton
                     {
                         Width = 40,
@@ -592,22 +677,16 @@ namespace StoreApp.View.UI.CashViews
                     };
                     btnEdit.Click += new RoutedEventHandler(btnEdit_Click);
 
-                    StackPanel stackPanel = new StackPanel
-                    {
-                        Children = { btnEdit, btnDelete }
-                    };
-
 
                     Grid.SetColumn(stackPanelRow1, 0);
-                    Grid.SetColumn(stackPanel, 1);
+                    Grid.SetColumn(btnEdit, 1);
 
                     Grid grid = new Grid
                     {
                         ColumnDefinitions = {c1, c2},
-                        Children = { stackPanelRow1, stackPanel}
+                        Children = { stackPanelRow1, btnEdit }
 
                     };
-
 
                     border.Child = grid;
 
@@ -685,7 +764,6 @@ namespace StoreApp.View.UI.CashViews
 
             if (myButton != null)
             {
-
                 string productName = myButton.Totalinfo.Name;
 
                 if (panelProduct.Children.Count > 0)
@@ -698,7 +776,11 @@ namespace StoreApp.View.UI.CashViews
                         {
                             var product = await storeProductService.Get(myButton.Totalinfo.Id);
 
-                            EditBasketProduct editBasketProduct = new EditBasketProduct(product);
+                            var quantity =  double.Parse(((((item[i] as MyBorder).Child as Grid).Children[0] as StackPanel).Children[1] as MyTextBlock).Text.Split("шт")[0].Trim());
+
+                            product.Quantity = quantity;
+
+                            EditBasketProduct editBasketProduct = new EditBasketProduct(product, this);
                             editBasketProduct.ShowDialog();
 
                             Keyboard.ClearFocus();
@@ -707,6 +789,27 @@ namespace StoreApp.View.UI.CashViews
                 }
             }
         }
+
+        public async void UpdateBasketProductQuantity(StoreProduct product)
+        {
+            NumberFormatInfo numberFormatInfo = (NumberFormatInfo)CultureInfo.InvariantCulture.NumberFormat.Clone();
+            numberFormatInfo.NumberGroupSeparator = " ";
+
+            if (panelProduct.Children.Count > 0)
+            {
+                var item = panelProduct.Children;
+
+                for (int i = 0; i < panelProduct.Children.Count; i++)
+                {
+                    if ((item[i] as MyBorder).TotalInfo.Name == product.ProductName)
+                    {
+                        ((((item[i] as MyBorder).Child as Grid).Children[0] as StackPanel).Children[1] as MyTextBlock).Text = $"{product.Quantity} шт  X  {(product.Price).ToString("#,##", numberFormatInfo)}  =  {(product.Quantity * product.Price).ToString("#,##", numberFormatInfo)}";
+
+                    }
+                }
+            }
+        }
+
 
         private async void btnBasketDelete_Click(object sender, RoutedEventArgs e)
         {
@@ -728,6 +831,7 @@ namespace StoreApp.View.UI.CashViews
                         {
                             if ((item[i] as MyBorder).TotalInfo.Name == productName)
                             {
+                                storeProductService = new StoreProductService();
                                 var product = await storeProductService.Get(myButton.Totalinfo.Id);
 
                                 double productQuantity = double.Parse(((((item[i] as MyBorder).Child as Grid).Children[0] as StackPanel).Children[1] as MyTextBlock).Text.Split("шт")[0].Trim());
@@ -747,6 +851,7 @@ namespace StoreApp.View.UI.CashViews
         {
             try
             {
+                storeProductService = new StoreProductService();
                 mainWindow.SetEffect();
 
                 if (panelProduct.Children.Count > 0)

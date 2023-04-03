@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:StoreApp.View.UI.CashViews"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="" Height="250" Width="350" WindowStartupLocation="CenterScreen" WindowStyle="SingleBorderWindow" ResizeMode="NoResize">
+        Title="" Height="250" Width="350" WindowStartupLocation="CenterScreen" WindowStyle="SingleBorderWindow" ResizeMode="NoResize" Loaded="Window_Loaded">
     <Grid>
 
         <StackPanel>

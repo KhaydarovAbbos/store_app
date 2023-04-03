@@ -81,7 +81,7 @@ namespace StoreApp.View.UI.FastInsertProductViews
                     CategoryId = _product.CategoryId,
                     CategoryName = _product.CategoryName,
                     SubcategoryId = _product.Product.SubCategory.Id,
-                    SubcategoryName = _product.CategoryName,
+                    SubcategoryName = _product.SubcategoryName,
                     Quantity = double.Parse(txtQuantity.Text),
                     ArrivalPrice = _product.ArrivalPrice,
                     Price = _product.Price,

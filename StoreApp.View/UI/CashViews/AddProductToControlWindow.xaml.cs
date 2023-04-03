@@ -57,7 +57,6 @@ namespace StoreApp.View.UI.CashViews
 
                     await tabControlProductService.Create(model);
 
-                    Cashview.WindowLoad();
                 }
 
                 this.Close();
