@@ -604,7 +604,6 @@ namespace StoreApp.View.UI.CashViews
                         CornerRadius = new CornerRadius(10),
                         TotalInfo = new TotalInfo { Id = product.Id, Name = product.ProductName },
                     };
-                    border.Mous
 
                     MyTextBlock txtProductName = new MyTextBlock
                     {
