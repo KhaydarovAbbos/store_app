@@ -11,24 +11,24 @@ namespace StoreApp.View.Helpers
 
             IList<UserSignIn> users = new List<UserSignIn>();
 
-            var logFile = File.ReadAllLines(App.FilePath);
-            var logList = new List<string>(logFile);
+            //var logFile = File.ReadAllLines(App.FilePath);
+            //var logList = new List<string>(logFile);
 
-            foreach (var item in logList)
-            {
-                if (item != "")
-                {
-                    string[] data = item.Split();
+            //foreach (var item in logList)
+            //{
+            //    if (item != "")
+            //    {
+            //        string[] data = item.Split();
 
-                    UserSignIn user = new UserSignIn()
-                    {
-                        Login = data[0],
-                        Password = data[1]
-                    };
+            //        UserSignIn user = new UserSignIn()
+            //        {
+            //            Login = data[0],
+            //            Password = data[1]
+            //        };
 
-                    users.Add(user);
-                }
-            }
+            //        users.Add(user);
+            //    }
+            //}
 
             return users;
         }
