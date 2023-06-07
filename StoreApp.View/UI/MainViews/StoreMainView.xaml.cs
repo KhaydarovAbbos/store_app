@@ -25,7 +25,7 @@ namespace StoreApp.View.UI.MainViews
             txtStoreName.Text = Storename;
             store_id.Content = StoreId;
 
-           // MainGrid.ColumnDefinitions[0].Width = new GridLength(MainView.gridColumn1Width, GridUnitType.Pixel);
+            // MainGrid.ColumnDefinitions[0].Width = new GridLength(MainView.gridColumn1Width, GridUnitType.Pixel);
             //MainGrid.ColumnDefinitions[1].Width = new GridLength(MainView.gridColumn2Width, GridUnitType.Pixel);
 
         }

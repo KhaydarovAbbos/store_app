@@ -1,5 +1,4 @@
-﻿using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media.Effects;
 
@@ -92,7 +91,7 @@ namespace StoreApp.View
             {
                 int count = cash_view.panelProduct.Children.Count;
 
-                if (count !=  0)
+                if (count != 0)
                 {
                     e.Cancel = true;
                     await cash_view.WindowClose();

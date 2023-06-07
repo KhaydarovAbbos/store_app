@@ -1,6 +1,5 @@
 ﻿using StoreApp.Domain.Entities.Users;
 using System.Collections.Generic;
-using System.IO;
 
 namespace StoreApp.View.Helpers
 {
