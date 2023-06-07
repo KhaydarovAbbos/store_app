@@ -139,7 +139,7 @@ namespace StoreApp.View.UI.CashViews
                     StackPanel stackPanelRow1 = new StackPanel
                     {
                         VerticalAlignment = VerticalAlignment.Center,
-                        Children = { txtProductName, txtQuantity}
+                        Children = { txtProductName, txtQuantity }
                     };
 
                     MyButton btnDelete = new MyButton
@@ -486,7 +486,7 @@ namespace StoreApp.View.UI.CashViews
 
                         product.Quantity = product.Quantity - quantity;
                         await storeProductService.Update(product);
-                    }                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+                    }
                     else
                     {
                         MyBorder border = new MyBorder
@@ -682,7 +682,7 @@ namespace StoreApp.View.UI.CashViews
 
                     Grid grid = new Grid
                     {
-                        ColumnDefinitions = {c1, c2},
+                        ColumnDefinitions = { c1, c2 },
                         Children = { stackPanelRow1, btnEdit }
 
                     };
@@ -775,7 +775,7 @@ namespace StoreApp.View.UI.CashViews
                         {
                             var product = await storeProductService.Get(myButton.Totalinfo.Id);
 
-                            var quantity =  double.Parse(((((item[i] as MyBorder).Child as Grid).Children[0] as StackPanel).Children[1] as MyTextBlock).Text.Split("шт")[0].Trim());
+                            var quantity = double.Parse(((((item[i] as MyBorder).Child as Grid).Children[0] as StackPanel).Children[1] as MyTextBlock).Text.Split("шт")[0].Trim());
 
                             product.Quantity = quantity;
 
@@ -859,7 +859,7 @@ namespace StoreApp.View.UI.CashViews
 
                     for (int i = 0; i < panelProduct.Children.Count; i++)
                     {
-                        long productId = (item[i] as MyBorder).TotalInfo.Id; 
+                        long productId = (item[i] as MyBorder).TotalInfo.Id;
 
                         double productQuantity = double.Parse(((((item[i] as MyBorder).Child as Grid).Children[0] as StackPanel).Children[1] as MyTextBlock).Text.Split("шт")[0].Trim());
 

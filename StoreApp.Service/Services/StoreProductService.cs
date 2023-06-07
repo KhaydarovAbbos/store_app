@@ -5,7 +5,6 @@ using StoreApp.Data.Repositories;
 using StoreApp.Domain.Entities.Products;
 using StoreApp.Service.Interfaces;
 using StoreApp.Service.ViewModels;
-using System.Reflection.Metadata;
 
 namespace StoreApp.Service.Services
 {
@@ -110,10 +109,10 @@ namespace StoreApp.Service.Services
             {
                 var product = await _db.Products.Include(x => x.Category).Include(x => x.SubCategory).FirstOrDefaultAsync(x => x.Id == productId);
 
-                storeProduct = new StoreProduct() 
-                { 
+                storeProduct = new StoreProduct()
+                {
                     Quantity = 0,
-                    Product = product 
+                    Product = product
                 };
 
                 return storeProduct;

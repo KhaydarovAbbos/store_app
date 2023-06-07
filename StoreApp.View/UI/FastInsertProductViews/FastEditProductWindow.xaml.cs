@@ -161,7 +161,7 @@ namespace StoreApp.View.UI.FastInsertProductViews
                 Barcode = txtBarcode.Text,
                 CategoryName = _product.CategoryName,
                 SubCategoryName = _product.SubcategoryName,
-                
+
 
 
             };
